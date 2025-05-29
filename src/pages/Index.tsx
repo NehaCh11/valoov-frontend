@@ -4,13 +4,21 @@ import Header from '@/components/Header';
 import MarketOverview from '@/components/MarketOverview';
 import AIAnalysis from '@/components/AIAnalysis';
 import Portfolio from '@/components/Portfolio';
+import LandingPage from '@/components/LandingPage';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { BarChart3, Bot, TrendingUp, PieChart } from 'lucide-react';
 
 const Index = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [activeTab, setActiveTab] = useState('overview');
 
+  // Show landing page if not logged in
+  if (!isLoggedIn) {
+    return <LandingPage />;
+  }
+
+  // Show main app if logged in
   const tabs = [
     { id: 'overview', label: 'Market Overview', icon: BarChart3 },
     { id: 'ai', label: 'AI Analysis', icon: Bot },
