@@ -16,7 +16,7 @@ const Header = () => {
               <TrendingUp className="h-6 w-6 text-financial-cyan animate-pulse-glow" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-glow">Financial Analyst AI</h1>
+              <h1 className="text-xl font-bold text-glow">Valoov</h1>
               <p className="text-xs text-muted-foreground">Professional Trading Platform</p>
             </div>
           </div>

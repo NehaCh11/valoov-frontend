@@ -59,7 +59,7 @@ const Index = () => {
           {/* Footer */}
           <footer className="mt-16 text-center text-muted-foreground">
             <p className="text-sm">
-              Financial Analyst AI - Professional Trading Platform
+              Valoov - Professional Trading Platform
             </p>
             <p className="text-xs mt-1">
               Real-time data and AI-powered insights for informed financial decisions
