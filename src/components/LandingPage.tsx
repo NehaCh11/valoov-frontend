@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { Building2, Upload, FileText, BarChart3, CheckCircle, ArrowRight, Globe, Calculator } from 'lucide-react';
+import { Building2, Upload, FileText, BarChart3, CheckCircle, ArrowRight, Globe, Calculator, Star, Eye, EyeOff } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import LoginForm from '@/components/LoginForm';
@@ -10,31 +10,49 @@ const LandingPage = () => {
   const [showLogin, setShowLogin] = useState(false);
   const [showSignup, setShowSignup] = useState(false);
 
-  const services = [
+  const howItWorksSteps = [
     {
-      icon: Upload,
+      step: 1,
       title: "Upload Tax Documents",
-      description: "Securely upload your standardized tax return documents for accurate analysis"
+      description: "Securely upload your standardized tax return documents. Our AI processes French and Spanish tax formats automatically.",
+      icon: Upload
     },
     {
-      icon: FileText,
-      title: "Dynamic Questionnaire",
-      description: "Complete our intelligent questionnaire tailored to your business sector"
+      step: 2,
+      title: "Complete Dynamic Questionnaire",
+      description: "Answer our intelligent questionnaire tailored to your business sector and region for more accurate valuation.",
+      icon: FileText
     },
     {
-      icon: BarChart3,
-      title: "Multi-Model Valuation",
-      description: "Receive comprehensive valuation reports using multiple proven financial models"
+      step: 3,
+      title: "Receive Comprehensive Report",
+      description: "Get your professional valuation report using multiple proven financial models (DCF, Comparable, Asset-based).",
+      icon: BarChart3
     }
   ];
 
-  const features = [
-    "Compliant with French & Spanish regulations",
-    "Multiple valuation methodologies (DCF, Comparable, Asset-based)",
-    "Sector-specific analysis",
-    "Professional PDF reports",
-    "Secure document processing",
-    "Expert review available"
+  const testimonials = [
+    {
+      name: "Marie Dubois",
+      company: "Tech Solutions SA",
+      location: "Paris, France",
+      text: "VALOOV helped us get an accurate valuation for our tech startup. The process was seamless and the report was incredibly detailed.",
+      rating: 5
+    },
+    {
+      name: "Carlos Rodriguez",
+      company: "Innovate Consulting",
+      location: "Madrid, Spain",
+      text: "The AI-powered analysis saved us weeks of work. The multi-model approach gave us confidence in our company's valuation.",
+      rating: 5
+    },
+    {
+      name: "Jean-Pierre Martin",
+      company: "Green Energy Corp",
+      location: "Lyon, France",
+      text: "Professional service with excellent attention to regulatory compliance. Highly recommend for any business valuation needs.",
+      rating: 5
+    }
   ];
 
   const regions = [
@@ -53,24 +71,45 @@ const LandingPage = () => {
   return (
     <div className="min-h-screen bg-financial-dark">
       <div className="financial-gradient min-h-screen">
-        {/* Hero Section */}
-        <div className="container mx-auto px-4 pt-16 pb-8">
-          <div className="text-center mb-16">
-            <div className="flex justify-center mb-6">
-              <div className="p-4 rounded-full bg-financial-blue/20">
-                <Building2 className="h-12 w-12 text-financial-cyan animate-pulse-glow" />
+        {/* Header with Sign In/Sign Up */}
+        <header className="container mx-auto px-4 pt-6 pb-4">
+          <div className="flex justify-between items-center">
+            <div className="flex items-center space-x-2">
+              <div className="p-2 rounded-lg bg-financial-blue/20">
+                <Building2 className="h-6 w-6 text-financial-cyan animate-pulse-glow" />
               </div>
+              <h1 className="text-2xl font-bold text-glow">VALOOV</h1>
             </div>
-            <h1 className="text-5xl font-bold text-glow mb-6">
-              VALOOV
+            <div className="flex gap-3">
+              <Button 
+                variant="outline" 
+                className="border-financial-cyan text-financial-cyan hover:bg-financial-cyan/10"
+                onClick={() => setShowLogin(true)}
+              >
+                Sign In
+              </Button>
+              <Button 
+                className="bg-financial-cyan hover:bg-financial-cyan/80 text-white"
+                onClick={() => setShowSignup(true)}
+              >
+                Sign Up
+              </Button>
+            </div>
+          </div>
+        </header>
+
+        {/* Hero Section */}
+        <div className="container mx-auto px-4 pt-12 pb-16">
+          <div className="text-center mb-16">
+            <h1 className="text-6xl font-bold text-glow mb-6">
+              Professional Company Valuation Platform
             </h1>
             <p className="text-2xl text-financial-cyan mb-4">
-              Professional Company Valuation Platform
+              Get accurate valuations for businesses in France and Spain
             </p>
-            <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-              Get accurate company valuations in France and Spain. Upload your tax documents, 
-              complete our expert questionnaire, and receive professional valuation reports 
-              using multiple proven financial models.
+            <p className="text-xl text-muted-foreground mb-8 max-w-4xl mx-auto">
+              Upload your tax documents, complete our expert questionnaire, and receive professional 
+              valuation reports using multiple proven financial models. Trusted by businesses across Europe.
             </p>
             
             {/* Region Availability */}
@@ -89,113 +128,173 @@ const LandingPage = () => {
             <div className="flex gap-4 justify-center">
               <Button 
                 size="lg" 
-                className="bg-financial-cyan hover:bg-financial-cyan/80 text-white px-8 py-3"
+                className="bg-financial-cyan hover:bg-financial-cyan/80 text-white px-8 py-4 text-lg"
                 onClick={() => setShowSignup(true)}
               >
-                Start Valuation
-                <ArrowRight className="ml-2 h-4 w-4" />
+                Start Your Valuation
+                <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
               <Button 
                 variant="outline" 
                 size="lg" 
-                className="border-financial-cyan text-financial-cyan hover:bg-financial-cyan/10 px-8 py-3"
-                onClick={() => setShowLogin(true)}
+                className="border-financial-cyan text-financial-cyan hover:bg-financial-cyan/10 px-8 py-4 text-lg"
               >
-                Sign In
+                View Sample Report
               </Button>
             </div>
           </div>
 
-          {/* Services Section */}
-          <div className="grid md:grid-cols-3 gap-8 mb-16">
-            {services.map((service, index) => {
-              const Icon = service.icon;
-              return (
-                <Card key={index} className="bg-card/30 backdrop-blur border-border/50 hover:bg-card/50 transition-all">
-                  <CardHeader className="text-center">
-                    <div className="flex justify-center mb-4">
-                      <div className="p-3 rounded-lg bg-financial-green/20">
-                        <Icon className="h-8 w-8 text-financial-green" />
+          {/* How It Works Section */}
+          <section className="mb-20">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-bold mb-4">How It Works</h2>
+              <p className="text-xl text-muted-foreground">Simple 3-step process to get your professional valuation</p>
+            </div>
+            
+            <div className="grid md:grid-cols-3 gap-8">
+              {howItWorksSteps.map((step) => {
+                const Icon = step.icon;
+                return (
+                  <Card key={step.step} className="bg-card/30 backdrop-blur border-border/50 hover:bg-card/50 transition-all text-center">
+                    <CardHeader>
+                      <div className="flex justify-center mb-4">
+                        <div className="w-16 h-16 bg-financial-cyan text-white rounded-full flex items-center justify-center text-2xl font-bold mb-4">
+                          {step.step}
+                        </div>
+                      </div>
+                      <div className="flex justify-center mb-4">
+                        <div className="p-3 rounded-lg bg-financial-green/20">
+                          <Icon className="h-8 w-8 text-financial-green" />
+                        </div>
+                      </div>
+                      <CardTitle className="text-xl">{step.title}</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <CardDescription className="text-center text-base">
+                        {step.description}
+                      </CardDescription>
+                    </CardContent>
+                  </Card>
+                );
+              })}
+            </div>
+          </section>
+
+          {/* Sample Report Preview Section */}
+          <section className="mb-20">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-bold mb-4">Sample Report Preview</h2>
+              <p className="text-xl text-muted-foreground">See what you'll receive with our comprehensive valuation reports</p>
+            </div>
+            
+            <Card className="bg-card/30 backdrop-blur border-border/50">
+              <CardContent className="p-8">
+                <div className="grid md:grid-cols-2 gap-8 items-center">
+                  <div>
+                    <h3 className="text-2xl font-bold mb-4">Comprehensive Analysis</h3>
+                    <ul className="space-y-3 text-lg">
+                      <li className="flex items-center space-x-3">
+                        <CheckCircle className="h-5 w-5 text-financial-green flex-shrink-0" />
+                        <span>Multiple valuation methodologies</span>
+                      </li>
+                      <li className="flex items-center space-x-3">
+                        <CheckCircle className="h-5 w-5 text-financial-green flex-shrink-0" />
+                        <span>Sector-specific benchmarking</span>
+                      </li>
+                      <li className="flex items-center space-x-3">
+                        <CheckCircle className="h-5 w-5 text-financial-green flex-shrink-0" />
+                        <span>Risk assessment analysis</span>
+                      </li>
+                      <li className="flex items-center space-x-3">
+                        <CheckCircle className="h-5 w-5 text-financial-green flex-shrink-0" />
+                        <span>Professional PDF format</span>
+                      </li>
+                    </ul>
+                    <Button className="mt-6 bg-financial-cyan hover:bg-financial-cyan/80">
+                      <Eye className="mr-2 h-4 w-4" />
+                      View Full Sample
+                    </Button>
+                  </div>
+                  <div className="relative">
+                    <div className="bg-gradient-to-br from-financial-blue/20 to-financial-cyan/20 rounded-lg p-6 backdrop-blur">
+                      <div className="bg-white/10 rounded-lg p-4 mb-4">
+                        <div className="h-4 bg-financial-cyan/50 rounded mb-2"></div>
+                        <div className="h-3 bg-financial-cyan/30 rounded mb-2"></div>
+                        <div className="h-3 bg-financial-cyan/30 rounded w-3/4"></div>
+                      </div>
+                      <div className="grid grid-cols-2 gap-4">
+                        <div className="bg-white/10 rounded-lg p-3">
+                          <div className="h-2 bg-financial-green/50 rounded mb-2"></div>
+                          <div className="h-6 bg-financial-green/30 rounded"></div>
+                        </div>
+                        <div className="bg-white/10 rounded-lg p-3">
+                          <div className="h-2 bg-financial-gold/50 rounded mb-2"></div>
+                          <div className="h-6 bg-financial-gold/30 rounded"></div>
+                        </div>
                       </div>
                     </div>
-                    <CardTitle className="text-xl">{service.title}</CardTitle>
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent backdrop-blur-sm rounded-lg"></div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </section>
+
+          {/* Testimonials Section */}
+          <section className="mb-20">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-bold mb-4">Trusted by Businesses Across Europe</h2>
+              <p className="text-xl text-muted-foreground">See what our clients say about VALOOV</p>
+            </div>
+            
+            <div className="grid md:grid-cols-3 gap-8">
+              {testimonials.map((testimonial, index) => (
+                <Card key={index} className="bg-card/30 backdrop-blur border-border/50 hover:bg-card/50 transition-all">
+                  <CardHeader>
+                    <div className="flex items-center space-x-1 mb-4">
+                      {[...Array(testimonial.rating)].map((_, i) => (
+                        <Star key={i} className="h-4 w-4 text-financial-gold fill-current" />
+                      ))}
+                    </div>
+                    <CardTitle className="text-lg">{testimonial.name}</CardTitle>
+                    <CardDescription>
+                      {testimonial.company} • {testimonial.location}
+                    </CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <CardDescription className="text-center">
-                      {service.description}
-                    </CardDescription>
+                    <p className="text-muted-foreground italic">"{testimonial.text}"</p>
                   </CardContent>
                 </Card>
-              );
-            })}
-          </div>
-
-          {/* Process Steps */}
-          <Card className="bg-card/30 backdrop-blur border-border/50 mb-16">
-            <CardHeader className="text-center">
-              <CardTitle className="text-2xl mb-4">Simple 3-Step Process</CardTitle>
-              <CardDescription>
-                Professional company valuation made easy
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="grid md:grid-cols-3 gap-8">
-                <div className="text-center">
-                  <div className="w-12 h-12 bg-financial-cyan text-white rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">1</div>
-                  <h3 className="font-semibold mb-2">Upload Documents</h3>
-                  <p className="text-sm text-muted-foreground">Upload your standardized tax return documents securely</p>
-                </div>
-                <div className="text-center">
-                  <div className="w-12 h-12 bg-financial-cyan text-white rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">2</div>
-                  <h3 className="font-semibold mb-2">Complete Questionnaire</h3>
-                  <p className="text-sm text-muted-foreground">Answer our dynamic, sector-specific questions</p>
-                </div>
-                <div className="text-center">
-                  <div className="w-12 h-12 bg-financial-cyan text-white rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">3</div>
-                  <h3 className="font-semibold mb-2">Get Valuation Report</h3>
-                  <p className="text-sm text-muted-foreground">Receive comprehensive reports with multiple valuation models</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Features Section */}
-          <Card className="bg-card/30 backdrop-blur border-border/50 mb-16">
-            <CardHeader className="text-center">
-              <CardTitle className="text-2xl mb-4">Professional Valuation Features</CardTitle>
-              <CardDescription>
-                Comprehensive analysis tools for accurate company valuations
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="grid md:grid-cols-2 gap-4">
-                {features.map((feature, index) => (
-                  <div key={index} className="flex items-center space-x-3">
-                    <CheckCircle className="h-5 w-5 text-financial-green flex-shrink-0" />
-                    <span className="text-sm">{feature}</span>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
+              ))}
+            </div>
+          </section>
 
           {/* CTA Section */}
           <div className="text-center">
             <Card className="bg-gradient-to-r from-financial-blue/20 to-financial-cyan/20 border-financial-cyan/30">
-              <CardContent className="py-12">
-                <h2 className="text-3xl font-bold mb-4">Ready to Value Your Company?</h2>
-                <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-                  Join businesses across France and Spain who trust VALOOV for accurate, 
+              <CardContent className="py-16">
+                <h2 className="text-4xl font-bold mb-6">Ready to Value Your Company?</h2>
+                <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
+                  Join hundreds of businesses across France and Spain who trust VALOOV for accurate, 
                   professional company valuations with comprehensive reporting.
                 </p>
-                <Button 
-                  size="lg" 
-                  className="bg-financial-cyan hover:bg-financial-cyan/80 text-white px-8 py-3"
-                  onClick={() => setShowSignup(true)}
-                >
-                  <Calculator className="mr-2 h-4 w-4" />
-                  Start Your Valuation
-                </Button>
+                <div className="flex gap-4 justify-center">
+                  <Button 
+                    size="lg" 
+                    className="bg-financial-cyan hover:bg-financial-cyan/80 text-white px-8 py-4 text-lg"
+                    onClick={() => setShowSignup(true)}
+                  >
+                    <Calculator className="mr-2 h-5 w-5" />
+                    Start Your Valuation
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    size="lg" 
+                    className="border-financial-cyan text-financial-cyan hover:bg-financial-cyan/10 px-8 py-4 text-lg"
+                  >
+                    Schedule Demo
+                  </Button>
+                </div>
               </CardContent>
             </Card>
           </div>
