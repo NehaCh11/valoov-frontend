@@ -94,7 +94,7 @@ const LandingPage = ({ onLogin }: LandingPageProps) => {
               <img 
                 src="/lovable-uploads/17dd4d7d-77a4-46b2-8bcc-c7b2923ba0e5.png" 
                 alt="VALOOV Logo" 
-                className="h-20 w-auto object-contain"
+                className="h-24 w-auto object-contain"
               />
             </div>
             <div className="flex gap-3">

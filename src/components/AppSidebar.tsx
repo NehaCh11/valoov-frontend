@@ -1,4 +1,3 @@
-
 import {
   BarChart3,
   TrendingUp,
@@ -90,12 +89,8 @@ export function AppSidebar({ activeView, setActiveView }: AppSidebarProps) {
           <img 
             src="/lovable-uploads/17dd4d7d-77a4-46b2-8bcc-c7b2923ba0e5.png" 
             alt="VALOOV Logo" 
-            className="h-8 w-auto object-contain"
+            className="h-12 w-auto object-contain"
           />
-          <div>
-            <h2 className="text-lg font-semibold text-white">VALOOV</h2>
-            <p className="text-xs text-gray-400">Valuation Platform</p>
-          </div>
         </div>
       </SidebarHeader>
 
