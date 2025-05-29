@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { ArrowLeft, Mail, Lock, User, Building, Eye, EyeOff } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -6,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
+import EmailVerificationPage from './EmailVerificationPage';
 
 interface SignupFormProps {
   onBack: () => void;
@@ -21,6 +21,7 @@ const SignupForm = ({ onBack, onSwitchToLogin }: SignupFormProps) => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [agreeTerms, setAgreeTerms] = useState(false);
+  const [showEmailVerification, setShowEmailVerification] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -33,7 +34,26 @@ const SignupForm = ({ onBack, onSwitchToLogin }: SignupFormProps) => {
       return;
     }
     console.log('Signup attempt:', { name, company, email, password });
+    // Show email verification page
+    setShowEmailVerification(true);
   };
+
+  const handleEmailVerified = () => {
+    console.log('Email verified successfully');
+    // Here you would typically redirect to dashboard or complete setup
+    alert('Account verified successfully! Welcome to VALOOV!');
+    onBack(); // Go back to landing page for now
+  };
+
+  if (showEmailVerification) {
+    return (
+      <EmailVerificationPage
+        email={email}
+        onBack={() => setShowEmailVerification(false)}
+        onVerified={handleEmailVerified}
+      />
+    );
+  }
 
   return (
     <div className="min-h-screen bg-financial-dark">
