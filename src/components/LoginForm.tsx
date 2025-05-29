@@ -10,18 +10,32 @@ import { Checkbox } from '@/components/ui/checkbox';
 interface LoginFormProps {
   onBack: () => void;
   onSwitchToSignup: () => void;
+  onLoginSuccess: () => void;
 }
 
-const LoginForm = ({ onBack, onSwitchToSignup }: LoginFormProps) => {
+const LoginForm = ({ onBack, onSwitchToSignup, onLoginSuccess }: LoginFormProps) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const [showForgotPassword, setShowForgotPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Login attempt:', { email, password, rememberMe });
+    setIsLoading(true);
+    
+    // Simulate authentication - for demo purposes, any valid email/password combo works
+    await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API call
+    
+    if (email && password.length >= 6) {
+      console.log('Login successful:', { email, rememberMe });
+      onLoginSuccess(); // This will set isLoggedIn to true
+    } else {
+      alert('Please enter a valid email and password (min 6 characters)');
+    }
+    
+    setIsLoading(false);
   };
 
   const handleForgotPassword = (e: React.FormEvent) => {
@@ -162,8 +176,9 @@ const LoginForm = ({ onBack, onSwitchToSignup }: LoginFormProps) => {
                   <Button 
                     type="submit" 
                     className="w-full bg-valoov-teal hover:bg-valoov-teal/80"
+                    disabled={isLoading}
                   >
-                    Sign In
+                    {isLoading ? 'Signing In...' : 'Sign In'}
                   </Button>
                 </form>
               )}

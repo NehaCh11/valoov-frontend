@@ -5,9 +5,20 @@ import { Button } from '@/components/ui/button';
 import LoginForm from '@/components/LoginForm';
 import SignupForm from '@/components/SignupForm';
 
-const LandingPage = () => {
+interface LandingPageProps {
+  onLogin?: () => void;
+}
+
+const LandingPage = ({ onLogin }: LandingPageProps) => {
   const [showLogin, setShowLogin] = useState(false);
   const [showSignup, setShowSignup] = useState(false);
+
+  const handleLoginSuccess = () => {
+    setShowLogin(false);
+    if (onLogin) {
+      onLogin();
+    }
+  };
 
   const howItWorksSteps = [
     {
@@ -60,7 +71,13 @@ const LandingPage = () => {
   ];
 
   if (showLogin) {
-    return <LoginForm onBack={() => setShowLogin(false)} onSwitchToSignup={() => { setShowLogin(false); setShowSignup(true); }} />;
+    return (
+      <LoginForm 
+        onBack={() => setShowLogin(false)} 
+        onSwitchToSignup={() => { setShowLogin(false); setShowSignup(true); }} 
+        onLoginSuccess={handleLoginSuccess}
+      />
+    );
   }
 
   if (showSignup) {

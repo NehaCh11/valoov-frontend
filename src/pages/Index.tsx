@@ -16,9 +16,13 @@ const Index = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [activeTab, setActiveTab] = useState('overview');
 
+  const handleLogin = () => {
+    setIsLoggedIn(true);
+  };
+
   // Show landing page if not logged in
   if (!isLoggedIn) {
-    return <LandingPage />;
+    return <LandingPage onLogin={handleLogin} />;
   }
 
   // Show main app if logged in - updated for valuation platform
