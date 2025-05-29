@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { ArrowLeft, Mail, Lock, Eye, EyeOff } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -48,7 +49,7 @@ const LoginForm = ({ onBack, onSwitchToSignup }: LoginFormProps) => {
             <CardHeader className="text-center">
               <div className="flex justify-center mb-4">
                 <img 
-                  src="/lovable-uploads/8db935c6-3e63-4ea8-a51d-83cd746862c0.png" 
+                  src="/lovable-uploads/17dd4d7d-77a4-46b2-8bcc-c7b2923ba0e5.png" 
                   alt="VALOOV Logo" 
                   className="h-16 w-auto"
                 />

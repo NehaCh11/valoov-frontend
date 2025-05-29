@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Upload, FileText, BarChart3, CheckCircle, ArrowRight, Calculator, Star, Eye } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -76,10 +75,9 @@ const LandingPage = () => {
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-4">
               <img 
-                src="/lovable-uploads/8db935c6-3e63-4ea8-a51d-83cd746862c0.png" 
+                src="/lovable-uploads/17dd4d7d-77a4-46b2-8bcc-c7b2923ba0e5.png" 
                 alt="VALOOV Logo" 
                 className="h-20 w-auto object-contain"
-                style={{ filter: 'brightness(0) saturate(100%) invert(30%) sepia(85%) saturate(1200%) hue-rotate(158deg) brightness(95%) contrast(101%)' }}
               />
             </div>
             <div className="flex gap-3">

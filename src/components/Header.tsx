@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Bot, Bell, Settings, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -13,10 +12,9 @@ const Header = () => {
         <div className="flex items-center space-x-4">
           <div className="flex items-center space-x-3">
             <img 
-              src="/lovable-uploads/8db935c6-3e63-4ea8-a51d-83cd746862c0.png" 
+              src="/lovable-uploads/17dd4d7d-77a4-46b2-8bcc-c7b2923ba0e5.png" 
               alt="VALOOV Logo" 
               className="h-12 w-auto object-contain"
-              style={{ filter: 'brightness(0) saturate(100%) invert(30%) sepia(85%) saturate(1200%) hue-rotate(158deg) brightness(95%) contrast(101%)' }}
             />
             <div>
               <p className="text-sm font-medium text-financial-cyan">Company Valuation Platform</p>
