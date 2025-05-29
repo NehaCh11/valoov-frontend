@@ -1,90 +1,74 @@
 
 import { useState } from 'react';
-import Header from '@/components/Header';
+import { SidebarProvider, SidebarInset } from '@/components/ui/sidebar';
+import { AppSidebar } from '@/components/AppSidebar';
+import { TopNavigation } from '@/components/TopNavigation';
+import { ValuationDashboard } from '@/components/ValuationDashboard';
+import { ValuationOverview } from '@/components/ValuationOverview';
+import { GenerateValuationReport } from '@/components/GenerateValuationReport';
+import { ValuationReport } from '@/components/ValuationReport';
+import { NotificationSettings } from '@/components/NotificationSettings';
+import { CompanyProfile } from '@/components/CompanyProfile';
 import MarketOverview from '@/components/MarketOverview';
-import AIAnalysis from '@/components/AIAnalysis';
-import Portfolio from '@/components/Portfolio';
-import LandingPage from '@/components/LandingPage';
 import DocumentUpload from '@/components/DocumentUpload';
 import ChatbotQuestionnaire from '@/components/ChatbotQuestionnaire';
 import RevenueProjections from '@/components/RevenueProjections';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-import { Upload, FileText, BarChart3, Bot, TrendingUp, MessageCircle } from 'lucide-react';
+import Portfolio from '@/components/Portfolio';
+import LandingPage from '@/components/LandingPage';
 
 const Index = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [activeTab, setActiveTab] = useState('overview');
+  const [activeView, setActiveView] = useState('dashboard');
 
   const handleLogin = () => {
     setIsLoggedIn(true);
   };
 
-  // Show landing page if not logged in
   if (!isLoggedIn) {
     return <LandingPage onLogin={handleLogin} />;
   }
 
-  // Show main app if logged in - updated for valuation platform
-  const tabs = [
-    { id: 'overview', label: 'Dashboard', icon: BarChart3 },
-    { id: 'upload', label: 'Upload Documents', icon: Upload },
-    { id: 'questionnaire', label: 'AI Questionnaire', icon: Bot },
-    { id: 'projections', label: 'Revenue Projections', icon: TrendingUp },
-    { id: 'reports', label: 'Valuation Reports', icon: FileText }
-  ];
+  const renderContent = () => {
+    switch (activeView) {
+      case 'dashboard':
+        return <ValuationDashboard />;
+      case 'valuation-overview':
+        return <ValuationOverview />;
+      case 'generate-report':
+        return <GenerateValuationReport />;
+      case 'valuation-report':
+        return <ValuationReport />;
+      case 'upload':
+        return <DocumentUpload />;
+      case 'questionnaire':
+        return <ChatbotQuestionnaire />;
+      case 'projections':
+        return <RevenueProjections />;
+      case 'reports':
+        return <Portfolio />;
+      case 'notifications':
+        return <NotificationSettings />;
+      case 'profile':
+        return <CompanyProfile />;
+      default:
+        return <ValuationDashboard />;
+    }
+  };
 
   return (
     <div className="min-h-screen bg-financial-dark">
       <div className="valoov-gradient min-h-screen">
-        <Header />
-        
-        <main className="container mx-auto px-4 py-8">
-          {/* Navigation Tabs */}
-          <Card className="mb-8 bg-card/30 backdrop-blur border-border/50">
-            <CardContent className="p-4">
-              <div className="flex space-x-1 overflow-x-auto">
-                {tabs.map((tab) => {
-                  const Icon = tab.icon;
-                  return (
-                    <Button
-                      key={tab.id}
-                      variant={activeTab === tab.id ? "default" : "ghost"}
-                      onClick={() => setActiveTab(tab.id)}
-                      className={`flex items-center space-x-2 whitespace-nowrap ${
-                        activeTab === tab.id 
-                          ? 'bg-valoov-teal text-white' 
-                          : 'hover:bg-card/50'
-                      }`}
-                    >
-                      <Icon className="h-4 w-4" />
-                      <span>{tab.label}</span>
-                    </Button>
-                  );
-                })}
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Content Area */}
-          <div className="space-y-8">
-            {activeTab === 'overview' && <MarketOverview />}
-            {activeTab === 'upload' && <DocumentUpload />}
-            {activeTab === 'questionnaire' && <ChatbotQuestionnaire />}
-            {activeTab === 'projections' && <RevenueProjections />}
-            {activeTab === 'reports' && <Portfolio />}
+        <SidebarProvider>
+          <div className="min-h-screen flex w-full">
+            <AppSidebar activeView={activeView} setActiveView={setActiveView} />
+            <SidebarInset>
+              <TopNavigation />
+              <main className="flex-1 p-6">
+                {renderContent()}
+              </main>
+            </SidebarInset>
           </div>
-
-          {/* Footer */}
-          <footer className="mt-16 text-center text-muted-foreground">
-            <p className="text-sm">
-              VALOOV - Professional Company Valuation Platform
-            </p>
-            <p className="text-xs mt-1">
-              Accurate valuations for businesses in France and Spain
-            </p>
-          </footer>
-        </main>
+        </SidebarProvider>
       </div>
     </div>
   );
