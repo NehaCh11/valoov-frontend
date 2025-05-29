@@ -15,8 +15,8 @@ const Header = () => {
             <img 
               src="/lovable-uploads/8db935c6-3e63-4ea8-a51d-83cd746862c0.png" 
               alt="VALOOV Logo" 
-              className="h-10 w-auto object-contain"
-              style={{ filter: 'drop-shadow(0 0 8px rgba(0,0,0,0.3))' }}
+              className="h-12 w-auto object-contain"
+              style={{ filter: 'brightness(0) saturate(100%) invert(30%) sepia(85%) saturate(1200%) hue-rotate(158deg) brightness(95%) contrast(101%)' }}
             />
             <div>
               <p className="text-sm font-medium text-financial-cyan">Company Valuation Platform</p>

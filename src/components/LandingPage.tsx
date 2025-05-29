@@ -78,8 +78,8 @@ const LandingPage = () => {
               <img 
                 src="/lovable-uploads/8db935c6-3e63-4ea8-a51d-83cd746862c0.png" 
                 alt="VALOOV Logo" 
-                className="h-16 w-auto object-contain"
-                style={{ filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.4))' }}
+                className="h-20 w-auto object-contain"
+                style={{ filter: 'brightness(0) saturate(100%) invert(30%) sepia(85%) saturate(1200%) hue-rotate(158deg) brightness(95%) contrast(101%)' }}
               />
             </div>
             <div className="flex gap-3">
@@ -103,7 +103,7 @@ const LandingPage = () => {
         {/* Hero Section */}
         <div className="container mx-auto px-4 pt-12 pb-16">
           <div className="text-center mb-16">
-            <h1 className="text-6xl font-bold text-financial-cyan mb-6" style={{ textShadow: '0 0 15px rgba(75, 174, 184, 0.6)' }}>
+            <h1 className="text-6xl font-bold text-white mb-6" style={{ textShadow: '0 0 15px rgba(255, 255, 255, 0.3)' }}>
               Professional Company Valuation Platform
             </h1>
             <p className="text-2xl text-financial-cyan mb-4 font-medium">
