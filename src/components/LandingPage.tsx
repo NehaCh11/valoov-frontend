@@ -74,23 +74,24 @@ const LandingPage = () => {
         {/* Header with Logo and Sign In/Sign Up */}
         <header className="container mx-auto px-4 pt-6 pb-4">
           <div className="flex justify-between items-center">
-            <div className="flex items-center space-x-3">
+            <div className="flex items-center space-x-4">
               <img 
                 src="/lovable-uploads/8db935c6-3e63-4ea8-a51d-83cd746862c0.png" 
                 alt="VALOOV Logo" 
-                className="h-12 w-auto"
+                className="h-16 w-auto object-contain"
+                style={{ filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.4))' }}
               />
             </div>
             <div className="flex gap-3">
               <Button 
                 variant="outline" 
-                className="border-valoov-teal text-valoov-teal hover:bg-valoov-teal/10"
+                className="border-financial-cyan text-financial-cyan hover:bg-financial-cyan/10 font-medium"
                 onClick={() => setShowLogin(true)}
               >
                 Sign In
               </Button>
               <Button 
-                className="bg-valoov-orange hover:bg-valoov-orange/80 text-white"
+                className="bg-valoov-orange hover:bg-valoov-orange/80 text-white font-medium"
                 onClick={() => setShowSignup(true)}
               >
                 Sign Up
@@ -102,13 +103,13 @@ const LandingPage = () => {
         {/* Hero Section */}
         <div className="container mx-auto px-4 pt-12 pb-16">
           <div className="text-center mb-16">
-            <h1 className="text-6xl font-bold text-glow mb-6">
+            <h1 className="text-6xl font-bold text-financial-cyan mb-6" style={{ textShadow: '0 0 15px rgba(75, 174, 184, 0.6)' }}>
               Professional Company Valuation Platform
             </h1>
-            <p className="text-2xl text-valoov-teal mb-4">
+            <p className="text-2xl text-financial-cyan mb-4 font-medium">
               Get accurate valuations for businesses in France and Spain
             </p>
-            <p className="text-xl text-muted-foreground mb-8 max-w-4xl mx-auto">
+            <p className="text-xl text-gray-200 mb-8 max-w-4xl mx-auto leading-relaxed">
               Upload your tax documents, complete our expert questionnaire, and receive professional 
               valuation reports using multiple proven financial models. Trusted by businesses across Europe.
             </p>
@@ -129,7 +130,7 @@ const LandingPage = () => {
             <div className="flex gap-4 justify-center">
               <Button 
                 size="lg" 
-                className="bg-valoov-teal hover:bg-valoov-teal/80 text-white px-8 py-4 text-lg"
+                className="bg-financial-cyan hover:bg-financial-cyan/80 text-white px-8 py-4 text-lg font-semibold"
                 onClick={() => setShowSignup(true)}
               >
                 Start Your Valuation
@@ -138,7 +139,7 @@ const LandingPage = () => {
               <Button 
                 variant="outline" 
                 size="lg" 
-                className="border-valoov-orange text-valoov-orange hover:bg-valoov-orange/10 px-8 py-4 text-lg"
+                className="border-valoov-orange text-valoov-orange hover:bg-valoov-orange/10 px-8 py-4 text-lg font-medium"
               >
                 View Sample Report
               </Button>

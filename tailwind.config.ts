@@ -73,7 +73,7 @@ export default {
 				financial: {
 					dark: '#0a0e1a',
 					blue: '#1e3a8a',
-					cyan: '#4BAEB8',
+					cyan: '#2D7A7F',
 					green: '#10b981',
 					red: '#ef4444',
 					gold: '#f59e0b',

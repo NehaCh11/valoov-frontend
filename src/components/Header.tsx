@@ -11,21 +11,22 @@ const Header = () => {
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between">
         <div className="flex items-center space-x-4">
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-3">
             <img 
               src="/lovable-uploads/8db935c6-3e63-4ea8-a51d-83cd746862c0.png" 
               alt="VALOOV Logo" 
-              className="h-8 w-auto"
+              className="h-10 w-auto object-contain"
+              style={{ filter: 'drop-shadow(0 0 8px rgba(0,0,0,0.3))' }}
             />
             <div>
-              <p className="text-xs text-muted-foreground">Company Valuation Platform</p>
+              <p className="text-sm font-medium text-financial-cyan">Company Valuation Platform</p>
             </div>
           </div>
         </div>
 
         <div className="flex items-center space-x-4">
           <div className="hidden md:flex items-center space-x-2">
-            <Badge variant="outline" className="bg-valoov-teal/20 text-valoov-teal border-valoov-teal/30">
+            <Badge variant="outline" className="bg-financial-cyan/20 text-financial-cyan border-financial-cyan/30">
               <Bot className="h-3 w-3 mr-1" />
               AI Active
             </Badge>

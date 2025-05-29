@@ -52,22 +52,32 @@
   }
 
   body {
-    @apply bg-background text-foreground font-mono;
+    @apply bg-background text-foreground font-sans;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
 
   .valoov-gradient {
-    background: linear-gradient(135deg, #2C3E50 0%, #4BAEB8 50%, #E87E41 100%);
+    background: linear-gradient(135deg, #2C3E50 0%, #2D7A7F 50%, #E87E41 100%);
   }
 
   .valoov-gradient-alt {
-    background: linear-gradient(45deg, #4BAEB8 0%, #E87E41 100%);
+    background: linear-gradient(45deg, #2D7A7F 0%, #E87E41 100%);
   }
 
   .text-glow {
-    text-shadow: 0 0 10px rgba(75, 174, 184, 0.5);
+    text-shadow: 0 0 15px rgba(45, 122, 127, 0.8);
   }
 
   .text-glow-orange {
     text-shadow: 0 0 10px rgba(232, 126, 65, 0.5);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    letter-spacing: -0.025em;
+  }
+
+  .logo-shadow {
+    filter: drop-shadow(0 0 12px rgba(0,0,0,0.5));
   }
 }
