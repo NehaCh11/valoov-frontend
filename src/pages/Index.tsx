@@ -7,7 +7,7 @@ import Portfolio from '@/components/Portfolio';
 import LandingPage from '@/components/LandingPage';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { BarChart3, Bot, TrendingUp, PieChart } from 'lucide-react';
+import { Upload, FileText, BarChart3 } from 'lucide-react';
 
 const Index = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -18,11 +18,11 @@ const Index = () => {
     return <LandingPage />;
   }
 
-  // Show main app if logged in
+  // Show main app if logged in - updated for valuation platform
   const tabs = [
-    { id: 'overview', label: 'Market Overview', icon: BarChart3 },
-    { id: 'ai', label: 'AI Analysis', icon: Bot },
-    { id: 'portfolio', label: 'Portfolio', icon: PieChart }
+    { id: 'overview', label: 'Dashboard', icon: BarChart3 },
+    { id: 'upload', label: 'Upload Documents', icon: Upload },
+    { id: 'reports', label: 'Valuation Reports', icon: FileText }
   ];
 
   return (
@@ -57,20 +57,20 @@ const Index = () => {
             </CardContent>
           </Card>
 
-          {/* Content Area */}
+          {/* Content Area - temporarily showing existing components */}
           <div className="space-y-8">
             {activeTab === 'overview' && <MarketOverview />}
-            {activeTab === 'ai' && <AIAnalysis />}
-            {activeTab === 'portfolio' && <Portfolio />}
+            {activeTab === 'upload' && <AIAnalysis />}
+            {activeTab === 'reports' && <Portfolio />}
           </div>
 
           {/* Footer */}
           <footer className="mt-16 text-center text-muted-foreground">
             <p className="text-sm">
-              Valoov - Professional Trading Platform
+              VALOOV - Professional Company Valuation Platform
             </p>
             <p className="text-xs mt-1">
-              Real-time data and AI-powered insights for informed financial decisions
+              Accurate valuations for businesses in France and Spain
             </p>
           </footer>
         </main>

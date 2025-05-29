@@ -36,9 +36,9 @@ const LoginForm = ({ onBack, onSwitchToSignup }: LoginFormProps) => {
 
           <Card className="bg-card/30 backdrop-blur border-border/50">
             <CardHeader className="text-center">
-              <CardTitle className="text-2xl">Welcome Back</CardTitle>
+              <CardTitle className="text-2xl">Welcome Back to VALOOV</CardTitle>
               <CardDescription>
-                Sign in to your Valoov account to continue
+                Sign in to access your company valuation dashboard
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -90,7 +90,7 @@ const LoginForm = ({ onBack, onSwitchToSignup }: LoginFormProps) => {
                     onClick={onSwitchToSignup}
                     className="text-financial-cyan hover:text-financial-cyan/80 font-medium"
                   >
-                    Sign up here
+                    Create one here
                   </button>
                 </p>
               </div>

@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { ArrowLeft, Mail, Lock, User } from 'lucide-react';
+import { ArrowLeft, Mail, Lock, User, Building } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -13,6 +13,7 @@ interface SignupFormProps {
 
 const SignupForm = ({ onBack, onSwitchToLogin }: SignupFormProps) => {
   const [name, setName] = useState('');
+  const [company, setCompany] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -24,7 +25,7 @@ const SignupForm = ({ onBack, onSwitchToLogin }: SignupFormProps) => {
       return;
     }
     // TODO: Implement signup logic
-    console.log('Signup attempt:', { name, email, password });
+    console.log('Signup attempt:', { name, company, email, password });
   };
 
   return (
@@ -42,9 +43,9 @@ const SignupForm = ({ onBack, onSwitchToLogin }: SignupFormProps) => {
 
           <Card className="bg-card/30 backdrop-blur border-border/50">
             <CardHeader className="text-center">
-              <CardTitle className="text-2xl">Create Your Account</CardTitle>
+              <CardTitle className="text-2xl">Join VALOOV</CardTitle>
               <CardDescription>
-                Join Valoov and start optimizing your taxes with AI
+                Create your account to start professional company valuations
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -66,13 +67,29 @@ const SignupForm = ({ onBack, onSwitchToLogin }: SignupFormProps) => {
                 </div>
 
                 <div className="space-y-2">
+                  <Label htmlFor="company">Company Name</Label>
+                  <div className="relative">
+                    <Building className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                    <Input
+                      id="company"
+                      type="text"
+                      placeholder="Enter your company name"
+                      value={company}
+                      onChange={(e) => setCompany(e.target.value)}
+                      className="pl-10"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-2">
                   <Label htmlFor="email">Email</Label>
                   <div className="relative">
                     <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                     <Input
                       id="email"
                       type="email"
-                      placeholder="Enter your email"
+                      placeholder="Enter your business email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       className="pl-10"
@@ -88,7 +105,7 @@ const SignupForm = ({ onBack, onSwitchToLogin }: SignupFormProps) => {
                     <Input
                       id="password"
                       type="password"
-                      placeholder="Create a password"
+                      placeholder="Create a secure password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       className="pl-10"
