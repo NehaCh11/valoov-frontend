@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { ArrowLeft, Mail, RotateCcw, CheckCircle2, Clock } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -98,30 +97,32 @@ const EmailVerificationPage = ({ email, onBack, onVerified }: EmailVerificationP
   const progressValue = ((300 - timeLeft) / 300) * 100;
 
   return (
-    <div className="min-h-screen bg-financial-dark">
-      <div className="financial-gradient min-h-screen flex items-center justify-center">
+    <div className="min-h-screen bg-valoov-dark-gray">
+      <div className="valoov-gradient min-h-screen flex items-center justify-center">
         <div className="container mx-auto px-4 max-w-md">
           <Button 
             variant="ghost" 
             onClick={onBack}
-            className="mb-6 text-financial-cyan hover:text-financial-cyan/80"
+            className="mb-6 text-valoov-teal hover:text-valoov-teal/80"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back
           </Button>
 
-          <Card className="bg-card/30 backdrop-blur border-border/50">
+          <Card className="bg-card/30 backdrop-blur border-valoov-teal/30">
             <CardHeader className="text-center">
               <div className="flex justify-center mb-4">
-                <div className="p-3 rounded-lg bg-financial-blue/20">
-                  <Mail className="h-8 w-8 text-financial-cyan" />
-                </div>
+                <img 
+                  src="/lovable-uploads/8db935c6-3e63-4ea8-a51d-83cd746862c0.png" 
+                  alt="VALOOV Logo" 
+                  className="h-12 w-auto mb-2"
+                />
               </div>
               <CardTitle className="text-2xl">Verify Your Email</CardTitle>
               <CardDescription>
                 We've sent a 6-digit verification code to
                 <br />
-                <span className="font-medium text-financial-cyan">{email}</span>
+                <span className="font-medium text-valoov-teal">{email}</span>
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
@@ -167,8 +168,8 @@ const EmailVerificationPage = ({ email, onBack, onVerified }: EmailVerificationP
               {/* Status and Actions */}
               <div className="space-y-4">
                 {isVerifying && (
-                  <div className="flex items-center justify-center space-x-2 text-financial-cyan">
-                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-financial-cyan"></div>
+                  <div className="flex items-center justify-center space-x-2 text-valoov-teal">
+                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-valoov-teal"></div>
                     <span className="text-sm">Verifying...</span>
                   </div>
                 )}
@@ -182,11 +183,11 @@ const EmailVerificationPage = ({ email, onBack, onVerified }: EmailVerificationP
                     variant="outline"
                     onClick={handleResendEmail}
                     disabled={!canResend || isResending}
-                    className="w-full border-financial-cyan text-financial-cyan hover:bg-financial-cyan/10"
+                    className="w-full border-valoov-orange text-valoov-orange hover:bg-valoov-orange/10"
                   >
                     {isResending ? (
                       <>
-                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-financial-cyan mr-2"></div>
+                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-valoov-orange mr-2"></div>
                         Sending...
                       </>
                     ) : (
@@ -203,16 +204,16 @@ const EmailVerificationPage = ({ email, onBack, onVerified }: EmailVerificationP
                   <h4 className="text-sm font-medium text-center">Verification Steps</h4>
                   <div className="space-y-2">
                     <div className="flex items-center space-x-3 text-xs">
-                      <CheckCircle2 className="h-4 w-4 text-financial-green" />
+                      <CheckCircle2 className="h-4 w-4 text-valoov-teal" />
                       <span className="text-muted-foreground">Account created</span>
                     </div>
                     <div className="flex items-center space-x-3 text-xs">
-                      <CheckCircle2 className="h-4 w-4 text-financial-green" />
+                      <CheckCircle2 className="h-4 w-4 text-valoov-teal" />
                       <span className="text-muted-foreground">Email sent</span>
                     </div>
                     <div className="flex items-center space-x-3 text-xs">
-                      <div className="h-4 w-4 rounded-full border-2 border-financial-cyan animate-pulse"></div>
-                      <span className="text-financial-cyan">Email verification</span>
+                      <div className="h-4 w-4 rounded-full border-2 border-valoov-orange animate-pulse"></div>
+                      <span className="text-valoov-orange">Email verification</span>
                     </div>
                     <div className="flex items-center space-x-3 text-xs">
                       <div className="h-4 w-4 rounded-full border-2 border-muted-foreground/30"></div>

@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { ArrowLeft, Mail, Lock, User, Building, Eye, EyeOff } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -56,24 +57,26 @@ const SignupForm = ({ onBack, onSwitchToLogin }: SignupFormProps) => {
   }
 
   return (
-    <div className="min-h-screen bg-financial-dark">
-      <div className="financial-gradient min-h-screen flex items-center justify-center">
+    <div className="min-h-screen bg-valoov-dark-gray">
+      <div className="valoov-gradient min-h-screen flex items-center justify-center">
         <div className="container mx-auto px-4 max-w-md">
           <Button 
             variant="ghost" 
             onClick={onBack}
-            className="mb-6 text-financial-cyan hover:text-financial-cyan/80"
+            className="mb-6 text-valoov-teal hover:text-valoov-teal/80"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to Home
           </Button>
 
-          <Card className="bg-card/30 backdrop-blur border-border/50">
+          <Card className="bg-card/30 backdrop-blur border-valoov-teal/30">
             <CardHeader className="text-center">
               <div className="flex justify-center mb-4">
-                <div className="p-3 rounded-lg bg-financial-blue/20">
-                  <Building className="h-8 w-8 text-financial-cyan" />
-                </div>
+                <img 
+                  src="/lovable-uploads/8db935c6-3e63-4ea8-a51d-83cd746862c0.png" 
+                  alt="VALOOV Logo" 
+                  className="h-16 w-auto"
+                />
               </div>
               <CardTitle className="text-2xl">Join VALOOV</CardTitle>
               <CardDescription>
@@ -197,7 +200,7 @@ const SignupForm = ({ onBack, onSwitchToLogin }: SignupFormProps) => {
 
                 <Button 
                   type="submit" 
-                  className="w-full bg-financial-cyan hover:bg-financial-cyan/80"
+                  className="w-full bg-valoov-teal hover:bg-valoov-teal/80"
                   disabled={!agreeTerms}
                 >
                   Create Account
@@ -209,7 +212,7 @@ const SignupForm = ({ onBack, onSwitchToLogin }: SignupFormProps) => {
                   Already have an account?{' '}
                   <button
                     onClick={onSwitchToLogin}
-                    className="text-financial-cyan hover:text-financial-cyan/80 font-medium"
+                    className="text-valoov-orange hover:text-valoov-orange/80 font-medium"
                   >
                     Sign in here
                   </button>

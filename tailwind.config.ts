@@ -63,13 +63,21 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
+				valoov: {
+					teal: '#4BAEB8',
+					orange: '#E87E41',
+					'dark-gray': '#2C3E50',
+					'light-gray': '#95A5A6',
+					white: '#FFFFFF'
+				},
 				financial: {
 					dark: '#0a0e1a',
 					blue: '#1e3a8a',
-					cyan: '#06b6d4',
+					cyan: '#4BAEB8',
 					green: '#10b981',
 					red: '#ef4444',
-					gold: '#f59e0b'
+					gold: '#f59e0b',
+					orange: '#E87E41'
 				}
 			},
 			borderRadius: {
@@ -96,10 +104,10 @@ export default {
 				},
 				'pulse-glow': {
 					'0%, 100%': {
-						boxShadow: '0 0 5px rgba(6, 182, 212, 0.3)'
+						boxShadow: '0 0 5px rgba(75, 174, 184, 0.3)'
 					},
 					'50%': {
-						boxShadow: '0 0 20px rgba(6, 182, 212, 0.6)'
+						boxShadow: '0 0 20px rgba(75, 174, 184, 0.6)'
 					}
 				},
 				'slide-up': {
