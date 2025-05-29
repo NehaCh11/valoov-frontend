@@ -1,12 +1,12 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Progress } from '@/components/ui/progress';
-import { Send, Mic, Image, Bot, User } from 'lucide-react';
+import { Send, Mic, Image, Bot, User, MicOff, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useToast } from '@/hooks/use-toast';
 
 interface Question {
   id: string;
@@ -22,6 +22,8 @@ interface ChatMessage {
   type: 'bot' | 'user';
   content: string;
   timestamp: Date;
+  audioUrl?: string;
+  imageUrl?: string;
 }
 
 const questions: Question[] = [
@@ -59,7 +61,15 @@ const ChatbotQuestionnaire = () => {
   const [currentAnswer, setCurrentAnswer] = useState('');
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [isCompleted, setIsCompleted] = useState(false);
+  const [isRecording, setIsRecording] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
+  const audioChunksRef = useRef<Blob[]>([]);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const { toast } = useToast();
 
   const currentQuestion = questions[currentQuestionIndex];
   const progress = ((currentQuestionIndex) / questions.length) * 100;
@@ -88,21 +98,107 @@ const ChatbotQuestionnaire = () => {
     setMessages(prev => [...prev, message]);
   };
 
-  const addUserMessage = (content: string) => {
+  const addUserMessage = (content: string, audioUrl?: string, imageUrl?: string) => {
     const message: ChatMessage = {
       id: Math.random().toString(36).substr(2, 9),
       type: 'user',
       content,
-      timestamp: new Date()
+      timestamp: new Date(),
+      audioUrl,
+      imageUrl
     };
     setMessages(prev => [...prev, message]);
+  };
+
+  const handleVoiceNote = async () => {
+    if (!isRecording) {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        const mediaRecorder = new MediaRecorder(stream);
+        mediaRecorderRef.current = mediaRecorder;
+        audioChunksRef.current = [];
+
+        mediaRecorder.ondataavailable = (event) => {
+          audioChunksRef.current.push(event.data);
+        };
+
+        mediaRecorder.onstop = () => {
+          const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/wav' });
+          const audioUrl = URL.createObjectURL(audioBlob);
+          
+          // For demo purposes, we'll simulate speech-to-text
+          const simulatedText = "Voice note recorded (speech-to-text would convert this to actual text)";
+          setCurrentAnswer(simulatedText);
+          
+          toast({
+            title: "Voice Note Recorded",
+            description: "Your voice note has been processed successfully.",
+          });
+        };
+
+        mediaRecorder.start();
+        setIsRecording(true);
+        toast({
+          title: "Recording Started",
+          description: "Speak now. Click the microphone again to stop recording.",
+        });
+      } catch (error) {
+        toast({
+          title: "Microphone Access Denied",
+          description: "Please allow microphone access to record voice notes.",
+          variant: "destructive",
+        });
+      }
+    } else {
+      if (mediaRecorderRef.current) {
+        mediaRecorderRef.current.stop();
+        mediaRecorderRef.current.stream.getTracks().forEach(track => track.stop());
+        setIsRecording(false);
+      }
+    }
+  };
+
+  const handleImageUpload = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file && file.type.startsWith('image/')) {
+      setSelectedImage(file);
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setImagePreview(e.target?.result as string);
+        setCurrentAnswer(`[Image uploaded: ${file.name}]`);
+      };
+      reader.readAsDataURL(file);
+      
+      toast({
+        title: "Image Uploaded",
+        description: `${file.name} has been selected successfully.`,
+      });
+    } else {
+      toast({
+        title: "Invalid File",
+        description: "Please select a valid image file.",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const clearSelectedImage = () => {
+    setSelectedImage(null);
+    setImagePreview(null);
+    if (currentAnswer.startsWith('[Image uploaded:')) {
+      setCurrentAnswer('');
+    }
   };
 
   const handleSubmitAnswer = () => {
     if (!currentAnswer.trim()) return;
 
-    // Add user message
-    addUserMessage(currentAnswer);
+    // Add user message with any attachments
+    addUserMessage(currentAnswer, undefined, imagePreview || undefined);
 
     // Save answer
     setAnswers(prev => ({
@@ -110,8 +206,9 @@ const ChatbotQuestionnaire = () => {
       [currentQuestion.id]: currentAnswer
     }));
 
-    // Clear current answer
+    // Clear current answer and attachments
     setCurrentAnswer('');
+    clearSelectedImage();
 
     // Move to next question or complete
     if (currentQuestionIndex < questions.length - 1) {
@@ -237,6 +334,13 @@ const ChatbotQuestionnaire = () => {
                   )}
                 >
                   <p className="text-sm">{message.content}</p>
+                  {message.imageUrl && (
+                    <img 
+                      src={message.imageUrl} 
+                      alt="Uploaded content" 
+                      className="mt-2 max-w-full h-auto rounded border"
+                    />
+                  )}
                   <span className="text-xs opacity-70 mt-1 block">
                     {message.timestamp.toLocaleTimeString()}
                   </span>
@@ -257,6 +361,25 @@ const ChatbotQuestionnaire = () => {
               <div className="text-sm font-medium text-muted-foreground">
                 {currentQuestion.category}
               </div>
+              
+              {/* Image Preview */}
+              {imagePreview && (
+                <div className="relative inline-block">
+                  <img 
+                    src={imagePreview} 
+                    alt="Preview" 
+                    className="max-w-[200px] h-auto rounded border"
+                  />
+                  <Button
+                    variant="destructive"
+                    size="sm"
+                    className="absolute -top-2 -right-2 h-6 w-6 rounded-full p-0"
+                    onClick={clearSelectedImage}
+                  >
+                    <X className="h-3 w-3" />
+                  </Button>
+                </div>
+              )}
               
               {currentQuestion.type === 'select' ? (
                 <div className="space-y-3">
@@ -284,14 +407,26 @@ const ChatbotQuestionnaire = () => {
               )}
               
               <div className="flex justify-center space-x-2">
-                <Button variant="ghost" size="sm">
-                  <Mic className="h-4 w-4 mr-2" />
-                  Voice Note
+                <Button 
+                  variant="ghost" 
+                  size="sm"
+                  onClick={handleVoiceNote}
+                  className={cn(isRecording && "bg-red-100 text-red-600")}
+                >
+                  {isRecording ? <MicOff className="h-4 w-4 mr-2" /> : <Mic className="h-4 w-4 mr-2" />}
+                  {isRecording ? "Stop Recording" : "Voice Note"}
                 </Button>
-                <Button variant="ghost" size="sm">
+                <Button variant="ghost" size="sm" onClick={handleImageUpload}>
                   <Image className="h-4 w-4 mr-2" />
                   Upload Image
                 </Button>
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/*"
+                  onChange={handleFileChange}
+                  className="hidden"
+                />
               </div>
             </div>
           )}
