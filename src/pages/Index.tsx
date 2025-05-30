@@ -18,7 +18,7 @@ import LandingPage from '@/components/LandingPage';
 
 const Index = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [activeView, setActiveView] = useState('dashboard');
+  const [activeView, setActiveView] = useState('questionnaire');
 
   const handleLogin = () => {
     setIsLoggedIn(true);
@@ -26,7 +26,7 @@ const Index = () => {
 
   const handleSignOut = () => {
     setIsLoggedIn(false);
-    setActiveView('dashboard'); // Reset to default view
+    setActiveView('questionnaire'); // Reset to questionnaire view
   };
 
   if (!isLoggedIn) {
@@ -56,7 +56,7 @@ const Index = () => {
       case 'profile':
         return <CompanyProfile />;
       default:
-        return <ValuationDashboard />;
+        return <ChatbotQuestionnaire />;
     }
   };
 
