@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -12,14 +13,6 @@ interface ValuationReportProps {
 
 export function ValuationReport({ hasPaidAccess = false }: ValuationReportProps) {
   const [showPricingDialog, setShowPricingDialog] = useState(false);
-
-  const valuationMethods = [
-    { name: 'Scorecard Method', value: '€3.2M', weight: '25%', status: 'complete' },
-    { name: 'Checklist Method', value: '€3.8M', weight: '20%', status: 'complete' },
-    { name: 'DCF/LTG', value: '€4.1M', weight: '20%', status: 'complete' },
-    { name: 'DCF w/ Multiple', value: '€3.5M', weight: '20%', status: 'complete' },
-    { name: 'Venture Capital Method', value: '€2.9M', weight: '15%', status: 'complete' },
-  ];
 
   const handleDownloadClick = () => {
     if (!hasPaidAccess) {
@@ -43,15 +36,15 @@ export function ValuationReport({ hasPaidAccess = false }: ValuationReportProps)
           <p className="text-slate-600 mt-1">Professional valuation analysis preview</p>
         </div>
         <div className="flex items-center space-x-3">
-          <Button onClick={handleDownloadClick}>
+          <Button onClick={handleDownloadClick} className="bg-valoov-teal hover:bg-valoov-teal/90">
             <Download className="h-4 w-4 mr-2" />
-            {hasPaidAccess ? 'Download PDF' : 'Unlock Full Report'}
+            {hasPaidAccess ? 'Download PDF' : 'Download Full Report'}
           </Button>
         </div>
       </div>
 
       {/* PDF Preview Section */}
-      <Card className="bg-card/30 backdrop-blur border-border/50">
+      <Card className="bg-white border-slate-200">
         <CardHeader>
           <CardTitle className="flex items-center space-x-2">
             <FileText className="h-5 w-5 text-valoov-teal" />
@@ -64,189 +57,256 @@ export function ValuationReport({ hasPaidAccess = false }: ValuationReportProps)
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="space-y-4">
-            {/* Placeholder for PDF pages - will be replaced when you provide the sample */}
-            <div className="border border-gray-300 rounded-lg overflow-hidden">
-              {/* Page 1 - Visible */}
-              <div className="bg-white p-8 border-b">
-                <div className="text-center mb-6">
-                  <h2 className="text-2xl font-bold text-slate-800 mb-2">VALUATION REPORT</h2>
-                  <h3 className="text-xl text-slate-700">TechCorp Solutions</h3>
-                  <p className="text-slate-600">Professional Business Valuation</p>
+          <div className="space-y-6">
+            {/* Page 1 - Cover Page */}
+            <div className="border border-gray-300 rounded-lg overflow-hidden bg-white shadow-sm">
+              <div className="p-8 text-center">
+                <div className="mb-8">
+                  <h1 className="text-3xl font-bold text-slate-800 mb-2">VALUATION REPORT</h1>
+                  <div className="w-24 h-1 bg-valoov-teal mx-auto mb-4"></div>
+                  <h2 className="text-2xl font-semibold text-slate-700 mb-2">TechCorp Solutions</h2>
+                  <p className="text-lg text-slate-600">Benchmarked Business Valuation</p>
                 </div>
-                <div className="grid grid-cols-2 gap-4 text-sm">
-                  <div>
-                    <p className="font-semibold text-slate-800">Company:</p>
-                    <p className="text-slate-700">TechCorp Solutions</p>
+                
+                <div className="bg-slate-50 p-6 rounded-lg mb-8">
+                  <div className="grid grid-cols-2 gap-6 text-left">
+                    <div>
+                      <p className="font-semibold text-slate-800 mb-1">Company:</p>
+                      <p className="text-slate-700">TechCorp Solutions Ltd.</p>
+                    </div>
+                    <div>
+                      <p className="font-semibold text-slate-800 mb-1">Industry:</p>
+                      <p className="text-slate-700">Financial Technology</p>
+                    </div>
+                    <div>
+                      <p className="font-semibold text-slate-800 mb-1">Valuation Date:</p>
+                      <p className="text-slate-700">December 15, 2024</p>
+                    </div>
+                    <div>
+                      <p className="font-semibold text-slate-800 mb-1">Report Type:</p>
+                      <p className="text-slate-700">Pre-Money Valuation</p>
+                    </div>
+                    <div>
+                      <p className="font-semibold text-slate-800 mb-1">Stage:</p>
+                      <p className="text-slate-700">Series A</p>
+                    </div>
+                    <div>
+                      <p className="font-semibold text-slate-800 mb-1">Revenue (ARR):</p>
+                      <p className="text-slate-700">€2.1M</p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="font-semibold text-slate-800">Industry:</p>
-                    <p className="text-slate-700">Financial Technology</p>
-                  </div>
-                  <div>
-                    <p className="font-semibold text-slate-800">Valuation Date:</p>
-                    <p className="text-slate-700">December 2024</p>
-                  </div>
-                  <div>
-                    <p className="font-semibold text-slate-800">Report Type:</p>
-                    <p className="text-slate-700">Pre-Money Valuation</p>
-                  </div>
+                </div>
+
+                <div className="text-center">
+                  <p className="text-sm text-slate-500">Generated by VALOOV</p>
+                  <p className="text-sm text-slate-500">Professional Business Valuations</p>
                 </div>
               </div>
+            </div>
 
-              {/* Page 2 - Visible */}
-              <div className="bg-white p-8 border-b">
-                <h3 className="text-lg font-bold text-slate-800 mb-4">Executive Summary</h3>
-                <div className="space-y-4 text-sm text-slate-700">
+            {/* Page 2 - Executive Summary */}
+            <div className="border border-gray-300 rounded-lg overflow-hidden bg-white shadow-sm">
+              <div className="p-8">
+                <h2 className="text-2xl font-bold text-slate-800 mb-6 border-b border-slate-200 pb-2">Executive Summary</h2>
+                
+                <div className="mb-8">
+                  <div className="bg-gradient-to-r from-valoov-teal/10 to-valoov-orange/10 p-6 rounded-lg text-center mb-6">
+                    <h3 className="text-lg font-semibold text-slate-800 mb-2">Company Valuation</h3>
+                    <p className="text-4xl font-bold text-valoov-teal mb-1">€3,500,000</p>
+                    <p className="text-slate-600">Weighted Average Pre-Money Valuation</p>
+                  </div>
+
+                  <div className="grid grid-cols-3 gap-4 mb-6">
+                    <div className="text-center p-4 bg-slate-50 rounded-lg">
+                      <p className="text-2xl font-bold text-slate-800">€2.9M</p>
+                      <p className="text-sm text-slate-600">Minimum Value</p>
+                    </div>
+                    <div className="text-center p-4 bg-slate-50 rounded-lg">
+                      <p className="text-2xl font-bold text-slate-800">€3.5M</p>
+                      <p className="text-sm text-slate-600">Most Likely</p>
+                    </div>
+                    <div className="text-center p-4 bg-slate-50 rounded-lg">
+                      <p className="text-2xl font-bold text-slate-800">€4.1M</p>
+                      <p className="text-sm text-slate-600">Maximum Value</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="text-sm text-slate-700 space-y-4">
                   <p>
-                    This valuation report provides a comprehensive analysis of TechCorp Solutions 
-                    using five industry-standard methodologies.
+                    <strong>Company Overview:</strong> TechCorp Solutions is a Financial Technology company 
+                    specializing in B2B SaaS solutions for small and medium enterprises. The company has 
+                    shown consistent growth with an Annual Recurring Revenue (ARR) of €2.1M.
                   </p>
-                  <div className="bg-gradient-to-r from-valoov-teal/20 to-valoov-orange/20 p-4 rounded-lg text-center">
-                    <p className="text-2xl font-bold text-slate-800">€3.5M</p>
-                    <p className="text-slate-600">Weighted Average Valuation</p>
+                  
+                  <p>
+                    <strong>Valuation Methodology:</strong> This report employs five industry-standard 
+                    valuation methods to provide a comprehensive assessment of the company's fair value.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Page 3 - Methodology Overview (visible) */}
+            <div className="border border-gray-300 rounded-lg overflow-hidden bg-white shadow-sm">
+              <div className="p-8">
+                <h2 className="text-2xl font-bold text-slate-800 mb-6 border-b border-slate-200 pb-2">Valuation Methodologies</h2>
+                
+                <div className="space-y-4">
+                  <div className="flex justify-between items-center p-4 bg-slate-50 rounded-lg">
+                    <div>
+                      <h4 className="font-semibold text-slate-800">Scorecard Method</h4>
+                      <p className="text-sm text-slate-600">Risk-adjusted approach</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-xl font-bold text-valoov-teal">€3.2M</p>
+                      <p className="text-sm text-slate-600">Weight: 25%</p>
+                    </div>
+                  </div>
+
+                  <div className="flex justify-between items-center p-4 bg-slate-50 rounded-lg">
+                    <div>
+                      <h4 className="font-semibold text-slate-800">Checklist Method</h4>
+                      <p className="text-sm text-slate-600">Qualitative assessment</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-xl font-bold text-valoov-teal">€3.8M</p>
+                      <p className="text-sm text-slate-600">Weight: 20%</p>
+                    </div>
+                  </div>
+
+                  <div className="flex justify-between items-center p-4 bg-slate-50 rounded-lg">
+                    <div>
+                      <h4 className="font-semibold text-slate-800">DCF / LTG Method</h4>
+                      <p className="text-sm text-slate-600">Long-term growth projections</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-xl font-bold text-valoov-teal">€4.1M</p>
+                      <p className="text-sm text-slate-600">Weight: 20%</p>
+                    </div>
+                  </div>
+
+                  <div className="flex justify-between items-center p-4 bg-slate-50 rounded-lg">
+                    <div>
+                      <h4 className="font-semibold text-slate-800">DCF w/ Multiple</h4>
+                      <p className="text-sm text-slate-600">Market multiple approach</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-xl font-bold text-valoov-teal">€3.5M</p>
+                      <p className="text-sm text-slate-600">Weight: 20%</p>
+                    </div>
+                  </div>
+
+                  <div className="flex justify-between items-center p-4 bg-slate-50 rounded-lg">
+                    <div>
+                      <h4 className="font-semibold text-slate-800">Venture Capital Method</h4>
+                      <p className="text-sm text-slate-600">Exit-based valuation</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-xl font-bold text-valoov-teal">€2.9M</p>
+                      <p className="text-sm text-slate-600">Weight: 15%</p>
+                    </div>
                   </div>
                 </div>
               </div>
+            </div>
 
-              {/* Blurred pages if no access */}
-              {!hasPaidAccess && (
-                <div className="relative">
-                  <div className="filter blur-sm bg-white p-8 opacity-50">
-                    <h3 className="text-lg font-bold text-slate-800 mb-4">Detailed Methodology</h3>
-                    <div className="space-y-3">
-                      <div className="h-4 bg-gray-300 rounded w-full"></div>
-                      <div className="h-4 bg-gray-300 rounded w-3/4"></div>
-                      <div className="h-4 bg-gray-300 rounded w-1/2"></div>
-                      <div className="h-20 bg-gray-200 rounded mt-4"></div>
+            {/* Blurred/Locked Content */}
+            {!hasPaidAccess && (
+              <>
+                {/* Page 4 - Blurred */}
+                <div className="relative border border-gray-300 rounded-lg overflow-hidden">
+                  <div className="filter blur-sm bg-white p-8 opacity-60">
+                    <h2 className="text-2xl font-bold text-slate-800 mb-6 border-b border-slate-200 pb-2">Detailed Analysis</h2>
+                    <div className="space-y-4">
+                      <div className="h-6 bg-gray-300 rounded w-full"></div>
+                      <div className="h-6 bg-gray-300 rounded w-3/4"></div>
+                      <div className="h-6 bg-gray-300 rounded w-1/2"></div>
+                      <div className="h-32 bg-gray-200 rounded mt-6"></div>
+                      <div className="grid grid-cols-2 gap-4 mt-4">
+                        <div className="h-20 bg-gray-200 rounded"></div>
+                        <div className="h-20 bg-gray-200 rounded"></div>
+                      </div>
                     </div>
                   </div>
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="bg-white p-6 rounded-lg shadow-lg text-center border-2 border-valoov-orange">
-                      <Lock className="h-8 w-8 mx-auto mb-2 text-valoov-orange" />
-                      <p className="font-semibold text-slate-800 mb-2">Unlock Full Report</p>
-                      <p className="text-sm text-slate-600 mb-4">15+ additional pages with detailed analysis</p>
+                    <div className="bg-white p-8 rounded-lg shadow-lg text-center border-2 border-valoov-orange max-w-md">
+                      <Lock className="h-12 w-12 mx-auto mb-4 text-valoov-orange" />
+                      <h3 className="text-xl font-bold text-slate-800 mb-2">Unlock Full Report</h3>
+                      <p className="text-slate-600 mb-4">
+                        Get access to 15+ additional pages including:
+                      </p>
+                      <ul className="text-sm text-slate-600 text-left mb-6 space-y-1">
+                        <li>• Detailed methodology calculations</li>
+                        <li>• Market analysis & benchmarks</li>
+                        <li>• Risk assessment</li>
+                        <li>• Financial projections</li>
+                        <li>• Investment recommendations</li>
+                      </ul>
                       <Button 
-                        className="bg-valoov-orange hover:bg-valoov-orange/90"
+                        className="bg-valoov-orange hover:bg-valoov-orange/90 w-full"
                         onClick={handleDownloadClick}
                       >
-                        View Pricing
+                        View Pricing Plans
                       </Button>
                     </div>
                   </div>
                 </div>
-              )}
-            </div>
+
+                {/* Additional blurred pages preview */}
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="border border-gray-300 rounded-lg overflow-hidden filter blur-sm opacity-40">
+                    <div className="bg-white p-6">
+                      <div className="h-4 bg-gray-300 rounded w-3/4 mb-3"></div>
+                      <div className="h-24 bg-gray-200 rounded mb-3"></div>
+                      <div className="space-y-2">
+                        <div className="h-3 bg-gray-300 rounded w-full"></div>
+                        <div className="h-3 bg-gray-300 rounded w-2/3"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="border border-gray-300 rounded-lg overflow-hidden filter blur-sm opacity-40">
+                    <div className="bg-white p-6">
+                      <div className="h-4 bg-gray-300 rounded w-3/4 mb-3"></div>
+                      <div className="h-24 bg-gray-200 rounded mb-3"></div>
+                      <div className="space-y-2">
+                        <div className="h-3 bg-gray-300 rounded w-full"></div>
+                        <div className="h-3 bg-gray-300 rounded w-2/3"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </>
+            )}
+
+            {hasPaidAccess && (
+              <div className="text-center p-8 bg-green-50 rounded-lg">
+                <div className="flex items-center justify-center space-x-2 mb-4">
+                  <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                  <p className="font-semibold text-green-800">Full Report Access Granted</p>
+                </div>
+                <p className="text-green-700">
+                  You have access to the complete 20+ page valuation report.
+                </p>
+              </div>
+            )}
 
             {!hasPaidAccess && (
-              <div className="text-center p-4 bg-slate-50 rounded-lg">
-                <p className="text-sm text-slate-600">
-                  This is a preview of your valuation report. Purchase a plan to download the complete 20+ page document.
+              <div className="text-center p-6 bg-slate-50 rounded-lg border-2 border-dashed border-slate-300">
+                <p className="text-slate-600 mb-4">
+                  <strong>Preview includes 3 of 20+ pages.</strong> Purchase a plan to download the complete professional report.
                 </p>
+                <Button 
+                  onClick={handleDownloadClick}
+                  className="bg-valoov-teal hover:bg-valoov-teal/90"
+                >
+                  Get Full Report Access
+                </Button>
               </div>
             )}
           </div>
         </CardContent>
       </Card>
-
-      {/* Existing tabbed content */}
-      <Tabs defaultValue="overview" className="space-y-4">
-        <TabsList className="grid w-full grid-cols-4">
-          <TabsTrigger value="overview">Overview</TabsTrigger>
-          <TabsTrigger value="methods">Method Breakdown</TabsTrigger>
-          <TabsTrigger value="charts">Charts & Visuals</TabsTrigger>
-          <TabsTrigger value="disclaimers">Disclaimers</TabsTrigger>
-        </TabsList>
-
-        <TabsContent value="overview" className="space-y-4">
-          <Card className="bg-card/30 backdrop-blur border-border/50">
-            <CardHeader>
-              <CardTitle className="text-slate-800">Executive Summary</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-slate-700 leading-relaxed">
-                This valuation report provides a comprehensive analysis of TechCorp Solutions using five 
-                industry-standard methodologies. The company operates in the Financial Technology sector 
-                with a focus on B2B SaaS solutions. Based on current market conditions, financial projections, 
-                and qualitative factors, the weighted average valuation is €3.5M.
-              </p>
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value="methods" className="space-y-4">
-          <Card className="bg-card/30 backdrop-blur border-border/50">
-            <CardHeader>
-              <CardTitle className="flex items-center space-x-2">
-                <BarChart3 className="h-5 w-5 text-financial-cyan" />
-                <span className="text-slate-800">Detailed Method Breakdown</span>
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                {valuationMethods.map((method, index) => (
-                  <div key={index} className="p-4 bg-card/20 rounded-lg">
-                    <div className="flex items-center justify-between mb-2">
-                      <h4 className="font-semibold text-slate-800">{method.name}</h4>
-                      <div className="flex items-center space-x-2">
-                        <span className="text-xl font-bold text-valoov-teal">{method.value}</span>
-                        <Badge variant="outline">{method.weight}</Badge>
-                      </div>
-                    </div>
-                    <p className="text-sm text-slate-600">
-                      Detailed methodology explanation and calculations would be shown here.
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value="charts" className="space-y-4">
-          <Card className="bg-card/30 backdrop-blur border-border/50">
-            <CardHeader>
-              <CardTitle className="flex items-center space-x-2">
-                <PieChart className="h-5 w-5 text-valoov-orange" />
-                <span className="text-slate-800">Visual Analysis</span>
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-center py-8">
-                <p className="text-slate-600">Interactive charts and graphs would be displayed here</p>
-                <p className="text-sm text-slate-500 mt-2">Including method weightings, trend analysis, and market comparisons</p>
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value="disclaimers" className="space-y-4">
-          <Card className="bg-card/30 backdrop-blur border-border/50">
-            <CardHeader>
-              <CardTitle className="flex items-center space-x-2">
-                <AlertTriangle className="h-5 w-5 text-yellow-500" />
-                <span className="text-slate-800">Legal Disclaimers</span>
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4 text-sm text-slate-700">
-                <p>
-                  This valuation report is prepared for informational purposes only and should not be considered 
-                  as investment advice or a recommendation to buy or sell securities.
-                </p>
-                <p>
-                  The valuation estimates are based on information provided by the company and publicly available 
-                  market data. Actual transaction values may differ significantly from these estimates.
-                </p>
-                <p>
-                  VALOOV disclaims any liability for decisions made based on this report. Users should consult 
-                  with qualified financial advisors before making investment decisions.
-                </p>
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
-      </Tabs>
 
       {/* Pricing Dialog */}
       <PricingDialog
