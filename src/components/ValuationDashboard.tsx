@@ -19,8 +19,8 @@ export function ValuationDashboard() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-white">Valuation Dashboard</h1>
-          <p className="text-gray-400 mt-1">Track your company valuation progress</p>
+          <h1 className="text-3xl font-bold text-black">Valuation Dashboard</h1>
+          <p className="text-gray-600 mt-1">Track your company valuation progress</p>
         </div>
         <Button className="bg-valoov-teal hover:bg-valoov-teal/90">
           <Calculator className="h-4 w-4 mr-2" />
@@ -39,27 +39,27 @@ export function ValuationDashboard() {
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
-              <p className="text-sm text-gray-400">Company Name</p>
-              <p className="font-semibold text-white">TechCorp Solutions</p>
+              <p className="text-sm text-gray-600">Company Name</p>
+              <p className="font-semibold text-black">TechCorp Solutions</p>
             </div>
             <div>
-              <p className="text-sm text-gray-400">Industry</p>
-              <p className="font-semibold text-white">Financial Technology</p>
+              <p className="text-sm text-gray-600">Industry</p>
+              <p className="font-semibold text-black">Financial Technology</p>
             </div>
             <div>
-              <p className="text-sm text-gray-400">Type</p>
-              <p className="font-semibold text-white">Startup</p>
+              <p className="text-sm text-gray-600">Type</p>
+              <p className="font-semibold text-black">Startup</p>
             </div>
             <div>
-              <p className="text-sm text-gray-400">Country</p>
-              <p className="font-semibold text-white">Spain</p>
+              <p className="text-sm text-gray-600">Country</p>
+              <p className="font-semibold text-black">Spain</p>
             </div>
             <div>
-              <p className="text-sm text-gray-400">Founded</p>
-              <p className="font-semibold text-white">2020</p>
+              <p className="text-sm text-gray-600">Founded</p>
+              <p className="font-semibold text-black">2020</p>
             </div>
             <div>
-              <p className="text-sm text-gray-400">Stage</p>
+              <p className="text-sm text-gray-600">Stage</p>
               <Badge variant="outline" className="bg-valoov-teal/20 text-valoov-teal border-valoov-teal/30">
                 Series A
               </Badge>
@@ -80,37 +80,37 @@ export function ValuationDashboard() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div>
               <div className="flex items-center justify-between mb-2">
-                <span className="text-sm font-medium">Overall Progress</span>
-                <span className="text-sm text-gray-400">65%</span>
+                <span className="text-sm font-medium text-black">Overall Progress</span>
+                <span className="text-sm text-gray-600">65%</span>
               </div>
               <Progress value={65} className="h-2 mb-4" />
               
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
-                  <span className="text-sm">Company Info</span>
+                  <span className="text-sm text-black">Company Info</span>
                   <Badge variant="default" className="bg-green-600">Complete</Badge>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm">Questionnaire</span>
+                  <span className="text-sm text-black">Questionnaire</span>
                   <Badge variant="default" className="bg-green-600">Complete</Badge>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm">Financial Projections</span>
+                  <span className="text-sm text-black">Financial Projections</span>
                   <Badge variant="default" className="bg-yellow-600">In Progress</Badge>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm">Document Upload</span>
+                  <span className="text-sm text-black">Document Upload</span>
                   <Badge variant="outline">Pending</Badge>
                 </div>
               </div>
             </div>
             
             <div>
-              <h4 className="font-semibold text-white mb-4">Current Valuation Range</h4>
+              <h4 className="font-semibold text-black mb-4">Current Valuation Range</h4>
               <div className="bg-gradient-to-r from-valoov-teal/20 to-valoov-orange/20 p-4 rounded-lg">
                 <div className="text-center">
-                  <p className="text-2xl font-bold text-white">€2.8M - €4.2M</p>
-                  <p className="text-sm text-gray-400 mt-1">Pre-Money Valuation</p>
+                  <p className="text-2xl font-bold text-black">€2.8M - €4.2M</p>
+                  <p className="text-sm text-gray-600 mt-1">Pre-Money Valuation</p>
                 </div>
               </div>
               <Button className="w-full mt-4 bg-valoov-orange hover:bg-valoov-orange/90">
@@ -135,10 +135,10 @@ export function ValuationDashboard() {
               <div key={index} className="flex items-center justify-between p-3 bg-card/20 rounded-lg">
                 <div className="flex items-center space-x-3">
                   <div className="w-2 h-2 rounded-full bg-valoov-teal"></div>
-                  <span className="font-medium text-white">{method.name}</span>
+                  <span className="font-medium text-black">{method.name}</span>
                 </div>
                 <div className="flex items-center space-x-4">
-                  <span className="text-sm text-gray-400">{method.weight}% weight</span>
+                  <span className="text-sm text-gray-600">{method.weight}% weight</span>
                   <Badge 
                     variant={method.status === 'completed' ? 'default' : method.status === 'in-progress' ? 'secondary' : 'outline'}
                     className={
