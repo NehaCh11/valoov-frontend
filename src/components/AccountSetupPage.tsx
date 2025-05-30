@@ -110,7 +110,7 @@ const AccountSetupPage = ({ email, onBack, onComplete }: AccountSetupPageProps) 
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Role Selection */}
                 <div className="space-y-2">
-                  <Label htmlFor="role">Access Role</Label>
+                  <Label htmlFor="role">Role</Label>
                   <Select value={role} onValueChange={setRole}>
                     <SelectTrigger className="w-full">
                       <div className="flex items-center">
@@ -122,19 +122,13 @@ const AccountSetupPage = ({ email, onBack, onComplete }: AccountSetupPageProps) 
                       <SelectItem value="company">
                         <div className="flex items-center">
                           <Building className="h-4 w-4 mr-2" />
-                          <div>
-                            <div className="font-medium">Company</div>
-                            <div className="text-sm text-muted-foreground">Standard access to valuation tools and reports</div>
-                          </div>
+                          <span>Company</span>
                         </div>
                       </SelectItem>
                       <SelectItem value="admin">
                         <div className="flex items-center">
                           <Shield className="h-4 w-4 mr-2" />
-                          <div>
-                            <div className="font-medium">Admin</div>
-                            <div className="text-sm text-muted-foreground">Full platform access and user management</div>
-                          </div>
+                          <span>Admin</span>
                         </div>
                       </SelectItem>
                     </SelectContent>
