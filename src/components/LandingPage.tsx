@@ -7,9 +7,10 @@ import SignupForm from '@/components/SignupForm';
 
 interface LandingPageProps {
   onLogin?: () => void;
+  onAccountCreated?: () => void;
 }
 
-const LandingPage = ({ onLogin }: LandingPageProps) => {
+const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
   const [showLogin, setShowLogin] = useState(false);
   const [showSignup, setShowSignup] = useState(false);
 
@@ -81,7 +82,7 @@ const LandingPage = ({ onLogin }: LandingPageProps) => {
   }
 
   if (showSignup) {
-    return <SignupForm onBack={() => setShowSignup(false)} onSwitchToLogin={() => { setShowSignup(false); setShowLogin(true); }} />;
+    return <SignupForm onBack={() => setShowSignup(false)} onSwitchToLogin={() => { setShowSignup(false); setShowLogin(true); }} onAccountCreated={onAccountCreated} />;
   }
 
   return (
