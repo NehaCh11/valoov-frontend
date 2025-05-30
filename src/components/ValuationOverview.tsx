@@ -1,11 +1,15 @@
-
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { TrendingUp, FileText, Calculator, BarChart3 } from 'lucide-react';
+import ChatbotQuestionnaire from '@/components/ChatbotQuestionnaire';
+import { useState } from 'react';
 
 export function ValuationOverview() {
+  const [showQuestionnaire, setShowQuestionnaire] = useState(false);
+
   const methodsProgress = [
     { name: 'Scorecard Method', progress: 100, weight: 25 },
     { name: 'Checklist Method', progress: 100, weight: 20 },
@@ -21,10 +25,20 @@ export function ValuationOverview() {
           <h1 className="text-3xl font-bold text-black">Valuation Overview</h1>
           <p className="text-gray-600 mt-1">Comprehensive view of your valuation process</p>
         </div>
-        <Button className="bg-valoov-teal hover:bg-valoov-teal/90">
-          <Calculator className="h-4 w-4 mr-2" />
-          Continue Valuation
-        </Button>
+        <Dialog open={showQuestionnaire} onOpenChange={setShowQuestionnaire}>
+          <DialogTrigger asChild>
+            <Button className="bg-valoov-teal hover:bg-valoov-teal/90">
+              <Calculator className="h-4 w-4 mr-2" />
+              Continue Valuation
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
+            <DialogHeader>
+              <DialogTitle>Continue Your Valuation</DialogTitle>
+            </DialogHeader>
+            <ChatbotQuestionnaire />
+          </DialogContent>
+        </Dialog>
       </div>
 
       {/* Current Valuation Range */}

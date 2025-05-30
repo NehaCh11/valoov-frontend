@@ -308,7 +308,7 @@ const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
                   <Button 
                     variant="outline" 
                     size="lg" 
-                    className="border-white text-white px-8 py-4 text-lg"
+                    className="border-white text-black bg-white hover:bg-white/90 px-8 py-4 text-lg"
                   >
                     Schedule Demo
                   </Button>
