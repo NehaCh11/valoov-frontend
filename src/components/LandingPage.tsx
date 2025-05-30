@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Upload, FileText, BarChart3, CheckCircle, ArrowRight, Calculator, Star, Eye } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -86,15 +87,15 @@ const LandingPage = ({ onLogin }: LandingPageProps) => {
 
   return (
     <div className="min-h-screen bg-white">
-      <div className="valoov-gradient min-h-screen">
+      <div className="bg-white min-h-screen">
         {/* Header with Logo and Sign In/Sign Up */}
         <header className="container mx-auto px-4 pt-6 pb-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-4">
               <img 
-                src="/lovable-uploads/17dd4d7d-77a4-46b2-8bcc-c7b2923ba0e5.png" 
+                src="/lovable-uploads/7878429c-0ab4-4ecf-936b-2947dc0eac7f.png" 
                 alt="VALOOV Logo" 
-                className="h-24 w-auto object-contain"
+                className="h-48 w-auto object-contain"
               />
             </div>
             <div className="flex gap-3">

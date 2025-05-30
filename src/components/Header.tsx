@@ -13,9 +13,9 @@ const Header = () => {
         <div className="flex items-center space-x-4">
           <div className="flex items-center space-x-3">
             <img 
-              src="/lovable-uploads/17dd4d7d-77a4-46b2-8bcc-c7b2923ba0e5.png" 
+              src="/lovable-uploads/7878429c-0ab4-4ecf-936b-2947dc0eac7f.png" 
               alt="VALOOV Logo" 
-              className="h-16 w-auto object-contain"
+              className="h-32 w-auto object-contain"
             />
           </div>
         </div>
