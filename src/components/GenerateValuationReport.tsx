@@ -13,6 +13,7 @@ export function GenerateValuationReport() {
   const [selectedPlan, setSelectedPlan] = useState<string>('');
   const [showBilling, setShowBilling] = useState(false);
   const [paymentCompleted, setPaymentCompleted] = useState(false);
+  const [reportGenerated, setReportGenerated] = useState(false);
 
   const steps = [
     {
@@ -45,17 +46,17 @@ export function GenerateValuationReport() {
     },
     {
       id: 5,
+      title: 'Generate Report',
+      description: 'Create professional valuation',
+      icon: FileText,
+      completed: reportGenerated
+    },
+    {
+      id: 6,
       title: 'Choose Plan',
       description: 'Select valuation package',
       icon: CreditCard,
       completed: paymentCompleted
-    },
-    {
-      id: 6,
-      title: 'Generate Report',
-      description: 'Create professional valuation',
-      icon: FileText,
-      completed: false
     }
   ];
 
@@ -76,6 +77,10 @@ export function GenerateValuationReport() {
   const handlePaymentComplete = () => {
     setPaymentCompleted(true);
     setShowBilling(false);
+  };
+
+  const handleGenerateReport = () => {
+    setReportGenerated(true);
     setCurrentStep(6);
   };
 
@@ -90,12 +95,12 @@ export function GenerateValuationReport() {
     );
   }
 
-  // Show pricing module if step 5 is active and payment not completed
-  if (currentStep === 5 && !paymentCompleted) {
+  // Show pricing module if step 6 is active and payment not completed
+  if (currentStep === 6 && !paymentCompleted) {
     return (
       <PricingModule 
         onPlanSelect={handlePlanSelect}
-        currentStep={5}
+        currentStep={6}
       />
     );
   }
@@ -139,8 +144,10 @@ export function GenerateValuationReport() {
                 isActive ? 'ring-2 ring-valoov-teal' : ''
               }`}
               onClick={() => {
-                if (step.id === 5 && !paymentCompleted) {
+                if (step.id === 5 && !reportGenerated) {
                   setCurrentStep(5);
+                } else if (step.id === 6 && reportGenerated && !paymentCompleted) {
+                  setCurrentStep(6);
                 } else if (step.completed || step.id <= 4) {
                   setCurrentStep(step.id);
                 }
@@ -179,17 +186,21 @@ export function GenerateValuationReport() {
                       <Button variant="outline" size="sm">
                         Review
                       </Button>
-                    ) : step.id === 5 ? (
+                    ) : step.id === 5 && !reportGenerated ? (
+                      <Button 
+                        className="bg-valoov-teal hover:bg-valoov-teal/90" 
+                        size="sm"
+                        onClick={handleGenerateReport}
+                      >
+                        Generate
+                      </Button>
+                    ) : step.id === 6 && reportGenerated && !paymentCompleted ? (
                       <Button 
                         className="bg-valoov-orange hover:bg-valoov-orange/90" 
                         size="sm"
-                        onClick={() => setCurrentStep(5)}
+                        onClick={() => setCurrentStep(6)}
                       >
                         Choose Plan
-                      </Button>
-                    ) : step.id === 6 && paymentCompleted ? (
-                      <Button className="bg-valoov-teal hover:bg-valoov-teal/90" size="sm">
-                        Generate
                       </Button>
                     ) : (
                       <Button variant="ghost" size="sm" disabled>
@@ -205,21 +216,45 @@ export function GenerateValuationReport() {
         })}
       </div>
 
-      {/* Final Generation Card */}
-      {paymentCompleted && currentStep === 6 && (
+      {/* Report Generated Success Card */}
+      {reportGenerated && !paymentCompleted && currentStep === 6 && (
         <Card className="bg-gradient-to-r from-valoov-teal/20 to-valoov-orange/20 border-valoov-teal/30">
           <CardContent className="p-6 text-center">
-            <h3 className="text-xl font-bold text-slate-800 mb-2">Ready to Generate Report!</h3>
+            <h3 className="text-xl font-bold text-slate-800 mb-2">Report Generated Successfully!</h3>
             <p className="text-slate-700 mb-4">
-              Payment confirmed. Generate your professional valuation report using 5 industry-standard methodologies.
+              Your valuation report has been created. Choose a plan to download the complete professional report.
             </p>
             <div className="space-y-3">
-              <Button className="bg-valoov-teal hover:bg-valoov-teal/90 text-lg px-8 py-3">
-                Generate Valuation Report
+              <Button 
+                className="bg-valoov-orange hover:bg-valoov-orange/90 text-lg px-8 py-3"
+                onClick={() => setCurrentStep(6)}
+              >
+                Choose Download Plan
+              </Button>
+              <div className="text-sm text-slate-600">
+                <p>✓ Report generated using 5 industry-standard methodologies</p>
+                <p>✓ All data processed and ready for download</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      {/* Final Completion Card */}
+      {paymentCompleted && (
+        <Card className="bg-gradient-to-r from-green-100 to-blue-100 border-green-300">
+          <CardContent className="p-6 text-center">
+            <h3 className="text-xl font-bold text-slate-800 mb-2">All Steps Complete!</h3>
+            <p className="text-slate-700 mb-4">
+              Payment confirmed. Your professional valuation report is ready for download.
+            </p>
+            <div className="space-y-3">
+              <Button className="bg-green-600 hover:bg-green-700 text-lg px-8 py-3">
+                Download Full Report
               </Button>
               <div className="text-sm text-slate-600">
                 <p>✓ Payment confirmed - {selectedPlan ? plans[selectedPlan as keyof typeof plans].name : 'Plan selected'}</p>
-                <p>✓ All data collected and ready for processing</p>
+                <p>✓ Complete access to professional valuation report</p>
               </div>
             </div>
           </CardContent>
