@@ -15,7 +15,7 @@ const Header = () => {
             <img 
               src="/lovable-uploads/7878429c-0ab4-4ecf-936b-2947dc0eac7f.png" 
               alt="VALOOV Logo" 
-              className="h-32 w-auto object-contain"
+              className="h-16 w-auto object-contain"
             />
           </div>
         </div>
