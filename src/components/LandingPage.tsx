@@ -23,19 +23,19 @@ const LandingPage = ({ onLogin }: LandingPageProps) => {
   const howItWorksSteps = [
     {
       step: 1,
-      title: "Step 1: Upload Tax Documents",
+      title: "Upload Tax Documents",
       description: "Securely upload your standardized tax return documents. Our AI processes French and Spanish tax formats automatically.",
       icon: Upload
     },
     {
       step: 2,
-      title: "Step 2: Complete Dynamic Questionnaire",
+      title: "Complete Dynamic Questionnaire",
       description: "Answer our intelligent questionnaire tailored to your business sector and region for more accurate valuation.",
       icon: FileText
     },
     {
       step: 3,
-      title: "Step 3: Receive Comprehensive Report",
+      title: "Receive Comprehensive Report",
       description: "Get your professional valuation report using multiple proven financial models (DCF, Comparable, Asset-based).",
       icon: BarChart3
     }
