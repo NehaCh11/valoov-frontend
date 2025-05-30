@@ -53,7 +53,7 @@ const Index = () => {
         return <RevenueProjections />;
       case 'reports':
         return <Portfolio />;
-      case 'notifications':
+      case 'settings':
         return <NotificationSettings />;
       case 'profile':
         return <CompanyProfile />;
