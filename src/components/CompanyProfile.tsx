@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Building2, Globe, MapPin, Calendar } from 'lucide-react';
@@ -8,7 +7,6 @@ export function CompanyProfile() {
     <div className="space-y-6">
       <div>
         <h1 className="text-3xl font-bold text-gray-900">Company Profile</h1>
-        <p className="text-gray-600 mt-1">Learn about VALOOV and our mission</p>
       </div>
 
       {/* Company Overview */}
