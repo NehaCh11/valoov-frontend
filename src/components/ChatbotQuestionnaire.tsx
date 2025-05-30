@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -64,6 +65,7 @@ const ChatbotQuestionnaire = () => {
   const [isRecording, setIsRecording] = useState(false);
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [showTextInput, setShowTextInput] = useState(false);
   
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
@@ -255,18 +257,52 @@ const ChatbotQuestionnaire = () => {
           />
         );
       case 'select':
-        return (
-          <div className="flex flex-wrap gap-2">
-            {currentQuestion.options?.map((option) => (
+        if (showTextInput) {
+          return (
+            <div className="space-y-2">
+              <Input
+                value={currentAnswer}
+                onChange={(e) => setCurrentAnswer(e.target.value)}
+                onKeyPress={handleKeyPress}
+                placeholder="Type your custom answer..."
+                className="flex-1"
+              />
               <Button
-                key={option}
-                variant={currentAnswer === option ? "default" : "outline"}
-                onClick={() => setCurrentAnswer(option)}
-                className="text-sm"
+                variant="ghost"
+                size="sm"
+                onClick={() => {
+                  setShowTextInput(false);
+                  setCurrentAnswer('');
+                }}
+                className="text-xs"
               >
-                {option}
+                Back to options
               </Button>
-            ))}
+            </div>
+          );
+        }
+        return (
+          <div className="space-y-3">
+            <div className="flex flex-wrap gap-2">
+              {currentQuestion.options?.map((option) => (
+                <Button
+                  key={option}
+                  variant={currentAnswer === option ? "default" : "outline"}
+                  onClick={() => setCurrentAnswer(option)}
+                  className="text-sm"
+                >
+                  {option}
+                </Button>
+              ))}
+            </div>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setShowTextInput(true)}
+              className="text-xs text-muted-foreground"
+            >
+              Or type your own answer
+            </Button>
           </div>
         );
       case 'textarea':
@@ -381,7 +417,7 @@ const ChatbotQuestionnaire = () => {
                 </div>
               )}
               
-              {currentQuestion.type === 'select' ? (
+              {currentQuestion.type === 'select' && !showTextInput ? (
                 <div className="space-y-3">
                   {renderInputField()}
                   {currentAnswer && (
@@ -394,15 +430,17 @@ const ChatbotQuestionnaire = () => {
                   )}
                 </div>
               ) : (
-                <div className="flex space-x-2">
+                <div className="space-y-3">
                   {renderInputField()}
-                  <Button
-                    onClick={handleSubmitAnswer}
-                    disabled={!currentAnswer.trim()}
-                    size="sm"
-                  >
-                    <Send className="h-4 w-4" />
-                  </Button>
+                  <div className="flex justify-end">
+                    <Button
+                      onClick={handleSubmitAnswer}
+                      disabled={!currentAnswer.trim()}
+                      size="sm"
+                    >
+                      <Send className="h-4 w-4" />
+                    </Button>
+                  </div>
                 </div>
               )}
               

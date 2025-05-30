@@ -119,21 +119,12 @@ const AccountSetupPage = ({ email, onBack, onComplete }: AccountSetupPageProps) 
                       </div>
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="user">
+                      <SelectItem value="company">
                         <div className="flex items-center">
-                          <User className="h-4 w-4 mr-2" />
+                          <Building className="h-4 w-4 mr-2" />
                           <div>
-                            <div className="font-medium">User</div>
-                            <div className="text-sm text-muted-foreground">Standard access to valuation tools</div>
-                          </div>
-                        </div>
-                      </SelectItem>
-                      <SelectItem value="analyst">
-                        <div className="flex items-center">
-                          <Factory className="h-4 w-4 mr-2" />
-                          <div>
-                            <div className="font-medium">Analyst</div>
-                            <div className="text-sm text-muted-foreground">Advanced analysis and reporting features</div>
+                            <div className="font-medium">Company</div>
+                            <div className="text-sm text-muted-foreground">Standard access to valuation tools and reports</div>
                           </div>
                         </div>
                       </SelectItem>
