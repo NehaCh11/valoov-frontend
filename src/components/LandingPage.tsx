@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Upload, FileText, BarChart3, CheckCircle, ArrowRight, Calculator, Star, Eye } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -176,8 +175,8 @@ const LandingPage = ({ onLogin }: LandingPageProps) => {
                   <Card key={step.step} className="bg-white/80 backdrop-blur border-slate-200 hover:bg-white transition-all text-center shadow-sm">
                     <CardHeader>
                       <div className="flex justify-center mb-4">
-                        <div className="w-16 h-16 bg-valoov-teal text-white rounded-full flex items-center justify-center text-2xl font-bold mb-4">
-                          {step.step}
+                        <div className="w-16 h-16 bg-valoov-teal text-white rounded-full flex items-center justify-center text-sm font-bold mb-4">
+                          Step {step.step}
                         </div>
                       </div>
                       <div className="flex justify-center mb-4">
