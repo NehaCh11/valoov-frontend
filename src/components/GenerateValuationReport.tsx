@@ -4,10 +4,15 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
-import { ChevronRight, CheckCircle, Circle, FileText, Building2, Bot, TrendingUp, Upload } from 'lucide-react';
+import { ChevronRight, CheckCircle, Circle, FileText, Building2, Bot, TrendingUp, Upload, CreditCard } from 'lucide-react';
+import { PricingModule } from './PricingModule';
+import { BillingForm } from './BillingForm';
 
 export function GenerateValuationReport() {
   const [currentStep, setCurrentStep] = useState(1);
+  const [selectedPlan, setSelectedPlan] = useState<string>('');
+  const [showBilling, setShowBilling] = useState(false);
+  const [paymentCompleted, setPaymentCompleted] = useState(false);
 
   const steps = [
     {
@@ -29,19 +34,26 @@ export function GenerateValuationReport() {
       title: 'Projections',
       description: '3-year financial forecast',
       icon: TrendingUp,
-      completed: false
+      completed: true
     },
     {
       id: 4,
       title: 'Upload Docs',
       description: 'Supporting financial documents',
       icon: Upload,
-      completed: false
+      completed: true
     },
     {
       id: 5,
-      title: 'Review & Generate',
-      description: 'Final review and report generation',
+      title: 'Choose Plan',
+      description: 'Select valuation package',
+      icon: CreditCard,
+      completed: paymentCompleted
+    },
+    {
+      id: 6,
+      title: 'Generate Report',
+      description: 'Create professional valuation',
       icon: FileText,
       completed: false
     }
@@ -49,6 +61,44 @@ export function GenerateValuationReport() {
 
   const completedSteps = steps.filter(step => step.completed).length;
   const progressPercentage = (completedSteps / steps.length) * 100;
+
+  const plans = {
+    basic: { name: 'Basic Report', price: '€49', id: 'basic' },
+    premium: { name: 'Premium + Review', price: '€199', id: 'premium' },
+    enterprise: { name: 'Enterprise', price: '€499', id: 'enterprise' }
+  };
+
+  const handlePlanSelect = (planId: string) => {
+    setSelectedPlan(planId);
+    setShowBilling(true);
+  };
+
+  const handlePaymentComplete = () => {
+    setPaymentCompleted(true);
+    setShowBilling(false);
+    setCurrentStep(6);
+  };
+
+  // Show billing form if a plan is selected
+  if (showBilling && selectedPlan) {
+    return (
+      <BillingForm
+        selectedPlan={plans[selectedPlan as keyof typeof plans]}
+        onBack={() => setShowBilling(false)}
+        onPayment={handlePaymentComplete}
+      />
+    );
+  }
+
+  // Show pricing module if step 5 is active and payment not completed
+  if (currentStep === 5 && !paymentCompleted) {
+    return (
+      <PricingModule 
+        onPlanSelect={handlePlanSelect}
+        currentStep={5}
+      />
+    );
+  }
 
   return (
     <div className="space-y-6">
@@ -88,7 +138,13 @@ export function GenerateValuationReport() {
               className={`bg-card/30 backdrop-blur border-border/50 transition-all cursor-pointer ${
                 isActive ? 'ring-2 ring-valoov-teal' : ''
               }`}
-              onClick={() => setCurrentStep(step.id)}
+              onClick={() => {
+                if (step.id === 5 && !paymentCompleted) {
+                  setCurrentStep(5);
+                } else if (step.completed || step.id <= 4) {
+                  setCurrentStep(step.id);
+                }
+              }}
             >
               <CardContent className="p-6">
                 <div className="flex items-center space-x-4">
@@ -123,9 +179,17 @@ export function GenerateValuationReport() {
                       <Button variant="outline" size="sm">
                         Review
                       </Button>
-                    ) : isActive ? (
+                    ) : step.id === 5 ? (
+                      <Button 
+                        className="bg-valoov-orange hover:bg-valoov-orange/90" 
+                        size="sm"
+                        onClick={() => setCurrentStep(5)}
+                      >
+                        Choose Plan
+                      </Button>
+                    ) : step.id === 6 && paymentCompleted ? (
                       <Button className="bg-valoov-teal hover:bg-valoov-teal/90" size="sm">
-                        Continue
+                        Generate
                       </Button>
                     ) : (
                       <Button variant="ghost" size="sm" disabled>
@@ -142,20 +206,20 @@ export function GenerateValuationReport() {
       </div>
 
       {/* Final Generation Card */}
-      {completedSteps === steps.length && (
+      {paymentCompleted && currentStep === 6 && (
         <Card className="bg-gradient-to-r from-valoov-teal/20 to-valoov-orange/20 border-valoov-teal/30">
           <CardContent className="p-6 text-center">
             <h3 className="text-xl font-bold text-white mb-2">Ready to Generate Report!</h3>
             <p className="text-gray-300 mb-4">
-              All steps completed. Generate your professional valuation report using 5 industry-standard methodologies.
+              Payment confirmed. Generate your professional valuation report using 5 industry-standard methodologies.
             </p>
             <div className="space-y-3">
               <Button className="bg-valoov-teal hover:bg-valoov-teal/90 text-lg px-8 py-3">
                 Generate Valuation Report
               </Button>
               <div className="text-sm text-gray-400">
-                <p>✓ Uses 5 industry-standard methodologies</p>
-                <p>Optional: Request Analyst Review (+€199)</p>
+                <p>✓ Payment confirmed - {selectedPlan ? plans[selectedPlan as keyof typeof plans].name : 'Plan selected'}</p>
+                <p>✓ All data collected and ready for processing</p>
               </div>
             </div>
           </CardContent>

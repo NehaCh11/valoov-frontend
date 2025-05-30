@@ -1,13 +1,16 @@
-
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { FileText, Download, Eye, BarChart3, PieChart, AlertTriangle, Star } from 'lucide-react';
+import { FileText, Download, Eye, BarChart3, PieChart, AlertTriangle, Star, Lock } from 'lucide-react';
 
-export function ValuationReport() {
-  const [showFullReport, setShowFullReport] = useState(false);
+interface ValuationReportProps {
+  hasPaidAccess?: boolean;
+}
+
+export function ValuationReport({ hasPaidAccess = false }: ValuationReportProps) {
+  const [showFullReport, setShowFullReport] = useState(hasPaidAccess);
 
   const valuationMethods = [
     { name: 'Scorecard Method', value: '€3.2M', weight: '25%', status: 'complete' },
@@ -21,16 +24,36 @@ export function ValuationReport() {
     return (
       <div className="space-y-6">
         <div>
-          <h1 className="text-3xl font-bold text-white">Valuation Report Preview</h1>
-          <p className="text-gray-400 mt-1">Limited preview - upgrade to access the full report</p>
+          <h1 className="text-3xl font-bold text-white">Valuation Report</h1>
+          <p className="text-gray-400 mt-1">Purchase required to access the complete report</p>
         </div>
+
+        {/* Access Required Notice */}
+        <Card className="bg-gradient-to-r from-red-900/20 to-orange-900/20 border-red-500/30">
+          <CardContent className="p-6 text-center">
+            <div className="flex items-center justify-center mb-4">
+              <Lock className="h-12 w-12 text-red-400" />
+            </div>
+            <h3 className="text-2xl font-bold text-white mb-2">Premium Report Access Required</h3>
+            <p className="text-gray-300 mb-6">
+              To view the complete valuation report, you need to purchase one of our professional packages.
+              This ensures you receive a comprehensive, investor-ready valuation document.
+            </p>
+            <Button 
+              className="bg-valoov-orange hover:bg-valoov-orange/90 text-lg px-8 py-3"
+              onClick={() => window.location.href = '/#/generate-report'}
+            >
+              Purchase Valuation Report
+            </Button>
+          </CardContent>
+        </Card>
 
         {/* Preview Card */}
         <Card className="bg-card/30 backdrop-blur border-border/50">
           <CardHeader>
             <CardTitle className="flex items-center space-x-2">
               <Eye className="h-5 w-5 text-valoov-teal" />
-              <span>Report Preview</span>
+              <span>Limited Preview</span>
               <Badge className="bg-valoov-orange/20 text-valoov-orange border-valoov-orange/30">
                 Preview Only
               </Badge>
@@ -58,6 +81,7 @@ export function ValuationReport() {
                   </div>
                 ))}
                 <div className="p-4 bg-card/10 rounded-lg border-2 border-dashed border-gray-600 text-center">
+                  <Lock className="h-8 w-8 mx-auto mb-2 text-gray-400" />
                   <p className="text-gray-400">+ 3 more valuation methods</p>
                   <p className="text-sm text-gray-500">Available in full report</p>
                 </div>
@@ -74,8 +98,9 @@ export function ValuationReport() {
                   </div>
                 </div>
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <Badge className="bg-valoov-orange px-4 py-2">
-                    Full Report Required
+                  <Badge className="bg-red-600 px-4 py-2">
+                    <Lock className="h-4 w-4 mr-2" />
+                    Purchase Required
                   </Badge>
                 </div>
               </div>
@@ -114,9 +139,9 @@ export function ValuationReport() {
             </div>
             <Button 
               className="bg-valoov-orange hover:bg-valoov-orange/90 text-lg px-8 py-3"
-              onClick={() => setShowFullReport(true)}
+              onClick={() => window.location.href = '/#/generate-report'}
             >
-              Upgrade & Download Full Report
+              Purchase Full Report Access
             </Button>
           </CardContent>
         </Card>
@@ -136,12 +161,14 @@ export function ValuationReport() {
             <Download className="h-4 w-4 mr-2" />
             Export PDF
           </Button>
-          <Button 
-            variant="ghost" 
-            onClick={() => setShowFullReport(false)}
-          >
-            Back to Preview
-          </Button>
+          {!hasPaidAccess && (
+            <Button 
+              variant="ghost" 
+              onClick={() => setShowFullReport(false)}
+            >
+              Back to Preview
+            </Button>
+          )}
         </div>
       </div>
 
