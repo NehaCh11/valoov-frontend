@@ -1,3 +1,4 @@
+
 import {
   BarChart3,
   TrendingUp,
@@ -64,9 +65,9 @@ const toolsItems = [
 
 const settingsItems = [
   {
-    title: "Notifications",
+    title: "Settings",
     icon: Settings,
-    id: "notifications"
+    id: "settings"
   },
   {
     title: "Company Profile",
