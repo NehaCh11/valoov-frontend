@@ -1,12 +1,16 @@
-
+import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { TrendingUp, FileText, Building2, Calculator, DollarSign, BarChart3 } from 'lucide-react';
 import { PieChart, Pie, Cell, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
+import ChatbotQuestionnaire from './ChatbotQuestionnaire';
 
 export function ValuationDashboard() {
+  const [isQuestionnaireOpen, setIsQuestionnaireOpen] = useState(false);
+
   const valuationMethods = [
     { name: 'Scorecard Method', weight: 6, status: 'completed' },
     { name: 'Checklist Method', weight: 6, status: 'completed' },
@@ -38,10 +42,20 @@ export function ValuationDashboard() {
           <h1 className="text-2xl font-bold text-black">Valuation Dashboard</h1>
           <p className="text-sm text-gray-600 mt-1">Track your company valuation progress</p>
         </div>
-        <Button className="bg-valoov-teal hover:bg-valoov-teal/90 text-sm">
-          <Calculator className="h-4 w-4 mr-2" />
-          Start New Valuation
-        </Button>
+        <Dialog open={isQuestionnaireOpen} onOpenChange={setIsQuestionnaireOpen}>
+          <DialogTrigger asChild>
+            <Button className="bg-valoov-teal hover:bg-valoov-teal/90 text-sm">
+              <Calculator className="h-4 w-4 mr-2" />
+              Start New Valuation
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+            <DialogHeader>
+              <DialogTitle>AI Valuation Questionnaire</DialogTitle>
+            </DialogHeader>
+            <ChatbotQuestionnaire />
+          </DialogContent>
+        </Dialog>
       </div>
 
       {/* Pre-money Valuation and Methods Breakdown */}
