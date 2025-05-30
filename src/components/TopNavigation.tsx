@@ -35,14 +35,14 @@ export function TopNavigation({ onSignOut }: TopNavigationProps) {
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="flex h-16 items-center justify-between px-6">
         <div className="flex items-center space-x-4">
-          <h1 className="text-xl font-semibold text-white">Company Valuation Platform</h1>
+          <h1 className="text-xl font-semibold text-black">Company Valuation Platform</h1>
         </div>
 
         <div className="flex items-center space-x-4">
           {/* Language Selector */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="sm" className="flex items-center space-x-2">
+              <Button variant="ghost" size="sm" className="flex items-center space-x-2 text-black">
                 <Globe className="h-4 w-4" />
                 <span>{selectedLanguage}</span>
                 <ChevronDown className="h-3 w-3" />
@@ -61,7 +61,7 @@ export function TopNavigation({ onSignOut }: TopNavigationProps) {
           </DropdownMenu>
 
           {/* Notifications */}
-          <Button variant="ghost" size="icon" className="relative">
+          <Button variant="ghost" size="icon" className="relative text-black">
             <Bell className="h-4 w-4" />
             {notifications > 0 && (
               <Badge className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 bg-valoov-orange text-white text-xs">
@@ -73,7 +73,7 @@ export function TopNavigation({ onSignOut }: TopNavigationProps) {
           {/* User Profile Dropdown */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="flex items-center space-x-2">
+              <Button variant="ghost" className="flex items-center space-x-2 text-black">
                 <User className="h-4 w-4" />
                 <span className="hidden md:inline">John Doe</span>
                 <ChevronDown className="h-3 w-3" />
