@@ -3,7 +3,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
-import { TrendingUp, FileText, Building2, Calculator } from 'lucide-react';
+import { TrendingUp, FileText, Building2, Calculator, DollarSign, BarChart3 } from 'lucide-react';
+import { PieChart, Pie, Cell, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 
 export function ValuationDashboard() {
   const valuationMethods = [
@@ -13,6 +14,16 @@ export function ValuationDashboard() {
     { name: 'DCF w/ Multiple', weight: 20, status: 'pending' },
     { name: 'Venture Capital Method', weight: 15, status: 'pending' },
   ];
+
+  const methodsBreakdownData = [
+    { name: 'Scorecard', value: 3762247, percentage: 25 },
+    { name: 'Checklist', value: 4639414, percentage: 20 },
+    { name: 'DCF/LTG', value: 5426348, percentage: 20 },
+    { name: 'DCF Multiple', value: 10694367, percentage: 20 },
+    { name: 'VC Method', value: 11940096, percentage: 15 },
+  ];
+
+  const COLORS = ['#06b6d4', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6'];
 
   return (
     <div className="space-y-6">
@@ -26,6 +37,94 @@ export function ValuationDashboard() {
           <Calculator className="h-4 w-4 mr-2" />
           Start New Valuation
         </Button>
+      </div>
+
+      {/* Pre-money Valuation and Methods Breakdown */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Pre-money Valuation */}
+        <Card className="bg-card/30 backdrop-blur border-border/50">
+          <CardHeader>
+            <CardTitle className="flex items-center space-x-2">
+              <DollarSign className="h-5 w-5 text-valoov-teal" />
+              <span>Pre-money Valuation</span>
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="relative">
+              <div className="text-center mb-4">
+                <p className="text-3xl font-bold text-valoov-teal">€ 9,940,096</p>
+                <p className="text-sm text-gray-600 mt-1">Pre-money Valuation</p>
+              </div>
+              <div className="relative h-48 flex items-center justify-center">
+                <div className="relative w-40 h-40">
+                  <div className="absolute inset-0 rounded-full border-8 border-gray-200"></div>
+                  <div 
+                    className="absolute inset-0 rounded-full border-8 border-valoov-teal"
+                    style={{
+                      borderTopColor: 'transparent',
+                      borderRightColor: 'transparent',
+                      borderBottomColor: 'transparent',
+                      transform: 'rotate(270deg)',
+                      borderRadius: '50%',
+                      clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)'
+                    }}
+                  ></div>
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="text-center">
+                      <p className="text-sm text-gray-600">Capital needed</p>
+                      <p className="text-xl font-bold text-black">€ 2M</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="text-center mt-4">
+                <p className="text-sm text-gray-600">Low bound</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Methods Breakdown */}
+        <Card className="bg-card/30 backdrop-blur border-border/50">
+          <CardHeader>
+            <CardTitle className="flex items-center space-x-2">
+              <BarChart3 className="h-5 w-5 text-valoov-orange" />
+              <span>Methods Breakdown</span>
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="h-64">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={methodsBreakdownData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+                  <XAxis 
+                    dataKey="name" 
+                    stroke="#9ca3af" 
+                    fontSize={10}
+                    angle={-45}
+                    textAnchor="end"
+                    height={60}
+                  />
+                  <YAxis 
+                    stroke="#9ca3af"
+                    fontSize={10}
+                    tickFormatter={(value) => `${(value / 1000000).toFixed(0)}M`}
+                  />
+                  <Tooltip 
+                    formatter={(value) => [`€${Number(value).toLocaleString()}`, 'Valuation']}
+                    contentStyle={{ 
+                      backgroundColor: '#1f2937', 
+                      border: '1px solid #374151',
+                      borderRadius: '8px',
+                      color: '#fff'
+                    }}
+                  />
+                  <Bar dataKey="value" fill="#06b6d4" radius={[4, 4, 0, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          </CardContent>
+        </Card>
       </div>
 
       {/* Company Static Data */}
