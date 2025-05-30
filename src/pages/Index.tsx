@@ -10,7 +10,6 @@ import { ValuationReport } from '@/components/ValuationReport';
 import { NotificationSettings } from '@/components/NotificationSettings';
 import { CompanyProfile } from '@/components/CompanyProfile';
 import MarketOverview from '@/components/MarketOverview';
-import DocumentUpload from '@/components/DocumentUpload';
 import ChatbotQuestionnaire from '@/components/ChatbotQuestionnaire';
 import RevenueProjections from '@/components/RevenueProjections';
 import Portfolio from '@/components/Portfolio';
@@ -24,13 +23,18 @@ const Index = () => {
     setIsLoggedIn(true);
   };
 
+  const handleAccountCreated = () => {
+    setIsLoggedIn(true);
+    setActiveView('questionnaire'); // Redirect to AI chatbot after account creation
+  };
+
   const handleSignOut = () => {
     setIsLoggedIn(false);
     setActiveView('questionnaire'); // Reset to questionnaire view
   };
 
   if (!isLoggedIn) {
-    return <LandingPage onLogin={handleLogin} />;
+    return <LandingPage onLogin={handleLogin} onAccountCreated={handleAccountCreated} />;
   }
 
   const renderContent = () => {
@@ -43,8 +47,6 @@ const Index = () => {
         return <GenerateValuationReport />;
       case 'valuation-report':
         return <ValuationReport />;
-      case 'upload':
-        return <DocumentUpload />;
       case 'questionnaire':
         return <ChatbotQuestionnaire />;
       case 'projections':

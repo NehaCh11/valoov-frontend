@@ -1,9 +1,7 @@
-
 import {
   BarChart3,
   TrendingUp,
   FileText,
-  Upload,
   Bot,
   Settings,
   Building2,
@@ -52,11 +50,6 @@ const menuItems = [
 ];
 
 const toolsItems = [
-  {
-    title: "Upload Documents",
-    icon: Upload,
-    id: "upload"
-  },
   {
     title: "AI Questionnaire",
     icon: Bot,

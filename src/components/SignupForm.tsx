@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { ArrowLeft, Mail, Lock, User, Building, Eye, EyeOff } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -11,9 +10,10 @@ import EmailVerificationPage from './EmailVerificationPage';
 interface SignupFormProps {
   onBack: () => void;
   onSwitchToLogin: () => void;
+  onAccountCreated?: () => void;
 }
 
-const SignupForm = ({ onBack, onSwitchToLogin }: SignupFormProps) => {
+const SignupForm = ({ onBack, onSwitchToLogin, onAccountCreated }: SignupFormProps) => {
   const [name, setName] = useState('');
   const [company, setCompany] = useState('');
   const [email, setEmail] = useState('');
@@ -41,9 +41,10 @@ const SignupForm = ({ onBack, onSwitchToLogin }: SignupFormProps) => {
 
   const handleEmailVerified = () => {
     console.log('Email verified successfully');
-    // Here you would typically redirect to dashboard or complete setup
-    alert('Account verified successfully! Welcome to VALOOV!');
-    onBack(); // Go back to landing page for now
+    // Redirect to AI chatbot after successful account creation
+    if (onAccountCreated) {
+      onAccountCreated();
+    }
   };
 
   if (showEmailVerification) {

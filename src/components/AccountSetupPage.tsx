@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { ArrowLeft, Building, Mail, Globe, Factory, User, Shield } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -68,7 +67,7 @@ const AccountSetupPage = ({ email, onBack, onComplete }: AccountSetupPageProps) 
       wacc: selectedIndustryData?.wacc
     });
     
-    // Here you would typically send this data to your backend
+    // Complete the account setup and redirect to AI chatbot
     alert(`Account setup complete!\nCRP: ${selectedCountryData?.crp}%\nWACC: ${selectedIndustryData?.wacc}%`);
     onComplete();
   };
