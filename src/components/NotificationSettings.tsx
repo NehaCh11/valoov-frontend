@@ -11,8 +11,8 @@ export function NotificationSettings() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold text-gray-900">Notifications</h1>
-        <p className="text-gray-600 mt-1">Manage which alerts you receive via email and in-app</p>
+        <h1 className="text-3xl font-bold text-gray-900">Settings</h1>
+        <p className="text-gray-600 mt-1">Manage your account preferences and notifications</p>
       </div>
 
       {/* Notification Preferences */}
