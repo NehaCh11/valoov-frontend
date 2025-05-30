@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Upload, FileText, BarChart3, CheckCircle, ArrowRight, Calculator, Star, Eye } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -23,19 +24,19 @@ const LandingPage = ({ onLogin }: LandingPageProps) => {
   const howItWorksSteps = [
     {
       step: 1,
-      title: "Upload Tax Documents",
+      title: "Step 1: Upload Tax Documents",
       description: "Securely upload your standardized tax return documents. Our AI processes French and Spanish tax formats automatically.",
       icon: Upload
     },
     {
       step: 2,
-      title: "Complete Dynamic Questionnaire",
+      title: "Step 2: Complete Dynamic Questionnaire",
       description: "Answer our intelligent questionnaire tailored to your business sector and region for more accurate valuation.",
       icon: FileText
     },
     {
       step: 3,
-      title: "Receive Comprehensive Report",
+      title: "Step 3: Receive Comprehensive Report",
       description: "Get your professional valuation report using multiple proven financial models (DCF, Comparable, Asset-based).",
       icon: BarChart3
     }
