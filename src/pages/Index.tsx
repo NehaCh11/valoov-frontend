@@ -24,6 +24,11 @@ const Index = () => {
     setIsLoggedIn(true);
   };
 
+  const handleSignOut = () => {
+    setIsLoggedIn(false);
+    setActiveView('dashboard'); // Reset to default view
+  };
+
   if (!isLoggedIn) {
     return <LandingPage onLogin={handleLogin} />;
   }
@@ -62,7 +67,7 @@ const Index = () => {
           <div className="min-h-screen flex w-full">
             <AppSidebar activeView={activeView} setActiveView={setActiveView} />
             <SidebarInset>
-              <TopNavigation />
+              <TopNavigation onSignOut={handleSignOut} />
               <main className="flex-1 p-6">
                 {renderContent()}
               </main>

@@ -11,7 +11,11 @@ import {
   DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu';
 
-export function TopNavigation() {
+interface TopNavigationProps {
+  onSignOut?: () => void;
+}
+
+export function TopNavigation({ onSignOut }: TopNavigationProps) {
   const [notifications] = useState(3);
   const [selectedLanguage, setSelectedLanguage] = useState('EN');
 
@@ -20,6 +24,12 @@ export function TopNavigation() {
     { code: 'ES', name: 'Español' },
     { code: 'FR', name: 'Français' },
   ];
+
+  const handleSignOut = () => {
+    if (onSignOut) {
+      onSignOut();
+    }
+  };
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -73,7 +83,7 @@ export function TopNavigation() {
               <DropdownMenuItem>View Profile</DropdownMenuItem>
               <DropdownMenuItem>Account Settings</DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Sign Out</DropdownMenuItem>
+              <DropdownMenuItem onClick={handleSignOut}>Sign Out</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
