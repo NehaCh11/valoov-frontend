@@ -18,8 +18,8 @@ export function ValuationOverview() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-white">Valuation Overview</h1>
-          <p className="text-gray-400 mt-1">Comprehensive view of your valuation process</p>
+          <h1 className="text-3xl font-bold text-black">Valuation Overview</h1>
+          <p className="text-gray-600 mt-1">Comprehensive view of your valuation process</p>
         </div>
         <Button className="bg-valoov-teal hover:bg-valoov-teal/90">
           <Calculator className="h-4 w-4 mr-2" />
@@ -37,8 +37,8 @@ export function ValuationOverview() {
         </CardHeader>
         <CardContent>
           <div className="text-center py-6">
-            <p className="text-4xl font-bold text-white mb-2">€2.8M - €4.2M</p>
-            <p className="text-gray-400">Pre-Money Valuation</p>
+            <p className="text-4xl font-bold text-black mb-2">€2.8M - €4.2M</p>
+            <p className="text-gray-600">Pre-Money Valuation</p>
             <Badge className="mt-3 bg-valoov-teal/20 text-valoov-teal border-valoov-teal/30">
               65% Complete
             </Badge>
@@ -59,9 +59,9 @@ export function ValuationOverview() {
             {methodsProgress.map((method, index) => (
               <div key={index} className="space-y-2">
                 <div className="flex items-center justify-between">
-                  <span className="font-medium text-white">{method.name}</span>
+                  <span className="font-medium text-black">{method.name}</span>
                   <div className="flex items-center space-x-2">
-                    <span className="text-sm text-gray-400">{method.weight}% weight</span>
+                    <span className="text-sm text-gray-600">{method.weight}% weight</span>
                     <Badge 
                       variant={method.progress === 100 ? 'default' : method.progress > 0 ? 'secondary' : 'outline'}
                       className={
@@ -91,19 +91,19 @@ export function ValuationOverview() {
         <CardContent>
           <div className="space-y-3">
             <div className="flex items-center justify-between p-3 bg-card/20 rounded-lg">
-              <span className="text-white">Complete Financial Projections</span>
+              <span className="text-black">Complete Financial Projections</span>
               <Button size="sm" className="bg-valoov-orange hover:bg-valoov-orange/90">
                 Continue
               </Button>
             </div>
             <div className="flex items-center justify-between p-3 bg-card/20 rounded-lg">
-              <span className="text-white">Upload Supporting Documents</span>
+              <span className="text-black">Upload Supporting Documents</span>
               <Button size="sm" variant="outline">
                 Start
               </Button>
             </div>
             <div className="flex items-center justify-between p-3 bg-card/20 rounded-lg">
-              <span className="text-white">Review & Generate Report</span>
+              <span className="text-black">Review & Generate Report</span>
               <Button size="sm" variant="outline" disabled>
                 Pending
               </Button>
