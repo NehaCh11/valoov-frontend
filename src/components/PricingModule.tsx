@@ -72,12 +72,12 @@ export function PricingModule({ onPlanSelect, currentStep = 1 }: PricingModulePr
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 bg-white min-h-screen p-6">
       <div className="text-center">
-        <h1 className="text-3xl font-bold text-white mb-2">
+        <h1 className="text-3xl font-bold text-slate-800 mb-2">
           Step {currentStep}: Choose Your Valuation Plan
         </h1>
-        <p className="text-gray-400">
+        <p className="text-slate-600">
           Select a plan to generate your professional valuation report
         </p>
       </div>
@@ -90,8 +90,8 @@ export function PricingModule({ onPlanSelect, currentStep = 1 }: PricingModulePr
           return (
             <Card 
               key={plan.id}
-              className={`bg-card/30 backdrop-blur border-2 transition-all cursor-pointer relative ${
-                plan.popular ? 'border-valoov-orange scale-105' : plan.color
+              className={`bg-white border-2 transition-all cursor-pointer relative shadow-sm ${
+                plan.popular ? 'border-valoov-orange scale-105' : 'border-slate-200'
               } ${isSelected ? 'ring-2 ring-valoov-teal' : ''}`}
               onClick={() => handlePlanSelect(plan.id)}
             >
@@ -106,16 +106,16 @@ export function PricingModule({ onPlanSelect, currentStep = 1 }: PricingModulePr
               <CardHeader className="text-center pb-4">
                 <div className="flex justify-center mb-4">
                   <div className={`p-3 rounded-full ${
-                    plan.popular ? 'bg-valoov-orange' : 'bg-gray-600'
+                    plan.popular ? 'bg-valoov-orange' : 'bg-slate-600'
                   }`}>
                     <Icon className="h-6 w-6 text-white" />
                   </div>
                 </div>
-                <CardTitle className="text-xl text-white">{plan.name}</CardTitle>
-                <p className="text-gray-400 text-sm">{plan.description}</p>
+                <CardTitle className="text-xl text-slate-800">{plan.name}</CardTitle>
+                <p className="text-slate-600 text-sm">{plan.description}</p>
                 <div className="mt-4">
-                  <span className="text-4xl font-bold text-white">{plan.price}</span>
-                  <span className="text-gray-400 text-sm ml-1">one-time</span>
+                  <span className="text-4xl font-bold text-slate-800">{plan.price}</span>
+                  <span className="text-slate-600 text-sm ml-1">one-time</span>
                 </div>
               </CardHeader>
               
@@ -124,7 +124,7 @@ export function PricingModule({ onPlanSelect, currentStep = 1 }: PricingModulePr
                   {plan.features.map((feature, index) => (
                     <li key={index} className="flex items-start space-x-2">
                       <Check className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-300 text-sm">{feature}</span>
+                      <span className="text-slate-700 text-sm">{feature}</span>
                     </li>
                   ))}
                 </ul>
@@ -135,7 +135,7 @@ export function PricingModule({ onPlanSelect, currentStep = 1 }: PricingModulePr
                       ? 'bg-valoov-orange hover:bg-valoov-orange/90' 
                       : isSelected
                       ? 'bg-valoov-teal hover:bg-valoov-teal/90'
-                      : 'bg-gray-600 hover:bg-gray-500'
+                      : 'bg-slate-600 hover:bg-slate-500'
                   }`}
                   onClick={() => handlePlanSelect(plan.id)}
                 >
@@ -147,9 +147,9 @@ export function PricingModule({ onPlanSelect, currentStep = 1 }: PricingModulePr
         })}
       </div>
 
-      <div className="bg-card/20 p-6 rounded-lg border border-border/50">
-        <h3 className="text-lg font-semibold text-white mb-3">Why Choose VALOOV?</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-300">
+      <div className="bg-slate-50 p-6 rounded-lg border border-slate-200">
+        <h3 className="text-lg font-semibold text-slate-800 mb-3">Why Choose VALOOV?</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-slate-700">
           <div className="flex items-center space-x-2">
             <Check className="h-4 w-4 text-green-500" />
             <span>5 Industry-standard methodologies</span>

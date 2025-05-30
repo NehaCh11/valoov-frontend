@@ -101,25 +101,25 @@ export function GenerateValuationReport() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 bg-white min-h-screen p-6">
       <div>
-        <h1 className="text-3xl font-bold text-white">Generate Valuation Report</h1>
-        <p className="text-gray-400 mt-1">Complete all steps to generate your comprehensive valuation report</p>
+        <h1 className="text-3xl font-bold text-slate-800">Generate Valuation Report</h1>
+        <p className="text-slate-600 mt-1">Complete all steps to generate your comprehensive valuation report</p>
       </div>
 
       {/* Progress Overview */}
-      <Card className="bg-card/30 backdrop-blur border-border/50">
+      <Card className="bg-white border-slate-200 shadow-sm">
         <CardHeader>
-          <CardTitle>Overall Progress</CardTitle>
+          <CardTitle className="text-slate-800">Overall Progress</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <span className="text-sm font-medium">Completion Status</span>
-              <span className="text-sm text-gray-400">{completedSteps} of {steps.length} steps</span>
+              <span className="text-sm font-medium text-slate-800">Completion Status</span>
+              <span className="text-sm text-slate-600">{completedSteps} of {steps.length} steps</span>
             </div>
             <Progress value={progressPercentage} className="h-3" />
-            <p className="text-sm text-gray-400">
+            <p className="text-sm text-slate-600">
               Complete all steps to unlock your professional valuation report using 5 industry-standard methodologies
             </p>
           </div>
@@ -135,7 +135,7 @@ export function GenerateValuationReport() {
           return (
             <Card 
               key={step.id} 
-              className={`bg-card/30 backdrop-blur border-border/50 transition-all cursor-pointer ${
+              className={`bg-white border-slate-200 transition-all cursor-pointer shadow-sm ${
                 isActive ? 'ring-2 ring-valoov-teal' : ''
               }`}
               onClick={() => {
@@ -150,7 +150,7 @@ export function GenerateValuationReport() {
                 <div className="flex items-center space-x-4">
                   <div className={`p-3 rounded-full ${
                     step.completed ? 'bg-green-600' : 
-                    isActive ? 'bg-valoov-teal' : 'bg-gray-600'
+                    isActive ? 'bg-valoov-teal' : 'bg-slate-600'
                   }`}>
                     {step.completed ? (
                       <CheckCircle className="h-6 w-6 text-white" />
@@ -161,7 +161,7 @@ export function GenerateValuationReport() {
                   
                   <div className="flex-1">
                     <div className="flex items-center space-x-2">
-                      <h3 className="text-lg font-semibold text-white">
+                      <h3 className="text-lg font-semibold text-slate-800">
                         Step {step.id}: {step.title}
                       </h3>
                       {step.completed && (
@@ -171,7 +171,7 @@ export function GenerateValuationReport() {
                         <Badge className="bg-valoov-orange">Current</Badge>
                       )}
                     </div>
-                    <p className="text-gray-400">{step.description}</p>
+                    <p className="text-slate-600">{step.description}</p>
                   </div>
                   
                   <div className="flex items-center space-x-2">
@@ -196,7 +196,7 @@ export function GenerateValuationReport() {
                         <Circle className="h-4 w-4" />
                       </Button>
                     )}
-                    <ChevronRight className="h-4 w-4 text-gray-400" />
+                    <ChevronRight className="h-4 w-4 text-slate-400" />
                   </div>
                 </div>
               </CardContent>
@@ -209,15 +209,15 @@ export function GenerateValuationReport() {
       {paymentCompleted && currentStep === 6 && (
         <Card className="bg-gradient-to-r from-valoov-teal/20 to-valoov-orange/20 border-valoov-teal/30">
           <CardContent className="p-6 text-center">
-            <h3 className="text-xl font-bold text-white mb-2">Ready to Generate Report!</h3>
-            <p className="text-gray-300 mb-4">
+            <h3 className="text-xl font-bold text-slate-800 mb-2">Ready to Generate Report!</h3>
+            <p className="text-slate-700 mb-4">
               Payment confirmed. Generate your professional valuation report using 5 industry-standard methodologies.
             </p>
             <div className="space-y-3">
               <Button className="bg-valoov-teal hover:bg-valoov-teal/90 text-lg px-8 py-3">
                 Generate Valuation Report
               </Button>
-              <div className="text-sm text-gray-400">
+              <div className="text-sm text-slate-600">
                 <p>✓ Payment confirmed - {selectedPlan ? plans[selectedPlan as keyof typeof plans].name : 'Plan selected'}</p>
                 <p>✓ All data collected and ready for processing</p>
               </div>

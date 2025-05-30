@@ -5,41 +5,41 @@
 
 @layer base {
   :root {
-    --background: 218 23% 8%;
-    --foreground: 210 40% 98%;
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
 
-    --card: 218 23% 10%;
-    --card-foreground: 210 40% 98%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
 
-    --popover: 218 23% 10%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
 
     --primary: 185 46% 51%;
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 84% 4.9%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 84% 4.9%;
 
-    --destructive: 0 62.8% 30.6%;
+    --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
     --ring: 185 46% 51%;
 
-    --sidebar-background: 218 23% 8%;
-    --sidebar-foreground: 210 40% 98%;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 222.2 84% 4.9%;
     --sidebar-primary: 185 46% 51%;
     --sidebar-primary-foreground: 210 40% 98%;
-    --sidebar-accent: 217.2 32.6% 17.5%;
-    --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 217.2 32.6% 17.5%;
+    --sidebar-accent: 210 40% 96%;
+    --sidebar-accent-foreground: 222.2 84% 4.9%;
+    --sidebar-border: 214.3 31.8% 91.4%;
     --sidebar-ring: 185 46% 51%;
 
     --radius: 0.5rem;
@@ -57,7 +57,7 @@
   }
 
   .valoov-gradient {
-    background: linear-gradient(135deg, #2C3E50 0%, #2D7A7F 50%, #E87E41 100%);
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #cbd5e1 100%);
   }
 
   .valoov-gradient-alt {
@@ -65,19 +65,20 @@
   }
 
   .text-glow {
-    text-shadow: 0 0 15px rgba(45, 122, 127, 0.8);
+    text-shadow: 0 0 15px rgba(45, 122, 127, 0.3);
   }
 
   .text-glow-orange {
-    text-shadow: 0 0 10px rgba(232, 126, 65, 0.5);
+    text-shadow: 0 0 10px rgba(232, 126, 65, 0.3);
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-weight: 600;
     letter-spacing: -0.025em;
+    color: #1e293b;
   }
 
   .logo-shadow {
-    filter: drop-shadow(0 0 12px rgba(0,0,0,0.5));
+    filter: drop-shadow(0 0 12px rgba(0,0,0,0.1));
   }
 }
