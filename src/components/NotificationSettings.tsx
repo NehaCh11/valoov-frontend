@@ -11,14 +11,14 @@ export function NotificationSettings() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold text-white">Notifications</h1>
-        <p className="text-gray-400 mt-1">Manage which alerts you receive via email and in-app</p>
+        <h1 className="text-3xl font-bold text-gray-900">Notifications</h1>
+        <p className="text-gray-600 mt-1">Manage which alerts you receive via email and in-app</p>
       </div>
 
       {/* Notification Preferences */}
       <Card className="bg-card/30 backdrop-blur border-border/50">
         <CardHeader>
-          <CardTitle className="flex items-center space-x-2">
+          <CardTitle className="flex items-center space-x-2 text-gray-900">
             <Bell className="h-5 w-5 text-valoov-teal" />
             <span>Notification Preferences</span>
           </CardTitle>
@@ -26,32 +26,32 @@ export function NotificationSettings() {
         <CardContent className="space-y-6">
           <div className="flex items-center justify-between">
             <div>
-              <Label className="text-base font-medium">Email Notifications</Label>
-              <p className="text-sm text-gray-400">Receive updates via email</p>
+              <Label className="text-base font-medium text-gray-900">Email Notifications</Label>
+              <p className="text-sm text-gray-600">Receive updates via email</p>
             </div>
             <Switch defaultChecked />
           </div>
           
           <div className="flex items-center justify-between">
             <div>
-              <Label className="text-base font-medium">Valuation Updates</Label>
-              <p className="text-sm text-gray-400">Get notified when valuations are complete</p>
+              <Label className="text-base font-medium text-gray-900">Valuation Updates</Label>
+              <p className="text-sm text-gray-600">Get notified when valuations are complete</p>
             </div>
             <Switch defaultChecked />
           </div>
           
           <div className="flex items-center justify-between">
             <div>
-              <Label className="text-base font-medium">Document Processing</Label>
-              <p className="text-sm text-gray-400">Alerts for document upload status</p>
+              <Label className="text-base font-medium text-gray-900">Document Processing</Label>
+              <p className="text-sm text-gray-600">Alerts for document upload status</p>
             </div>
             <Switch />
           </div>
           
           <div className="flex items-center justify-between">
             <div>
-              <Label className="text-base font-medium">Marketing Updates</Label>
-              <p className="text-sm text-gray-400">Product updates and feature announcements</p>
+              <Label className="text-base font-medium text-gray-900">Marketing Updates</Label>
+              <p className="text-sm text-gray-600">Product updates and feature announcements</p>
             </div>
             <Switch />
           </div>
@@ -61,7 +61,7 @@ export function NotificationSettings() {
       {/* Account Preferences */}
       <Card className="bg-card/30 backdrop-blur border-border/50">
         <CardHeader>
-          <CardTitle className="flex items-center space-x-2">
+          <CardTitle className="flex items-center space-x-2 text-gray-900">
             <Globe className="h-5 w-5 text-valoov-orange" />
             <span>Account Preferences</span>
           </CardTitle>
@@ -69,7 +69,7 @@ export function NotificationSettings() {
         <CardContent className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <Label>Language Selection</Label>
+              <Label className="text-gray-900">Language Selection</Label>
               <Select defaultValue="en">
                 <SelectTrigger>
                   <SelectValue />
@@ -83,7 +83,7 @@ export function NotificationSettings() {
             </div>
             
             <div>
-              <Label>Timezone</Label>
+              <Label className="text-gray-900">Timezone</Label>
               <Select defaultValue="europe/madrid">
                 <SelectTrigger>
                   <SelectValue />
@@ -97,7 +97,7 @@ export function NotificationSettings() {
             </div>
             
             <div>
-              <Label>Date Format</Label>
+              <Label className="text-gray-900">Date Format</Label>
               <Select defaultValue="dd/mm/yyyy">
                 <SelectTrigger>
                   <SelectValue />
@@ -110,7 +110,7 @@ export function NotificationSettings() {
             </div>
             
             <div>
-              <Label>Currency Preference</Label>
+              <Label className="text-gray-900">Currency Preference</Label>
               <Select defaultValue="eur">
                 <SelectTrigger>
                   <SelectValue />
@@ -129,7 +129,7 @@ export function NotificationSettings() {
       {/* Security Settings */}
       <Card className="bg-card/30 backdrop-blur border-border/50">
         <CardHeader>
-          <CardTitle className="flex items-center space-x-2">
+          <CardTitle className="flex items-center space-x-2 text-gray-900">
             <Shield className="h-5 w-5 text-financial-cyan" />
             <span>Security Settings</span>
           </CardTitle>
@@ -137,14 +137,14 @@ export function NotificationSettings() {
         <CardContent className="space-y-6">
           <div className="flex items-center justify-between">
             <div>
-              <Label className="text-base font-medium">2-Factor Authentication</Label>
-              <p className="text-sm text-gray-400">Enable via authenticator app or SMS</p>
+              <Label className="text-base font-medium text-gray-900">2-Factor Authentication</Label>
+              <p className="text-sm text-gray-600">Enable via authenticator app or SMS</p>
             </div>
             <Switch />
           </div>
           
           <div>
-            <Label className="text-base font-medium">Change Password</Label>
+            <Label className="text-base font-medium text-gray-900">Change Password</Label>
             <div className="grid grid-cols-1 gap-4 mt-2">
               <Input type="password" placeholder="Current Password" />
               <Input type="password" placeholder="New Password" />
@@ -154,15 +154,15 @@ export function NotificationSettings() {
           </div>
           
           <div>
-            <Label className="text-base font-medium">Recent Login Activity</Label>
+            <Label className="text-base font-medium text-gray-900">Recent Login Activity</Label>
             <div className="mt-2 space-y-2">
               <div className="flex justify-between items-center p-2 bg-card/20 rounded">
-                <span className="text-sm">Current Session - Chrome on Windows</span>
-                <span className="text-xs text-gray-400">Now</span>
+                <span className="text-sm text-gray-900">Current Session - Chrome on Windows</span>
+                <span className="text-xs text-gray-600">Now</span>
               </div>
               <div className="flex justify-between items-center p-2 bg-card/20 rounded">
-                <span className="text-sm">Mobile App - iPhone</span>
-                <span className="text-xs text-gray-400">2 hours ago</span>
+                <span className="text-sm text-gray-900">Mobile App - iPhone</span>
+                <span className="text-xs text-gray-600">2 hours ago</span>
               </div>
             </div>
             <Button variant="outline" className="mt-2">Logout from All Devices</Button>
