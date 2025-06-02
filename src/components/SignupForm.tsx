@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { ArrowLeft, Mail, Lock, User, Building, Eye, EyeOff, Globe, Factory, Shield } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -161,30 +160,30 @@ const SignupForm = ({ onBack, onLogin, onAccountCreated }: SignupFormProps) => {
 
   return (
     <div className="min-h-screen bg-valoov-dark-gray">
-      <div className="valoov-gradient min-h-screen flex items-center justify-center">
-        <div className="container mx-auto px-4 max-w-md">
+      <div className="valoov-gradient min-h-screen flex items-center justify-center p-4">
+        <div className="w-full max-w-md">
           <Button 
             variant="ghost" 
             onClick={onBack}
-            className="mb-6 text-valoov-teal hover:text-valoov-teal/80"
+            className="mb-4 text-valoov-teal hover:text-valoov-teal/80"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to Registration
           </Button>
 
           <Card className="bg-card/30 backdrop-blur border-valoov-teal/30">
-            <CardHeader className="text-center">
-              <div className="flex justify-center mb-4">
+            <CardHeader className="text-center space-y-4">
+              <div className="flex justify-center">
                 <img 
                   src="/lovable-uploads/10986bb1-03cf-4cef-b5a2-8a61c6dfd7a1.png" 
                   alt="VALOOV AI Logo" 
                   className="h-24 w-auto object-contain"
                 />
               </div>
-              <CardTitle className="text-2xl text-white">Create an Account</CardTitle>
-              <CardDescription>Start your company valuation journey</CardDescription>
+              <CardTitle className="text-2xl text-foreground">Create an Account</CardTitle>
+              <CardDescription className="text-muted-foreground">Start your company valuation journey</CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent className="space-y-6">
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
@@ -389,7 +388,7 @@ const SignupForm = ({ onBack, onLogin, onAccountCreated }: SignupFormProps) => {
                   )}
                 </Button>
 
-                <div className="text-center">
+                <div className="text-center border-t pt-4">
                   <p className="text-sm text-muted-foreground">
                     Already have an account?
                   </p>

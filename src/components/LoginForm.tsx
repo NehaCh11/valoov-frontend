@@ -48,37 +48,37 @@ const LoginForm = ({ onBack, onSwitchToSignup, onLoginSuccess }: LoginFormProps)
 
   return (
     <div className="min-h-screen bg-valoov-dark-gray">
-      <div className="valoov-gradient min-h-screen flex items-center justify-center">
-        <div className="container mx-auto px-4 max-w-md">
+      <div className="valoov-gradient min-h-screen flex items-center justify-center p-4">
+        <div className="w-full max-w-md">
           <Button 
             variant="ghost" 
             onClick={onBack}
-            className="mb-6 text-valoov-teal hover:text-valoov-teal/80"
+            className="mb-4 text-valoov-teal hover:text-valoov-teal/80"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to Home
           </Button>
 
           <Card className="bg-card/30 backdrop-blur border-valoov-teal/30">
-            <CardHeader className="text-center">
-              <div className="flex justify-center mb-4">
+            <CardHeader className="text-center space-y-4">
+              <div className="flex justify-center">
                 <img 
-                  src="/lovable-uploads/17dd4d7d-77a4-46b2-8bcc-c7b2923ba0e5.png" 
-                  alt="VALOOV Logo" 
-                  className="h-64 w-auto"
+                  src="/lovable-uploads/10986bb1-03cf-4cef-b5a2-8a61c6dfd7a1.png" 
+                  alt="VALOOV AI Logo" 
+                  className="h-24 w-auto object-contain"
                 />
               </div>
-              <CardTitle className="text-2xl">
+              <CardTitle className="text-2xl text-foreground">
                 {showForgotPassword ? 'Reset Password' : 'Welcome Back to VALOOV'}
               </CardTitle>
-              <CardDescription>
+              <CardDescription className="text-muted-foreground">
                 {showForgotPassword 
                   ? 'Enter your email to receive a password reset link'
                   : 'Sign in to access your company valuation dashboard'
                 }
               </CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent className="space-y-6">
               {showForgotPassword ? (
                 <form onSubmit={handleForgotPassword} className="space-y-4">
                   <div className="space-y-2">
@@ -184,7 +184,7 @@ const LoginForm = ({ onBack, onSwitchToSignup, onLoginSuccess }: LoginFormProps)
               )}
 
               {!showForgotPassword && (
-                <div className="mt-6 text-center">
+                <div className="text-center border-t pt-4">
                   <p className="text-sm text-muted-foreground">
                     Don't have an account?{' '}
                     <button
