@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { SidebarProvider, SidebarInset } from '@/components/ui/sidebar';
 import { AppSidebar } from '@/components/AppSidebar';
@@ -21,11 +22,12 @@ const Index = () => {
 
   const handleLogin = () => {
     setIsLoggedIn(true);
+    setActiveView('questionnaire'); // Ensure we go to questionnaire on login
   };
 
   const handleAccountCreated = () => {
     setIsLoggedIn(true);
-    setActiveView('questionnaire'); // Redirect to AI chatbot after account creation
+    setActiveView('questionnaire'); // Ensure we go to questionnaire after account creation
   };
 
   const handleSignOut = () => {
