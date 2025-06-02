@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Upload, FileText, BarChart3, CheckCircle, ArrowRight, Calculator, Star, Eye } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -83,7 +82,7 @@ const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
   }
 
   if (showSignup) {
-    return <SignupForm onBack={() => setShowSignup(false)} onSwitchToLogin={() => { setShowSignup(false); setShowLogin(true); }} onAccountCreated={onAccountCreated} />;
+    return <SignupForm onBack={() => setShowSignup(false)} onLogin={() => { setShowSignup(false); setShowLogin(true); }} onAccountCreated={onAccountCreated} />;
   }
 
   return (
