@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { ArrowLeft, Mail, Lock, User, Building, Eye, EyeOff, Globe, Factory, Shield } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -125,12 +126,17 @@ const SignupForm = ({ onBack, onLogin, onAccountCreated }: SignupFormProps) => {
     }, 2000);
   };
 
+  const handleEmailVerified = () => {
+    // Directly call onAccountCreated to go to main app
+    onAccountCreated();
+  };
+
   if (showEmailVerification) {
     return (
       <EmailVerificationPage
         email={formData.email}
         onBack={() => setShowEmailVerification(false)}
-        onVerified={onAccountCreated}
+        onVerified={handleEmailVerified}
       />
     );
   }

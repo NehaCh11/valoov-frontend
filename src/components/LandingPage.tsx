@@ -21,6 +21,13 @@ const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
     }
   };
 
+  const handleAccountCreated = () => {
+    setShowSignup(false);
+    if (onAccountCreated) {
+      onAccountCreated();
+    }
+  };
+
   const howItWorksSteps = [
     {
       step: 1,
@@ -82,7 +89,7 @@ const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
   }
 
   if (showSignup) {
-    return <SignupForm onBack={() => setShowSignup(false)} onLogin={() => { setShowSignup(false); setShowLogin(true); }} onAccountCreated={onAccountCreated} />;
+    return <SignupForm onBack={() => setShowSignup(false)} onLogin={() => { setShowSignup(false); setShowLogin(true); }} onAccountCreated={handleAccountCreated} />;
   }
 
   return (
