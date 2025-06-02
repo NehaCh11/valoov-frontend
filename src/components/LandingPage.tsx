@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Upload, FileText, BarChart3, CheckCircle, ArrowRight, Calculator, Star, Eye } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -93,8 +94,8 @@ const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-4">
               <img 
-                src="/lovable-uploads/7878429c-0ab4-4ecf-936b-2947dc0eac7f.png" 
-                alt="VALOOV Logo" 
+                src="/lovable-uploads/ccbfeb8f-e488-4725-8c91-82d50190256a.png" 
+                alt="VALOOV AI Logo" 
                 className="h-24 w-auto object-contain"
               />
             </div>
