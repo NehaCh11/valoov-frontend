@@ -95,7 +95,7 @@ const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
               <img 
                 src="/lovable-uploads/ccbfeb8f-e488-4725-8c91-82d50190256a.png" 
                 alt="VALOOV AI Logo" 
-                className="h-8 w-auto object-contain"
+                className="h-12 w-auto object-contain"
               />
             </div>
             <div className="flex gap-3">
@@ -119,7 +119,7 @@ const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
         {/* Hero Section */}
         <div className="container mx-auto px-4 pt-12 pb-16">
           <div className="text-center mb-16">
-            <h1 className="text-6xl font-bold text-slate-800 mb-6" style={{ textShadow: '0 0 15px rgba(30, 41, 59, 0.1)' }}>
+            <h1 className="text-6xl font-bold text-black mb-6" style={{ textShadow: '0 0 15px rgba(30, 41, 59, 0.1)' }}>
               Professional Company Valuation Platform
             </h1>
             <p className="text-2xl text-financial-cyan mb-4 font-medium">
@@ -165,7 +165,7 @@ const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
           {/* How It Works Section */}
           <section className="mb-20">
             <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold mb-4 text-slate-800">How It Works</h2>
+              <h2 className="text-4xl font-bold mb-4 text-black">How It Works</h2>
               <p className="text-xl text-slate-600">Simple 3-step process to get your professional valuation</p>
             </div>
             
@@ -201,7 +201,7 @@ const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
           {/* Sample Report Preview Section */}
           <section className="mb-20">
             <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold mb-4 text-slate-800">Sample Report Preview</h2>
+              <h2 className="text-4xl font-bold mb-4 text-black">Sample Report Preview</h2>
               <p className="text-xl text-slate-600">See what you'll receive with our comprehensive valuation reports</p>
             </div>
             
@@ -209,7 +209,7 @@ const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
               <CardContent className="p-8">
                 <div className="grid md:grid-cols-2 gap-8 items-center">
                   <div>
-                    <h3 className="text-2xl font-bold mb-4 text-slate-800">Comprehensive Analysis</h3>
+                    <h3 className="text-2xl font-bold mb-4 text-black">Comprehensive Analysis</h3>
                     <ul className="space-y-3 text-lg text-slate-700">
                       <li className="flex items-center space-x-3">
                         <CheckCircle className="h-5 w-5 text-valoov-teal flex-shrink-0" />
@@ -261,7 +261,7 @@ const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
           {/* Testimonials Section */}
           <section className="mb-20">
             <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold mb-4 text-slate-800">Trusted by Businesses Across Europe</h2>
+              <h2 className="text-4xl font-bold mb-4 text-black">Trusted by Businesses Across Europe</h2>
               <p className="text-xl text-slate-600">See what our clients say about VALOOV</p>
             </div>
             
