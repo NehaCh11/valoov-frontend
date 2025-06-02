@@ -4,7 +4,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/u
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Check, Star, Crown, Shield, X } from 'lucide-react';
+import { Check, Star, Crown, Shield, X, Mail } from 'lucide-react';
 
 interface PricingDialogProps {
   isOpen: boolean;
@@ -17,12 +17,13 @@ export function PricingDialog({ isOpen, onClose, onPlanSelect }: PricingDialogPr
 
   const plans = [
     {
-      id: 'basic',
-      name: 'Basic Report',
-      price: '€49',
-      description: 'Professional valuation report',
+      id: 'single',
+      name: 'Per Report',
+      price: '$400',
+      description: 'One professional valuation report',
       icon: Shield,
       features: [
+        '1 valuation report included',
         'Complete 5-methodology valuation',
         '20+ page professional report',
         'PDF download & sharing',
@@ -33,35 +34,37 @@ export function PricingDialog({ isOpen, onClose, onPlanSelect }: PricingDialogPr
       color: 'border-gray-300'
     },
     {
-      id: 'premium',
-      name: 'Premium + Review',
-      price: '€199',
-      description: 'Report + analyst validation',
+      id: 'multiple',
+      name: 'Up to 5 Reports',
+      price: '$1,200',
+      description: 'Multiple reports with savings',
       icon: Star,
       features: [
-        'Everything in Basic Report',
-        'Certified analyst review',
-        'Market comparison analysis',
-        'Investment readiness assessment',
-        'Priority support',
-        'Revision guarantee'
+        'Up to 5 valuation reports',
+        'Complete 5-methodology valuation',
+        '20+ page professional reports',
+        'PDF download & sharing',
+        'Advanced charts & visualizations',
+        'Priority email support',
+        'Bulk report management'
       ],
       popular: true,
       color: 'border-valoov-orange'
     },
     {
-      id: 'enterprise',
-      name: 'Enterprise',
-      price: '€499',
-      description: 'White-label & custom features',
+      id: 'custom',
+      name: 'Custom Plan',
+      price: 'Contact Us',
+      description: 'Tailored solution for your needs',
       icon: Crown,
       features: [
-        'Everything in Premium',
-        'White-label branding',
+        'Custom report quantity',
+        'White-label branding options',
         'Custom methodology weights',
-        'Multiple company valuations',
         'Dedicated account manager',
-        'API access'
+        'API access (if needed)',
+        'Custom integrations',
+        'Enterprise support'
       ],
       popular: false,
       color: 'border-financial-cyan'
@@ -70,6 +73,11 @@ export function PricingDialog({ isOpen, onClose, onPlanSelect }: PricingDialogPr
 
   const handlePlanSelect = (planId: string) => {
     setSelectedPlan(planId);
+    if (planId === 'custom') {
+      // For custom plan, we could open a contact form or redirect
+      window.open('mailto:contact@valoov.com?subject=Custom Plan Inquiry', '_blank');
+      return;
+    }
     onPlanSelect(planId);
     onClose();
   };
@@ -80,14 +88,14 @@ export function PricingDialog({ isOpen, onClose, onPlanSelect }: PricingDialogPr
         <DialogHeader>
           <div className="flex items-center justify-between">
             <DialogTitle className="text-2xl font-bold text-slate-800">
-              Unlock Full Valuation Report
+              Choose Your Valuation Plan
             </DialogTitle>
             <Button variant="ghost" size="icon" onClick={onClose}>
               <X className="h-4 w-4" />
             </Button>
           </div>
           <p className="text-slate-600">
-            Choose a plan to download your complete professional valuation report
+            Select a plan to generate your professional valuation reports
           </p>
         </DialogHeader>
 
@@ -115,7 +123,7 @@ export function PricingDialog({ isOpen, onClose, onPlanSelect }: PricingDialogPr
                 <CardHeader className="text-center pb-4">
                   <div className="flex justify-center mb-4">
                     <div className={`p-3 rounded-full ${
-                      plan.popular ? 'bg-valoov-orange' : 'bg-slate-600'
+                      plan.popular ? 'bg-valoov-orange' : plan.id === 'custom' ? 'bg-financial-cyan' : 'bg-slate-600'
                     }`}>
                       <Icon className="h-6 w-6 text-white" />
                     </div>
@@ -124,7 +132,9 @@ export function PricingDialog({ isOpen, onClose, onPlanSelect }: PricingDialogPr
                   <p className="text-slate-600 text-sm">{plan.description}</p>
                   <div className="mt-4">
                     <span className="text-4xl font-bold text-slate-800">{plan.price}</span>
-                    <span className="text-slate-600 text-sm ml-1">one-time</span>
+                    {plan.id !== 'custom' && (
+                      <span className="text-slate-600 text-sm ml-1">one-time</span>
+                    )}
                   </div>
                 </CardHeader>
                 
@@ -140,7 +150,9 @@ export function PricingDialog({ isOpen, onClose, onPlanSelect }: PricingDialogPr
                   
                   <Button 
                     className={`w-full ${
-                      plan.popular 
+                      plan.id === 'custom'
+                        ? 'bg-financial-cyan hover:bg-financial-cyan/90'
+                        : plan.popular 
                         ? 'bg-valoov-orange hover:bg-valoov-orange/90' 
                         : isSelected
                         ? 'bg-valoov-teal hover:bg-valoov-teal/90'
@@ -148,7 +160,12 @@ export function PricingDialog({ isOpen, onClose, onPlanSelect }: PricingDialogPr
                     }`}
                     onClick={() => handlePlanSelect(plan.id)}
                   >
-                    {isSelected ? 'Selected' : 'Select Plan'}
+                    {plan.id === 'custom' ? (
+                      <div className="flex items-center space-x-2">
+                        <Mail className="h-4 w-4" />
+                        <span>Contact Us</span>
+                      </div>
+                    ) : isSelected ? 'Selected' : 'Select Plan'}
                   </Button>
                 </CardContent>
               </Card>
