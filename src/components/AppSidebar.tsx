@@ -8,7 +8,7 @@ import {
   Building2,
   Eye,
   PlusCircle,
-  History,
+  CreditCard,
   Home
 } from 'lucide-react';
 import {
@@ -62,8 +62,8 @@ const valuationItems = [
 
 const reportsItems = [
   {
-    title: "History",
-    icon: History,
+    title: "Billing & Payment",
+    icon: CreditCard,
     id: "history"
   }
 ];
@@ -142,7 +142,7 @@ export function AppSidebar({ activeView, setActiveView }: AppSidebarProps) {
         </SidebarGroup>
 
         <SidebarGroup>
-          <SidebarGroupLabel>Reports</SidebarGroupLabel>
+          <SidebarGroupLabel>Billing</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {reportsItems.map((item) => {
