@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import { Send, Mic, Paperclip, Bot, User, MicOff, X } from 'lucide-react';
+import { Send, Mic, Paperclip, Bot, User, MicOff, X, Upload, FileText, CheckCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useToast } from '@/hooks/use-toast';
 
@@ -23,6 +23,12 @@ interface ChatMessage {
   audioUrl?: string;
   pdfUrl?: string;
   pdfName?: string;
+}
+
+interface UploadedTaxReturn {
+  id: string;
+  file: File;
+  uploadedAt: Date;
 }
 
 const questions: Question[] = [
@@ -62,23 +68,24 @@ const ChatbotQuestionnaire = () => {
   const [isCompleted, setIsCompleted] = useState(false);
   const [isRecording, setIsRecording] = useState(false);
   const [selectedPdf, setSelectedPdf] = useState<File | null>(null);
+  const [taxReturnsUploaded, setTaxReturnsUploaded] = useState<UploadedTaxReturn[]>([]);
+  const [showQuestionnaire, setShowQuestionnaire] = useState(false);
+  const [isDragOver, setIsDragOver] = useState(false);
   
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const audioChunksRef = useRef<Blob[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const taxReturnInputRef = useRef<HTMLInputElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const { toast } = useToast();
 
   const currentQuestion = questions[currentQuestionIndex];
 
   useEffect(() => {
-    // Add initial bot message
+    // Add initial bot message for tax return upload
     if (messages.length === 0) {
-      addBotMessage("Hello! I'm here to help with your company valuation. I'll ask you some questions about your business. Let's start!");
-      setTimeout(() => {
-        addBotMessage(currentQuestion.question);
-      }, 1000);
+      addBotMessage("Hello! I'm here to help with your company valuation. Before we begin with the business questions, I need you to upload your tax return files in PDF format (covering the past 3 years). This information is essential for an accurate valuation assessment.");
     }
   }, []);
 
@@ -115,6 +122,119 @@ const ChatbotQuestionnaire = () => {
       pdfName
     };
     setMessages(prev => [...prev, message]);
+  };
+
+  const handleTaxReturnUpload = () => {
+    taxReturnInputRef.current?.click();
+  };
+
+  const handleTaxReturnFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      if (file.type === 'application/pdf') {
+        const newTaxReturn: UploadedTaxReturn = {
+          id: Math.random().toString(36).substr(2, 9),
+          file,
+          uploadedAt: new Date()
+        };
+        
+        setTaxReturnsUploaded(prev => [...prev, newTaxReturn]);
+        
+        // Add user message showing the upload
+        addUserMessage(`Tax return uploaded: ${file.name}`);
+        
+        // Check if we have enough files to proceed
+        if (taxReturnsUploaded.length >= 0) { // Allow proceeding after first upload
+          setTimeout(() => {
+            addBotMessage("Thank you for uploading your tax return! You can upload additional years if needed, or we can proceed to the business questionnaire. Click 'Start Questionnaire' when you're ready to begin.");
+            setShowQuestionnaire(true);
+          }, 1000);
+        }
+        
+        toast({
+          title: "Tax Return Uploaded",
+          description: `${file.name} has been uploaded successfully.`,
+        });
+      } else {
+        // Show error message for non-PDF files
+        addBotMessage("Only PDF format is supported. Please upload a valid tax return file in PDF format.");
+        
+        toast({
+          title: "Invalid File Format",
+          description: "Only PDF format is supported. Please upload a valid tax return file in PDF format.",
+          variant: "destructive",
+        });
+      }
+    }
+    
+    // Clear the input so the same file can be selected again if needed
+    if (event.target) {
+      event.target.value = '';
+    }
+  };
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragOver(true);
+  };
+
+  const handleDragLeave = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragOver(false);
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragOver(false);
+    
+    const files = Array.from(e.dataTransfer.files);
+    const pdfFile = files.find(file => file.type === 'application/pdf');
+    
+    if (pdfFile) {
+      const newTaxReturn: UploadedTaxReturn = {
+        id: Math.random().toString(36).substr(2, 9),
+        file: pdfFile,
+        uploadedAt: new Date()
+      };
+      
+      setTaxReturnsUploaded(prev => [...prev, newTaxReturn]);
+      addUserMessage(`Tax return uploaded: ${pdfFile.name}`);
+      
+      if (taxReturnsUploaded.length >= 0) {
+        setTimeout(() => {
+          addBotMessage("Thank you for uploading your tax return! You can upload additional years if needed, or we can proceed to the business questionnaire. Click 'Start Questionnaire' when you're ready to begin.");
+          setShowQuestionnaire(true);
+        }, 1000);
+      }
+      
+      toast({
+        title: "Tax Return Uploaded",
+        description: `${pdfFile.name} has been uploaded successfully.`,
+      });
+    } else {
+      addBotMessage("Only PDF format is supported. Please upload a valid tax return file in PDF format.");
+      
+      toast({
+        title: "Invalid File Format",
+        description: "Only PDF format is supported. Please upload a valid tax return file in PDF format.",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const startQuestionnaire = () => {
+    addBotMessage("Perfect! Now let's begin with the business questions. I'll ask you about different aspects of your company to help with the valuation analysis.");
+    setTimeout(() => {
+      addBotMessage(currentQuestion.question);
+    }, 1000);
+  };
+
+  const removeTaxReturn = (id: string) => {
+    setTaxReturnsUploaded(prev => prev.filter(tr => tr.id !== id));
+    
+    if (taxReturnsUploaded.length <= 1) {
+      setShowQuestionnaire(false);
+    }
   };
 
   const handleVoiceNote = async () => {
@@ -206,7 +326,7 @@ const ChatbotQuestionnaire = () => {
     addUserMessage(currentMessage, undefined, pdfUrl, pdfName);
 
     // Save answer if it's for a question
-    if (!isCompleted && currentQuestion) {
+    if (isCompleted === false && currentQuestion && showQuestionnaire) {
       setAnswers(prev => ({
         ...prev,
         [currentQuestion.id]: currentMessage
@@ -218,7 +338,7 @@ const ChatbotQuestionnaire = () => {
     setSelectedPdf(null);
 
     // Move to next question or complete
-    if (currentQuestionIndex < questions.length - 1 && !isCompleted) {
+    if (currentQuestionIndex < questions.length - 1 && !isCompleted && showQuestionnaire) {
       setTimeout(() => {
         setCurrentQuestionIndex(prev => prev + 1);
         const nextQuestion = questions[currentQuestionIndex + 1];
@@ -233,7 +353,7 @@ const ChatbotQuestionnaire = () => {
           addBotMessage(nextQuestion.question);
         }
       }, 1000);
-    } else if (!isCompleted) {
+    } else if (!isCompleted && showQuestionnaire) {
       setTimeout(() => {
         addBotMessage("Thank you for completing the questionnaire! I'll now analyze your responses to help with your company valuation.");
         setIsCompleted(true);
@@ -306,95 +426,198 @@ const ChatbotQuestionnaire = () => {
             )}
           </div>
         ))}
+
+        {/* Tax Return Upload Section */}
+        {!showQuestionnaire && taxReturnsUploaded.length === 0 && (
+          <div className="max-w-4xl mx-auto">
+            <Card className="bg-white border-gray-200">
+              <CardContent className="p-6">
+                <div
+                  className={cn(
+                    "border-2 border-dashed rounded-lg p-8 text-center transition-colors cursor-pointer",
+                    isDragOver ? "border-blue-500 bg-blue-50" : "border-gray-300 hover:border-blue-400 hover:bg-blue-50"
+                  )}
+                  onDragOver={handleDragOver}
+                  onDragLeave={handleDragLeave}
+                  onDrop={handleDrop}
+                  onClick={handleTaxReturnUpload}
+                >
+                  <Upload className="h-12 w-12 mx-auto mb-4 text-gray-400" />
+                  <h3 className="text-lg font-medium mb-2 text-gray-900">
+                    Upload Tax Return Files
+                  </h3>
+                  <p className="text-gray-600 mb-4">
+                    Drag and drop your tax return PDF files here, or click to browse
+                  </p>
+                  <p className="text-sm text-gray-500">
+                    Please upload PDF files covering the past 3 years
+                  </p>
+                  <Button className="mt-4 bg-blue-600 hover:bg-blue-700">
+                    Select PDF Files
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        )}
+
+        {/* Uploaded Tax Returns Display */}
+        {taxReturnsUploaded.length > 0 && (
+          <div className="max-w-4xl mx-auto">
+            <Card className="bg-white border-gray-200">
+              <CardContent className="p-6">
+                <h3 className="text-lg font-medium mb-4 text-gray-900 flex items-center">
+                  <FileText className="h-5 w-5 mr-2 text-green-600" />
+                  Uploaded Tax Returns
+                </h3>
+                <div className="space-y-3">
+                  {taxReturnsUploaded.map((taxReturn) => (
+                    <div
+                      key={taxReturn.id}
+                      className="flex items-center justify-between p-3 bg-gray-50 rounded-lg border"
+                    >
+                      <div className="flex items-center space-x-3">
+                        <CheckCircle className="h-5 w-5 text-green-600" />
+                        <div>
+                          <p className="font-medium text-gray-900">{taxReturn.file.name}</p>
+                          <p className="text-sm text-gray-500">
+                            {(taxReturn.file.size / 1024 / 1024).toFixed(2)} MB • Uploaded {taxReturn.uploadedAt.toLocaleTimeString()}
+                          </p>
+                        </div>
+                      </div>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => removeTaxReturn(taxReturn.id)}
+                        className="hover:bg-red-100"
+                      >
+                        <X className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  ))}
+                </div>
+                
+                <div className="mt-4 flex space-x-3">
+                  <Button
+                    variant="outline"
+                    onClick={handleTaxReturnUpload}
+                    className="border-blue-600 text-blue-600 hover:bg-blue-50"
+                  >
+                    Add More Files
+                  </Button>
+                  
+                  {showQuestionnaire && (
+                    <Button
+                      onClick={startQuestionnaire}
+                      className="bg-blue-600 hover:bg-blue-700"
+                    >
+                      Start Questionnaire
+                    </Button>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        )}
+
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Input Area */}
-      <div className="border-t bg-white px-6 py-4">
-        {/* PDF Preview */}
-        {selectedPdf && (
-          <div className="mb-3 p-3 bg-gray-100 rounded-lg border flex items-center justify-between">
-            <div className="flex items-center space-x-2 text-sm text-gray-700">
-              <Paperclip className="h-4 w-4" />
-              <span>{selectedPdf.name}</span>
+      {/* Input Area - Only show if questionnaire has started */}
+      {showQuestionnaire && (
+        <div className="border-t bg-white px-6 py-4">
+          {/* PDF Preview */}
+          {selectedPdf && (
+            <div className="mb-3 p-3 bg-gray-100 rounded-lg border flex items-center justify-between">
+              <div className="flex items-center space-x-2 text-sm text-gray-700">
+                <Paperclip className="h-4 w-4" />
+                <span>{selectedPdf.name}</span>
+              </div>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={clearSelectedPdf}
+                className="h-6 w-6 p-0 hover:bg-red-100"
+              >
+                <X className="h-3 w-3" />
+              </Button>
             </div>
+          )}
+
+          <div className="flex items-end space-x-3">
+            {/* Voice Input Button */}
             <Button
               variant="ghost"
               size="sm"
-              onClick={clearSelectedPdf}
-              className="h-6 w-6 p-0 hover:bg-red-100"
+              onClick={handleVoiceNote}
+              className={cn(
+                "flex-shrink-0 h-10 w-10 p-0 rounded-full",
+                isRecording ? "bg-red-100 text-red-600 hover:bg-red-200" : "hover:bg-gray-100"
+              )}
             >
-              <X className="h-3 w-3" />
+              {isRecording ? <MicOff className="h-4 w-4" /> : <Mic className="h-4 w-4" />}
             </Button>
-          </div>
-        )}
 
-        <div className="flex items-end space-x-3">
-          {/* Voice Input Button */}
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={handleVoiceNote}
-            className={cn(
-              "flex-shrink-0 h-10 w-10 p-0 rounded-full",
-              isRecording ? "bg-red-100 text-red-600 hover:bg-red-200" : "hover:bg-gray-100"
-            )}
-          >
-            {isRecording ? <MicOff className="h-4 w-4" /> : <Mic className="h-4 w-4" />}
-          </Button>
-
-          {/* PDF Upload Button */}
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={handlePdfUpload}
-            className="flex-shrink-0 h-10 w-10 p-0 rounded-full hover:bg-gray-100"
-          >
-            <Paperclip className="h-4 w-4" />
-          </Button>
-
-          {/* Message Input */}
-          <div className="flex-1 relative">
-            <Textarea
-              ref={textareaRef}
-              value={currentMessage}
-              onChange={(e) => setCurrentMessage(e.target.value)}
-              onKeyPress={handleKeyPress}
-              placeholder="Type your message..."
-              className="min-h-[40px] max-h-[120px] resize-none border-gray-300 rounded-2xl pr-12 py-3"
-              rows={1}
-            />
+            {/* PDF Upload Button */}
             <Button
-              onClick={handleSubmitMessage}
-              disabled={!currentMessage.trim()}
+              variant="ghost"
               size="sm"
-              className="absolute right-2 bottom-2 h-8 w-8 p-0 rounded-full"
+              onClick={handlePdfUpload}
+              className="flex-shrink-0 h-10 w-10 p-0 rounded-full hover:bg-gray-100"
             >
-              <Send className="h-4 w-4" />
+              <Paperclip className="h-4 w-4" />
             </Button>
+
+            {/* Message Input */}
+            <div className="flex-1 relative">
+              <Textarea
+                ref={textareaRef}
+                value={currentMessage}
+                onChange={(e) => setCurrentMessage(e.target.value)}
+                onKeyPress={handleKeyPress}
+                placeholder="Type your message..."
+                className="min-h-[40px] max-h-[120px] resize-none border-gray-300 rounded-2xl pr-12 py-3"
+                rows={1}
+              />
+              <Button
+                onClick={handleSubmitMessage}
+                disabled={!currentMessage.trim()}
+                size="sm"
+                className="absolute right-2 bottom-2 h-8 w-8 p-0 rounded-full"
+              >
+                <Send className="h-4 w-4" />
+              </Button>
+            </div>
+
+            {/* Hidden file inputs */}
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept=".pdf,application/pdf"
+              onChange={handleFileChange}
+              className="hidden"
+            />
+            <input
+              ref={taxReturnInputRef}
+              type="file"
+              accept=".pdf,application/pdf"
+              onChange={handleTaxReturnFileChange}
+              className="hidden"
+            />
           </div>
 
-          {/* Hidden file input */}
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept=".pdf,application/pdf"
-            onChange={handleFileChange}
-            className="hidden"
-          />
+          {isRecording && (
+            <div className="mt-2 text-center">
+              <span className="text-sm text-red-600 animate-pulse">Recording... Click microphone to stop</span>
+            </div>
+          )}
         </div>
-
-        {isRecording && (
-          <div className="mt-2 text-center">
-            <span className="text-sm text-red-600 animate-pulse">Recording... Click microphone to stop</span>
-          </div>
-        )}
-      </div>
+      )}
 
       {isCompleted && (
         <div className="border-t bg-blue-50 px-6 py-4 text-center">
           <p className="text-sm text-blue-800 mb-3">
-            Questionnaire completed! Your responses have been saved.
+            Questionnaire completed! Your responses and tax returns have been saved.
           </p>
           <Button className="bg-blue-600 hover:bg-blue-700">
             Continue to Revenue Projections
