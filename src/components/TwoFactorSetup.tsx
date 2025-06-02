@@ -70,10 +70,10 @@ const TwoFactorSetup = ({ onBack, onComplete, email }: TwoFactorSetupProps) => {
                   <Shield className="h-8 w-8 text-valoov-teal" />
                 </div>
               </div>
-              <CardTitle className="text-2xl text-foreground">
+              <CardTitle className="text-2xl text-slate-800">
                 {step === 'setup' ? 'Secure Your Account' : 'Verify Your Setup'}
               </CardTitle>
-              <CardDescription className="text-muted-foreground">
+              <CardDescription className="text-slate-600">
                 {step === 'setup' 
                   ? 'Set up two-factor authentication to protect your account'
                   : 'Enter the code from your authenticator app to complete setup'
@@ -84,17 +84,17 @@ const TwoFactorSetup = ({ onBack, onComplete, email }: TwoFactorSetupProps) => {
               {step === 'setup' ? (
                 <div className="space-y-6">
                   <div className="text-center space-y-4">
-                    <div className="flex items-center space-x-2 text-sm text-muted-foreground">
+                    <div className="flex items-center space-x-2 text-sm text-slate-600">
                       <Smartphone className="h-4 w-4" />
                       <span>Step 1: Install an authenticator app</span>
                     </div>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-sm text-slate-600">
                       Download Google Authenticator, Authy, or similar app on your phone
                     </p>
                   </div>
 
                   <div className="text-center space-y-4">
-                    <div className="flex items-center space-x-2 text-sm text-muted-foreground">
+                    <div className="flex items-center space-x-2 text-sm text-slate-600">
                       <span>Step 2: Scan QR code or enter secret key</span>
                     </div>
                     
@@ -107,9 +107,9 @@ const TwoFactorSetup = ({ onBack, onComplete, email }: TwoFactorSetupProps) => {
                     </div>
 
                     <div className="space-y-2">
-                      <Label className="text-sm">Or enter this secret key manually:</Label>
-                      <div className="flex items-center space-x-2 p-3 bg-muted/50 rounded-lg">
-                        <code className="flex-1 text-sm font-mono">{secretKey}</code>
+                      <Label className="text-sm text-slate-700">Or enter this secret key manually:</Label>
+                      <div className="flex items-center space-x-2 p-3 bg-slate-100 rounded-lg">
+                        <code className="flex-1 text-sm font-mono text-slate-800">{secretKey}</code>
                         <Button
                           variant="ghost"
                           size="sm"
@@ -133,7 +133,7 @@ const TwoFactorSetup = ({ onBack, onComplete, email }: TwoFactorSetupProps) => {
                     <Button 
                       variant="outline" 
                       onClick={handleSkip}
-                      className="w-full"
+                      className="w-full text-slate-700 border-slate-300"
                     >
                       Skip for Now
                     </Button>
@@ -142,7 +142,7 @@ const TwoFactorSetup = ({ onBack, onComplete, email }: TwoFactorSetupProps) => {
               ) : (
                 <div className="space-y-6">
                   <div className="space-y-4">
-                    <Label htmlFor="verification-code" className="text-center block">
+                    <Label htmlFor="verification-code" className="text-center block text-slate-700">
                       Enter the 6-digit code from your authenticator app
                     </Label>
                     
@@ -186,7 +186,7 @@ const TwoFactorSetup = ({ onBack, onComplete, email }: TwoFactorSetupProps) => {
                     <Button 
                       variant="ghost" 
                       onClick={() => setStep('setup')}
-                      className="w-full"
+                      className="w-full text-slate-700"
                     >
                       Back to Setup
                     </Button>
