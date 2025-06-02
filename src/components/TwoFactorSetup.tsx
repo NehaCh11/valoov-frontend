@@ -45,11 +45,6 @@ const TwoFactorSetup = ({ onBack, onComplete, email }: TwoFactorSetupProps) => {
     onComplete();
   };
 
-  const handleSkip = () => {
-    console.log('Email 2FA verification skipped');
-    onComplete();
-  };
-
   return (
     <div className="min-h-screen bg-valoov-dark-gray">
       <div className="valoov-gradient min-h-screen flex items-center justify-center p-4">
@@ -149,14 +144,6 @@ const TwoFactorSetup = ({ onBack, onComplete, email }: TwoFactorSetupProps) => {
                   ) : (
                     'Verify Code'
                   )}
-                </Button>
-                
-                <Button 
-                  variant="outline" 
-                  onClick={handleSkip}
-                  className="w-full text-slate-700 border-slate-300"
-                >
-                  Skip for Now
                 </Button>
               </div>
             </CardContent>
