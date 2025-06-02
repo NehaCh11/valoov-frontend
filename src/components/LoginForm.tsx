@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { ArrowLeft, Mail, Lock, Eye, EyeOff } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -6,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
+import TwoFactorSetup from './TwoFactorSetup';
 
 interface LoginFormProps {
   onBack: () => void;
@@ -20,6 +20,7 @@ const LoginForm = ({ onBack, onSwitchToSignup, onLoginSuccess }: LoginFormProps)
   const [rememberMe, setRememberMe] = useState(false);
   const [showForgotPassword, setShowForgotPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [showTwoFactor, setShowTwoFactor] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -29,13 +30,18 @@ const LoginForm = ({ onBack, onSwitchToSignup, onLoginSuccess }: LoginFormProps)
     await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API call
     
     if (email && password.length >= 6) {
-      console.log('Login successful:', { email, rememberMe });
-      onLoginSuccess(); // This will set isLoggedIn to true
+      console.log('Login credentials validated:', { email, rememberMe });
+      setShowTwoFactor(true); // Show 2FA verification instead of direct login
     } else {
       alert('Please enter a valid email and password (min 6 characters)');
     }
     
     setIsLoading(false);
+  };
+
+  const handleTwoFactorComplete = () => {
+    console.log('2FA verification completed for login');
+    onLoginSuccess(); // Complete the login process
   };
 
   const handleForgotPassword = (e: React.FormEvent) => {
@@ -45,6 +51,16 @@ const LoginForm = ({ onBack, onSwitchToSignup, onLoginSuccess }: LoginFormProps)
     alert('Password reset link sent to your email!');
     setShowForgotPassword(false);
   };
+
+  if (showTwoFactor) {
+    return (
+      <TwoFactorSetup
+        onBack={() => setShowTwoFactor(false)}
+        onComplete={handleTwoFactorComplete}
+        email={email}
+      />
+    );
+  }
 
   return (
     <div className="min-h-screen bg-valoov-dark-gray">
