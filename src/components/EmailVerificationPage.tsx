@@ -5,7 +5,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import AccountSetupPage from './AccountSetupPage';
 
 interface EmailVerificationPageProps {
   email: string;
@@ -17,7 +16,6 @@ const EmailVerificationPage = ({ email, onBack, onVerified }: EmailVerificationP
   const [verificationCode, setVerificationCode] = useState('');
   const [timeLeft, setTimeLeft] = useState(300); // 5 minutes
   const [isResending, setIsResending] = useState(false);
-  const [showAccountSetup, setShowAccountSetup] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -39,8 +37,8 @@ const EmailVerificationPage = ({ email, onBack, onVerified }: EmailVerificationP
     
     // Simulate verification
     if (verificationCode.length === 6) {
-      alert('Email verified successfully!');
-      setShowAccountSetup(true);
+      console.log('Email verified successfully, redirecting to questionnaire');
+      onVerified();
     } else {
       alert('Please enter a valid 6-digit code');
     }
@@ -57,20 +55,6 @@ const EmailVerificationPage = ({ email, onBack, onVerified }: EmailVerificationP
       alert('Verification code sent!');
     }, 2000);
   };
-
-  const handleAccountSetupComplete = () => {
-    onVerified();
-  };
-
-  if (showAccountSetup) {
-    return (
-      <AccountSetupPage
-        email={email}
-        onBack={() => setShowAccountSetup(false)}
-        onComplete={handleAccountSetupComplete}
-      />
-    );
-  }
 
   return (
     <div className="min-h-screen bg-valoov-dark-gray">
