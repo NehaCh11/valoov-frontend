@@ -77,7 +77,7 @@ const SignupForm = ({ onBack, onSwitchToLogin, onAccountCreated }: SignupFormPro
                 <img 
                   src="/lovable-uploads/17dd4d7d-77a4-46b2-8bcc-c7b2923ba0e5.png" 
                   alt="VALOOV Logo" 
-                  className="h-48 w-auto"
+                  className="h-64 w-auto"
                 />
               </div>
               <CardTitle className="text-2xl">Join VALOOV</CardTitle>
