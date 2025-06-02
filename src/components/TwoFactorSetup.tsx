@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { ArrowLeft, Shield, Smartphone, Copy, Check } from 'lucide-react';
+import { ArrowLeft, Shield, Mail, RefreshCw } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
@@ -13,40 +13,40 @@ interface TwoFactorSetupProps {
 }
 
 const TwoFactorSetup = ({ onBack, onComplete, email }: TwoFactorSetupProps) => {
-  const [step, setStep] = useState<'setup' | 'verify'>('setup');
   const [otpCode, setOtpCode] = useState('');
-  const [secretKey] = useState('JBSWY3DPEHPK3PXP'); // In real app, this would come from backend
-  const [qrCodeUrl] = useState(`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=otpauth://totp/VALOOV:${encodeURIComponent(email)}?secret=${secretKey}&issuer=VALOOV`);
-  const [copied, setCopied] = useState(false);
   const [isVerifying, setIsVerifying] = useState(false);
+  const [isResending, setIsResending] = useState(false);
+  const [codeSent, setCodeSent] = useState(true); // Assume code was already sent
 
-  const handleCopySecret = async () => {
-    try {
-      await navigator.clipboard.writeText(secretKey);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
-      console.error('Failed to copy:', err);
-    }
+  const handleResendCode = async () => {
+    setIsResending(true);
+    console.log('Resending verification code to:', email);
+    
+    // Simulate sending email
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    
+    console.log('Verification code resent successfully');
+    setIsResending(false);
+    setCodeSent(true);
   };
 
   const handleVerifyCode = async () => {
     if (otpCode.length !== 6) return;
     
     setIsVerifying(true);
-    console.log('Verifying 2FA code:', otpCode);
+    console.log('Verifying email 2FA code:', otpCode);
     
     // Simulate verification
     await new Promise(resolve => setTimeout(resolve, 1500));
     
     // For demo purposes, any 6-digit code works
-    console.log('2FA setup completed successfully');
+    console.log('Email 2FA verification completed successfully');
     setIsVerifying(false);
     onComplete();
   };
 
   const handleSkip = () => {
-    console.log('2FA setup skipped');
+    console.log('Email 2FA verification skipped');
     onComplete();
   };
 
@@ -71,128 +71,94 @@ const TwoFactorSetup = ({ onBack, onComplete, email }: TwoFactorSetupProps) => {
                 </div>
               </div>
               <CardTitle className="text-2xl text-slate-800">
-                {step === 'setup' ? 'Secure Your Account' : 'Verify Your Setup'}
+                Verify Your Email
               </CardTitle>
               <CardDescription className="text-slate-600">
-                {step === 'setup' 
-                  ? 'Set up two-factor authentication to protect your account'
-                  : 'Enter the code from your authenticator app to complete setup'
-                }
+                Enter the 6-digit code we sent to your email address
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
-              {step === 'setup' ? (
-                <div className="space-y-6">
-                  <div className="text-center space-y-4">
-                    <div className="flex items-center space-x-2 text-sm text-slate-600">
-                      <Smartphone className="h-4 w-4" />
-                      <span>Step 1: Install an authenticator app</span>
-                    </div>
-                    <p className="text-sm text-slate-600">
-                      Download Google Authenticator, Authy, or similar app on your phone
-                    </p>
-                  </div>
-
-                  <div className="text-center space-y-4">
-                    <div className="flex items-center space-x-2 text-sm text-slate-600">
-                      <span>Step 2: Scan QR code or enter secret key</span>
-                    </div>
-                    
-                    <div className="flex justify-center">
-                      <img 
-                        src={qrCodeUrl} 
-                        alt="QR Code for 2FA setup" 
-                        className="border border-border/50 rounded-lg"
-                      />
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label className="text-sm text-slate-700">Or enter this secret key manually:</Label>
-                      <div className="flex items-center space-x-2 p-3 bg-slate-100 rounded-lg">
-                        <code className="flex-1 text-sm font-mono text-slate-800">{secretKey}</code>
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={handleCopySecret}
-                          className="h-8 w-8 p-0"
-                        >
-                          {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-                        </Button>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="space-y-3">
-                    <Button 
-                      onClick={() => setStep('verify')}
-                      className="w-full bg-valoov-teal hover:bg-valoov-teal/80"
+              <div className="text-center space-y-4">
+                <div className="flex items-center justify-center space-x-2 text-sm text-slate-600">
+                  <Mail className="h-4 w-4" />
+                  <span>Code sent to: {email}</span>
+                </div>
+                
+                <div className="space-y-4">
+                  <Label htmlFor="verification-code" className="text-center block text-slate-700">
+                    Enter verification code
+                  </Label>
+                  
+                  <div className="flex justify-center">
+                    <InputOTP
+                      value={otpCode}
+                      onChange={setOtpCode}
+                      maxLength={6}
                     >
-                      Continue to Verification
-                    </Button>
-                    
-                    <Button 
-                      variant="outline" 
-                      onClick={handleSkip}
-                      className="w-full text-slate-700 border-slate-300"
-                    >
-                      Skip for Now
-                    </Button>
+                      <InputOTPGroup>
+                        <InputOTPSlot index={0} />
+                        <InputOTPSlot index={1} />
+                        <InputOTPSlot index={2} />
+                        <InputOTPSlot index={3} />
+                        <InputOTPSlot index={4} />
+                        <InputOTPSlot index={5} />
+                      </InputOTPGroup>
+                    </InputOTP>
                   </div>
                 </div>
-              ) : (
-                <div className="space-y-6">
-                  <div className="space-y-4">
-                    <Label htmlFor="verification-code" className="text-center block text-slate-700">
-                      Enter the 6-digit code from your authenticator app
-                    </Label>
-                    
-                    <div className="flex justify-center">
-                      <InputOTP
-                        value={otpCode}
-                        onChange={setOtpCode}
-                        maxLength={6}
-                      >
-                        <InputOTPGroup>
-                          <InputOTPSlot index={0} />
-                          <InputOTPSlot index={1} />
-                          <InputOTPSlot index={2} />
-                          <InputOTPSlot index={3} />
-                          <InputOTPSlot index={4} />
-                          <InputOTPSlot index={5} />
-                        </InputOTPGroup>
-                      </InputOTP>
-                    </div>
-                  </div>
 
-                  <div className="space-y-3">
-                    <Button 
-                      onClick={handleVerifyCode}
-                      disabled={otpCode.length !== 6 || isVerifying}
-                      className="w-full bg-valoov-teal hover:bg-valoov-teal/80"
-                    >
-                      {isVerifying ? (
-                        <>
-                          <svg className="animate-spin h-5 w-5 mr-2" viewBox="0 0 24 24">
-                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"></circle>
-                            <path className="opacity-75" fill="currentColor" d="m4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                          </svg>
-                          Verifying...
-                        </>
-                      ) : (
-                        'Verify & Complete Setup'
-                      )}
-                    </Button>
-                    
-                    <Button 
-                      variant="ghost" 
-                      onClick={() => setStep('setup')}
-                      className="w-full text-slate-700"
-                    >
-                      Back to Setup
-                    </Button>
-                  </div>
+                <div className="text-center">
+                  <p className="text-sm text-slate-600 mb-2">
+                    Didn't receive the code?
+                  </p>
+                  <Button
+                    variant="ghost"
+                    onClick={handleResendCode}
+                    disabled={isResending}
+                    className="text-valoov-teal hover:text-valoov-teal/80"
+                  >
+                    {isResending ? (
+                      <>
+                        <RefreshCw className="h-4 w-4 mr-2 animate-spin" />
+                        Resending...
+                      </>
+                    ) : (
+                      <>
+                        <RefreshCw className="h-4 w-4 mr-2" />
+                        Resend Code
+                      </>
+                    )}
+                  </Button>
                 </div>
-              )}
+              </div>
+
+              <div className="space-y-3">
+                <Button 
+                  onClick={handleVerifyCode}
+                  disabled={otpCode.length !== 6 || isVerifying}
+                  className="w-full bg-valoov-teal hover:bg-valoov-teal/80"
+                >
+                  {isVerifying ? (
+                    <>
+                      <svg className="animate-spin h-5 w-5 mr-2" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"></circle>
+                        <path className="opacity-75" fill="currentColor" d="m4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      Verifying...
+                    </>
+                  ) : (
+                    'Verify Code'
+                  )}
+                </Button>
+                
+                <Button 
+                  variant="outline" 
+                  onClick={handleSkip}
+                  className="w-full text-slate-700 border-slate-300"
+                >
+                  Skip for Now
+                </Button>
+              </div>
             </CardContent>
           </Card>
         </div>
