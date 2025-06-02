@@ -102,7 +102,7 @@ const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
               <img 
                 src="/lovable-uploads/ccbfeb8f-e488-4725-8c91-82d50190256a.png" 
                 alt="VALOOV AI Logo" 
-                className="h-14 w-auto object-contain"
+                className="h-16 w-auto object-contain"
               />
             </div>
             <div className="flex gap-3">

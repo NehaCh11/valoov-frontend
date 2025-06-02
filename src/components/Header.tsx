@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Bot, Bell, Settings, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -15,7 +14,7 @@ const Header = () => {
             <img 
               src="/lovable-uploads/10986bb1-03cf-4cef-b5a2-8a61c6dfd7a1.png" 
               alt="VALOOV AI Logo" 
-              className="h-14 w-auto object-contain"
+              className="h-16 w-auto object-contain"
             />
           </div>
         </div>
