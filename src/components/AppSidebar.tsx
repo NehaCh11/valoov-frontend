@@ -1,4 +1,3 @@
-
 import {
   BarChart3,
   TrendingUp,
@@ -55,11 +54,6 @@ const toolsItems = [
     title: "AI Questionnaire",
     icon: Bot,
     id: "questionnaire"
-  },
-  {
-    title: "Revenue Projections",
-    icon: TrendingUp,
-    id: "projections"
   }
 ];
 
