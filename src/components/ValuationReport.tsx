@@ -57,7 +57,7 @@ export function ValuationReport({ hasPaidAccess = false }: ValuationReportProps)
         </CardHeader>
         <CardContent>
           <div className="space-y-8">
-            {/* Page 1 - Cover Page - Exact replica */}
+            {/* Page 1 - Cover Page - Numbers Hidden */}
             <div className="border border-gray-300 rounded-lg overflow-hidden bg-white shadow-sm p-8 min-h-[700px]">
               <div className="text-center space-y-8">
                 {/* Header Logo Area */}
@@ -69,7 +69,7 @@ export function ValuationReport({ hasPaidAccess = false }: ValuationReportProps)
                   <h2 className="text-3xl font-bold text-gray-800 mb-2">VALUATION REPORT</h2>
                 </div>
 
-                {/* Company Info Box */}
+                {/* Company Info Box - Numbers Hidden */}
                 <div className="bg-gray-50 p-8 rounded-lg mx-auto max-w-md">
                   <h3 className="text-xl font-bold text-gray-800 mb-6">InnovateTech Solutions</h3>
                   <div className="space-y-3 text-left">
@@ -83,11 +83,11 @@ export function ValuationReport({ hasPaidAccess = false }: ValuationReportProps)
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-600">Revenue:</span>
-                      <span className="text-gray-800 font-medium">€2.5M ARR</span>
+                      <span className="text-gray-800 font-medium filter blur-sm">€•.•M ARR</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-600">Employees:</span>
-                      <span className="text-gray-800 font-medium">25-50</span>
+                      <span className="text-gray-800 font-medium filter blur-sm">••-••</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-600">Location:</span>
@@ -109,61 +109,61 @@ export function ValuationReport({ hasPaidAccess = false }: ValuationReportProps)
               </div>
             </div>
 
-            {/* Page 2 - Executive Summary */}
+            {/* Page 2 - Executive Summary - All Numbers Hidden */}
             <div className="border border-gray-300 rounded-lg overflow-hidden bg-white shadow-sm p-8 min-h-[700px]">
               <h2 className="text-2xl font-bold text-gray-800 mb-8 border-b border-gray-200 pb-4">EXECUTIVE SUMMARY</h2>
               
-              {/* Valuation Box */}
+              {/* Valuation Box - Numbers Hidden */}
               <div className="bg-blue-50 border border-blue-200 p-6 rounded-lg mb-8 text-center">
                 <h3 className="text-lg font-semibold text-gray-800 mb-2">COMPANY VALUATION</h3>
-                <p className="text-4xl font-bold text-blue-600 mb-2">€4,200,000</p>
+                <p className="text-4xl font-bold text-blue-600 mb-2 filter blur-sm">€•,•••,•••</p>
                 <p className="text-gray-600">Pre-money valuation (most likely scenario)</p>
               </div>
 
-              {/* Valuation Range */}
+              {/* Valuation Range - Numbers Hidden */}
               <div className="grid grid-cols-3 gap-4 mb-8">
                 <div className="text-center p-4 bg-gray-50 rounded">
-                  <p className="text-xl font-bold text-gray-800">€3,400,000</p>
+                  <p className="text-xl font-bold text-gray-800 filter blur-sm">€•,•••,•••</p>
                   <p className="text-sm text-gray-600">Conservative</p>
                 </div>
                 <div className="text-center p-4 bg-blue-50 rounded border border-blue-200">
-                  <p className="text-xl font-bold text-blue-600">€4,200,000</p>
+                  <p className="text-xl font-bold text-blue-600 filter blur-sm">€•,•••,•••</p>
                   <p className="text-sm text-gray-600">Most Likely</p>
                 </div>
                 <div className="text-center p-4 bg-gray-50 rounded">
-                  <p className="text-xl font-bold text-gray-800">€5,100,000</p>
+                  <p className="text-xl font-bold text-gray-800 filter blur-sm">€•,•••,•••</p>
                   <p className="text-sm text-gray-600">Optimistic</p>
                 </div>
               </div>
 
-              {/* Key Metrics */}
+              {/* Key Metrics - Numbers Hidden */}
               <div className="space-y-6">
                 <div>
                   <h4 className="font-semibold text-gray-800 mb-3">KEY BUSINESS METRICS</h4>
                   <div className="grid grid-cols-2 gap-4 text-sm">
                     <div className="flex justify-between">
                       <span className="text-gray-600">Annual Recurring Revenue:</span>
-                      <span className="font-medium">€2.5M</span>
+                      <span className="font-medium filter blur-sm">€•.•M</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-600">Revenue Growth (YoY):</span>
-                      <span className="font-medium">150%</span>
+                      <span className="font-medium filter blur-sm">•••%</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-600">Gross Margin:</span>
-                      <span className="font-medium">85%</span>
+                      <span className="font-medium filter blur-sm">••%</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-600">Customer Acquisition Cost:</span>
-                      <span className="font-medium">€850</span>
+                      <span className="font-medium filter blur-sm">€•••</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-600">Monthly Churn Rate:</span>
-                      <span className="font-medium">2.5%</span>
+                      <span className="font-medium filter blur-sm">•.•%</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-600">Lifetime Value:</span>
-                      <span className="font-medium">€12,400</span>
+                      <span className="font-medium filter blur-sm">€••,•••</span>
                     </div>
                   </div>
                 </div>
@@ -180,7 +180,7 @@ export function ValuationReport({ hasPaidAccess = false }: ValuationReportProps)
               </div>
             </div>
 
-            {/* Page 3 - Valuation Methods */}
+            {/* Page 3 - Valuation Methods - Numbers Hidden */}
             <div className="border border-gray-300 rounded-lg overflow-hidden bg-white shadow-sm p-8 min-h-[700px]">
               <h2 className="text-2xl font-bold text-gray-800 mb-8 border-b border-gray-200 pb-4">VALUATION METHODOLOGIES</h2>
               
@@ -192,8 +192,8 @@ export function ValuationReport({ hasPaidAccess = false }: ValuationReportProps)
                       <p className="text-sm text-gray-600">Risk-adjusted pre-money valuation</p>
                     </div>
                     <div className="text-right">
-                      <p className="text-2xl font-bold text-blue-600">€3,800,000</p>
-                      <p className="text-sm text-gray-600">Weight: 30%</p>
+                      <p className="text-2xl font-bold text-blue-600 filter blur-sm">€•,•••,•••</p>
+                      <p className="text-sm text-gray-600 filter blur-sm">Weight: ••%</p>
                     </div>
                   </div>
                   <div className="text-sm text-gray-600">
@@ -209,8 +209,8 @@ export function ValuationReport({ hasPaidAccess = false }: ValuationReportProps)
                       <p className="text-sm text-gray-600">Qualitative risk assessment</p>
                     </div>
                     <div className="text-right">
-                      <p className="text-2xl font-bold text-blue-600">€4,100,000</p>
-                      <p className="text-sm text-gray-600">Weight: 20%</p>
+                      <p className="text-2xl font-bold text-blue-600 filter blur-sm">€•,•••,•••</p>
+                      <p className="text-sm text-gray-600 filter blur-sm">Weight: ••%</p>
                     </div>
                   </div>
                   <div className="text-sm text-gray-600">
@@ -226,12 +226,12 @@ export function ValuationReport({ hasPaidAccess = false }: ValuationReportProps)
                       <p className="text-sm text-gray-600">Discounted cash flow with terminal value</p>
                     </div>
                     <div className="text-right">
-                      <p className="text-2xl font-bold text-blue-600">€4,800,000</p>
-                      <p className="text-sm text-gray-600">Weight: 25%</p>
+                      <p className="text-2xl font-bold text-blue-600 filter blur-sm">€•,•••,•••</p>
+                      <p className="text-sm text-gray-600 filter blur-sm">Weight: ••%</p>
                     </div>
                   </div>
                   <div className="text-sm text-gray-600">
-                    <p>5-year financial projections discounted at 12% WACC with 3% terminal growth rate, 
+                    <p>5-year financial projections discounted at ••% WACC with •% terminal growth rate, 
                     based on market expansion and customer acquisition projections.</p>
                   </div>
                 </div>
@@ -243,13 +243,13 @@ export function ValuationReport({ hasPaidAccess = false }: ValuationReportProps)
                       <p className="text-sm text-gray-600">DCF with industry exit multiple</p>
                     </div>
                     <div className="text-right">
-                      <p className="text-2xl font-bold text-blue-600">€4,200,000</p>
-                      <p className="text-sm text-gray-600">Weight: 15%</p>
+                      <p className="text-2xl font-bold text-blue-600 filter blur-sm">€•,•••,•••</p>
+                      <p className="text-sm text-gray-600 filter blur-sm">Weight: ••%</p>
                     </div>
                   </div>
                   <div className="text-sm text-gray-600">
                     <p>Cash flow projections with terminal value based on industry average 
-                    revenue multiple of 4.2x for B2B SaaS companies.</p>
+                    revenue multiple of •.•x for B2B SaaS companies.</p>
                   </div>
                 </div>
 
@@ -260,12 +260,12 @@ export function ValuationReport({ hasPaidAccess = false }: ValuationReportProps)
                       <p className="text-sm text-gray-600">Return-based valuation</p>
                     </div>
                     <div className="text-right">
-                      <p className="text-2xl font-bold text-blue-600">€3,600,000</p>
-                      <p className="text-sm text-gray-600">Weight: 10%</p>
+                      <p className="text-2xl font-bold text-blue-600 filter blur-sm">€•,•••,•••</p>
+                      <p className="text-sm text-gray-600 filter blur-sm">Weight: ••%</p>
                     </div>
                   </div>
                   <div className="text-sm text-gray-600">
-                    <p>Based on expected exit value of €50M in 5 years with 10x target return, 
+                    <p>Based on expected exit value of €••M in • years with ••x target return, 
                     accounting for dilution through future funding rounds.</p>
                   </div>
                 </div>

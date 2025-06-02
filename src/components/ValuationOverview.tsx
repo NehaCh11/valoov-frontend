@@ -53,7 +53,7 @@ export function ValuationOverview() {
         </Dialog>
       </div>
 
-      {/* Current Valuation Range - Restricted */}
+      {/* Current Valuation Range - Always Blurred */}
       <Card className="bg-card/30 backdrop-blur border-border/50 relative">
         <CardHeader>
           <CardTitle className="flex items-center space-x-2">
@@ -63,35 +63,33 @@ export function ValuationOverview() {
         </CardHeader>
         <CardContent>
           <div className="text-center py-6 relative">
-            {!hasCompletedPayment && (
-              <div className="absolute inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center z-10 rounded-lg">
-                <div className="text-center space-y-4">
-                  <Lock className="h-12 w-12 text-gray-400 mx-auto" />
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-800">Unlock Your Valuation</h3>
-                    <p className="text-gray-600">Complete payment to view your detailed valuation range</p>
-                  </div>
-                  <Button 
-                    onClick={() => setShowPricing(true)}
-                    className="bg-valoov-orange hover:bg-valoov-orange/90"
-                  >
-                    Unlock with Payment
-                  </Button>
+            <div className="absolute inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center z-10 rounded-lg">
+              <div className="text-center space-y-4">
+                <Lock className="h-12 w-12 text-gray-400 mx-auto" />
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-800">Unlock Your Valuation</h3>
+                  <p className="text-gray-600">Complete payment to view your detailed valuation range</p>
                 </div>
+                <Button 
+                  onClick={() => setShowPricing(true)}
+                  className="bg-valoov-orange hover:bg-valoov-orange/90"
+                >
+                  Unlock with Payment
+                </Button>
               </div>
-            )}
-            <div className={!hasCompletedPayment ? 'filter blur-sm' : ''}>
-              <p className="text-4xl font-bold text-black mb-2">€2.8M - €4.2M</p>
+            </div>
+            <div className="filter blur-sm">
+              <p className="text-4xl font-bold text-black mb-2">€•.•M - €•.•M</p>
               <p className="text-gray-600">Pre-Money Valuation</p>
               <Badge className="mt-3 bg-valoov-teal/20 text-valoov-teal border-valoov-teal/30">
-                65% Complete
+                ••% Complete
               </Badge>
             </div>
           </div>
         </CardContent>
       </Card>
 
-      {/* Method Breakdown - Restricted */}
+      {/* Method Breakdown - Always Blurred */}
       <Card className="bg-card/30 backdrop-blur border-border/50 relative">
         <CardHeader>
           <CardTitle className="flex items-center space-x-2">
@@ -100,30 +98,28 @@ export function ValuationOverview() {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          {!hasCompletedPayment && (
-            <div className="absolute inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center z-10 rounded-lg">
-              <div className="text-center space-y-4">
-                <Lock className="h-12 w-12 text-gray-400 mx-auto" />
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-800">Detailed Analysis Locked</h3>
-                  <p className="text-gray-600">Access comprehensive methodology breakdown</p>
-                </div>
-                <Button 
-                  onClick={() => setShowPricing(true)}
-                  className="bg-valoov-orange hover:bg-valoov-orange/90"
-                >
-                  Unlock Full Report
-                </Button>
+          <div className="absolute inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center z-10 rounded-lg">
+            <div className="text-center space-y-4">
+              <Lock className="h-12 w-12 text-gray-400 mx-auto" />
+              <div>
+                <h3 className="text-lg font-semibold text-gray-800">Detailed Analysis Locked</h3>
+                <p className="text-gray-600">Access comprehensive methodology breakdown</p>
               </div>
+              <Button 
+                onClick={() => setShowPricing(true)}
+                className="bg-valoov-orange hover:bg-valoov-orange/90"
+              >
+                Unlock Full Report
+              </Button>
             </div>
-          )}
-          <div className={`space-y-4 ${!hasCompletedPayment ? 'filter blur-sm' : ''}`}>
+          </div>
+          <div className="space-y-4 filter blur-sm">
             {methodsProgress.map((method, index) => (
               <div key={index} className="space-y-2">
                 <div className="flex items-center justify-between">
                   <span className="font-medium text-black">{method.name}</span>
                   <div className="flex items-center space-x-2">
-                    <span className="text-sm text-gray-600">{method.weight}% weight</span>
+                    <span className="text-sm text-gray-600">••% weight</span>
                     <Badge 
                       variant={method.progress === 100 ? 'default' : method.progress > 0 ? 'secondary' : 'outline'}
                       className={
@@ -131,7 +127,7 @@ export function ValuationOverview() {
                         method.progress > 0 ? 'bg-yellow-600' : ''
                       }
                     >
-                      {method.progress}%
+                      ••%
                     </Badge>
                   </div>
                 </div>
