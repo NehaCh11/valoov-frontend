@@ -48,17 +48,17 @@ const SignupForm = ({ onBack, onLogin, onAccountCreated }: SignupFormProps) => {
     let isValid = true;
     const newErrors: Partial<FormData> = {};
 
-    if (!formData.firstName) {
+    if (!formData.firstName.trim()) {
       newErrors.firstName = 'First name is required';
       isValid = false;
     }
 
-    if (!formData.lastName) {
+    if (!formData.lastName.trim()) {
       newErrors.lastName = 'Last name is required';
       isValid = false;
     }
 
-    if (!formData.email) {
+    if (!formData.email.trim()) {
       newErrors.email = 'Email is required';
       isValid = false;
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
@@ -66,17 +66,17 @@ const SignupForm = ({ onBack, onLogin, onAccountCreated }: SignupFormProps) => {
       isValid = false;
     }
 
-    if (!formData.companyName) {
+    if (!formData.companyName.trim()) {
       newErrors.companyName = 'Company name is required';
       isValid = false;
     }
 
-    if (!formData.companyType) {
+    if (!formData.companyType.trim()) {
       newErrors.companyType = 'Company type is required';
       isValid = false;
     }
 
-    if (!formData.companyIndustry) {
+    if (!formData.companyIndustry.trim()) {
       newErrors.companyIndustry = 'Company industry is required';
       isValid = false;
     }
@@ -98,36 +98,54 @@ const SignupForm = ({ onBack, onLogin, onAccountCreated }: SignupFormProps) => {
     return isValid;
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData(prevState => ({
       ...prevState,
       [name]: value
     }));
-    setErrors(prevState => ({
+    // Clear error for this field when user starts typing
+    if (errors[name as keyof FormData]) {
+      setErrors(prevState => ({
+        ...prevState,
+        [name]: undefined
+      }));
+    }
+  };
+
+  const handleSelectChange = (value: string) => {
+    setFormData(prevState => ({
       ...prevState,
-      [name]: undefined
+      country: value
     }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    console.log('Form submission started');
+    
     if (!validateForm()) {
+      console.log('Form validation failed');
       return;
     }
 
     setIsSubmitting(true);
     console.log('Form submitted:', formData);
 
-    // Simulate API call
-    setTimeout(() => {
+    try {
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      console.log('Account created successfully');
       setIsSubmitting(false);
       setShowEmailVerification(true);
-    }, 2000);
+    } catch (error) {
+      console.error('Error creating account:', error);
+      setIsSubmitting(false);
+    }
   };
 
   const handleEmailVerified = () => {
-    // Directly call onAccountCreated to go to main app
+    console.log('Email verified, redirecting to questionnaire');
     onAccountCreated();
   };
 
@@ -181,6 +199,7 @@ const SignupForm = ({ onBack, onLogin, onAccountCreated }: SignupFormProps) => {
                         value={formData.firstName}
                         onChange={handleChange}
                         className="pl-10"
+                        required
                       />
                     </div>
                     {errors.firstName && <p className="text-sm text-destructive">{errors.firstName}</p>}
@@ -198,6 +217,7 @@ const SignupForm = ({ onBack, onLogin, onAccountCreated }: SignupFormProps) => {
                         value={formData.lastName}
                         onChange={handleChange}
                         className="pl-10"
+                        required
                       />
                     </div>
                     {errors.lastName && <p className="text-sm text-destructive">{errors.lastName}</p>}
@@ -216,6 +236,7 @@ const SignupForm = ({ onBack, onLogin, onAccountCreated }: SignupFormProps) => {
                       value={formData.email}
                       onChange={handleChange}
                       className="pl-10"
+                      required
                     />
                   </div>
                   {errors.email && <p className="text-sm text-destructive">{errors.email}</p>}
@@ -233,6 +254,7 @@ const SignupForm = ({ onBack, onLogin, onAccountCreated }: SignupFormProps) => {
                       value={formData.companyName}
                       onChange={handleChange}
                       className="pl-10"
+                      required
                     />
                   </div>
                   {errors.companyName && <p className="text-sm text-destructive">{errors.companyName}</p>}
@@ -251,6 +273,7 @@ const SignupForm = ({ onBack, onLogin, onAccountCreated }: SignupFormProps) => {
                         value={formData.companyType}
                         onChange={handleChange}
                         className="pl-10"
+                        required
                       />
                     </div>
                     {errors.companyType && <p className="text-sm text-destructive">{errors.companyType}</p>}
@@ -268,6 +291,7 @@ const SignupForm = ({ onBack, onLogin, onAccountCreated }: SignupFormProps) => {
                         value={formData.companyIndustry}
                         onChange={handleChange}
                         className="pl-10"
+                        required
                       />
                     </div>
                     {errors.companyIndustry && <p className="text-sm text-destructive">{errors.companyIndustry}</p>}
@@ -286,6 +310,7 @@ const SignupForm = ({ onBack, onLogin, onAccountCreated }: SignupFormProps) => {
                       value={formData.password}
                       onChange={handleChange}
                       className="pl-10"
+                      required
                     />
                     <Button
                       type="button"
@@ -313,6 +338,7 @@ const SignupForm = ({ onBack, onLogin, onAccountCreated }: SignupFormProps) => {
                       value={formData.confirmPassword}
                       onChange={handleChange}
                       className="pl-10"
+                      required
                     />
                     <Button
                       type="button"
@@ -330,7 +356,7 @@ const SignupForm = ({ onBack, onLogin, onAccountCreated }: SignupFormProps) => {
 
                 <div className="space-y-2">
                   <Label htmlFor="country">Country</Label>
-                  <Select onValueChange={(value) => setFormData(prevState => ({ ...prevState, country: value }))}>
+                  <Select onValueChange={handleSelectChange} defaultValue="US">
                     <SelectTrigger className="w-full">
                       <Globe className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                       <SelectValue placeholder="Select a country" />
@@ -341,7 +367,6 @@ const SignupForm = ({ onBack, onLogin, onAccountCreated }: SignupFormProps) => {
                       <SelectItem value="GB">United Kingdom</SelectItem>
                       <SelectItem value="ES">Spain</SelectItem>
                       <SelectItem value="FR">France</SelectItem>
-                      {/* Add more countries as needed */}
                     </SelectContent>
                   </Select>
                 </div>
@@ -354,7 +379,8 @@ const SignupForm = ({ onBack, onLogin, onAccountCreated }: SignupFormProps) => {
                   {isSubmitting ? (
                     <>
                       <svg className="animate-spin h-5 w-5 mr-2" viewBox="0 0 24 24">
-                        <path fill="currentColor" d="M12 4V2m0 18v-2m-5.196-3.09a1 1 0 0 0 1.414 1.414l2.828-2.828a1 1 0 0 0-1.414-1.414l-2.828 2.828M5.464 5.464a1 1 0 0 0 1.414 1.414l2.828-2.828a1 1 0 0 0-1.414-1.414l-2.828 2.828M4 12H2m18 0h-2m3.09 5.196a1 1 0 0 0-1.414 1.414l-2.828-2.828a1 1 0 0 0 1.414-1.414l2.828 2.828M18.536 5.464a1 1 0 0 0-1.414 1.414l-2.828-2.828a1 1 0 0 0 1.414-1.414l2.828 2.828z"/>
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"></circle>
+                        <path className="opacity-75" fill="currentColor" d="m4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                       </svg>
                       Creating Account...
                     </>
