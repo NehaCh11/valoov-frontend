@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Upload, FileText, BarChart3, CheckCircle, ArrowRight, Calculator, Star, Eye } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -292,7 +291,7 @@ const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
           <div className="text-center">
             <Card className="valoov-gradient-alt border-valoov-teal/30 shadow-lg">
               <CardContent className="py-16">
-                <h2 className="text-4xl font-bold mb-6 text-white">Ready to Value Your Company?</h2>
+                <h2 className="text-4xl font-bold mb-6 text-black">Ready to Value Your Company?</h2>
                 <p className="text-xl text-white/90 mb-8 max-w-3xl mx-auto">
                   Join hundreds of businesses across France and Spain who trust VALOOV for accurate, 
                   professional company valuations with comprehensive reporting.
