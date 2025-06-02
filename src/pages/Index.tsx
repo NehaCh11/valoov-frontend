@@ -52,7 +52,7 @@ const Index = () => {
       case 'questionnaire':
         return <ChatbotQuestionnaire />;
       case 'history':
-        return <History />;
+        return <History setActiveView={setActiveView} />;
       case 'projections':
         return <RevenueProjections />;
       case 'reports':

@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -10,7 +9,8 @@ import {
   RefreshCw,
   CheckCircle,
   XCircle,
-  Minus
+  Minus,
+  Eye
 } from 'lucide-react';
 import {
   Table,
@@ -30,7 +30,11 @@ interface Invoice {
   downloadType: 'pdf' | 'retry' | 'none';
 }
 
-export function History() {
+interface HistoryProps {
+  setActiveView?: (view: string) => void;
+}
+
+export function History({ setActiveView }: HistoryProps) {
   // Mock data for current plan
   const currentPlan = {
     name: 'Basic Report',
@@ -131,6 +135,12 @@ export function History() {
     }
   };
 
+  const handleViewClick = () => {
+    if (setActiveView) {
+      setActiveView('questionnaire');
+    }
+  };
+
   return (
     <div className="space-y-6">
       <div>
@@ -191,6 +201,7 @@ export function History() {
                   <TableHead className="text-black font-semibold">Amount</TableHead>
                   <TableHead className="text-black font-semibold">Status</TableHead>
                   <TableHead className="text-black font-semibold">Download</TableHead>
+                  <TableHead className="text-black font-semibold">View</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -212,6 +223,17 @@ export function History() {
                     </TableCell>
                     <TableCell>
                       {getDownloadButton(invoice)}
+                    </TableCell>
+                    <TableCell>
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={handleViewClick}
+                        className="flex items-center space-x-1"
+                      >
+                        <Eye className="h-4 w-4" />
+                        <span>View</span>
+                      </Button>
                     </TableCell>
                   </TableRow>
                 ))}
