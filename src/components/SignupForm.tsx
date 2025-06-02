@@ -4,104 +4,133 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Checkbox } from '@/components/ui/checkbox';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Badge } from '@/components/ui/badge';
 import EmailVerificationPage from './EmailVerificationPage';
 
 interface SignupFormProps {
   onBack: () => void;
-  onSwitchToLogin: () => void;
-  onAccountCreated?: () => void;
+  onLogin: () => void;
+  onAccountCreated: () => void;
 }
 
-// Country data with CRP (Country Risk Premium)
-const countryData = {
-  'United States': { code: 'US', crp: 0.0 },
-  'Germany': { code: 'DE', crp: 0.5 },
-  'France': { code: 'FR', crp: 0.8 },
-  'Spain': { code: 'ES', crp: 1.2 },
-  'United Kingdom': { code: 'GB', crp: 0.6 },
-  'Italy': { code: 'IT', crp: 1.5 },
-  'Japan': { code: 'JP', crp: 0.4 },
-  'Canada': { code: 'CA', crp: 0.3 },
-  'Australia': { code: 'AU', crp: 0.5 },
-  'Netherlands': { code: 'NL', crp: 0.4 },
-  'Switzerland': { code: 'CH', crp: 0.2 },
-  'Sweden': { code: 'SE', crp: 0.3 },
-  'Brazil': { code: 'BR', crp: 2.8 },
-  'Mexico': { code: 'MX', crp: 2.1 }
-};
+interface FormData {
+  firstName: string;
+  lastName: string;
+  email: string;
+  companyName: string;
+  companyType: string;
+  companyIndustry: string;
+  password: string;
+  confirmPassword: string;
+  country: string;
+}
 
-// Industry data with WACC (Weighted Average Cost of Capital) based on Damodaran data
-const industryData = {
-  'Technology': { wacc: 8.5, description: 'Software, Hardware, IT Services' },
-  'Healthcare': { wacc: 7.2, description: 'Pharmaceuticals, Medical Devices, Healthcare Services' },
-  'Financial Services': { wacc: 6.8, description: 'Banking, Insurance, Investment Management' },
-  'Consumer Goods': { wacc: 7.8, description: 'Retail, Consumer Products, Food & Beverage' },
-  'Manufacturing': { wacc: 8.2, description: 'Industrial Equipment, Automotive, Chemicals' },
-  'Real Estate': { wacc: 7.5, description: 'REITs, Property Development, Construction' },
-  'Energy': { wacc: 9.1, description: 'Oil & Gas, Renewable Energy, Utilities' },
-  'Telecommunications': { wacc: 6.9, description: 'Telecom Services, Media, Entertainment' },
-  'Transportation': { wacc: 8.7, description: 'Airlines, Shipping, Logistics' },
-  'Retail': { wacc: 8.3, description: 'E-commerce, Traditional Retail, Hospitality' }
-};
-
-const SignupForm = ({ onBack, onSwitchToLogin, onAccountCreated }: SignupFormProps) => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+const SignupForm = ({ onBack, onLogin, onAccountCreated }: SignupFormProps) => {
+  const [formData, setFormData] = useState<FormData>({
+    firstName: '',
+    lastName: '',
+    email: '',
+    companyName: '',
+    companyType: '',
+    companyIndustry: '',
+    password: '',
+    confirmPassword: '',
+    country: 'US',
+  });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [agreeTerms, setAgreeTerms] = useState(false);
+  const [errors, setErrors] = useState<Partial<FormData>>({});
   const [showEmailVerification, setShowEmailVerification] = useState(false);
-  
-  // Account setup fields
-  const [role, setRole] = useState('');
-  const [companyName, setCompanyName] = useState('');
-  const [companyEmail, setCompanyEmail] = useState('');
-  const [country, setCountry] = useState('');
-  const [industry, setIndustry] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const selectedCountryData = country ? countryData[country as keyof typeof countryData] : null;
-  const selectedIndustryData = industry ? industryData[industry as keyof typeof industryData] : null;
+  const validateForm = (): boolean => {
+    let isValid = true;
+    const newErrors: Partial<FormData> = {};
 
-  const handleSubmit = (e: React.FormEvent) => {
+    if (!formData.firstName) {
+      newErrors.firstName = 'First name is required';
+      isValid = false;
+    }
+
+    if (!formData.lastName) {
+      newErrors.lastName = 'Last name is required';
+      isValid = false;
+    }
+
+    if (!formData.email) {
+      newErrors.email = 'Email is required';
+      isValid = false;
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = 'Invalid email format';
+      isValid = false;
+    }
+
+    if (!formData.companyName) {
+      newErrors.companyName = 'Company name is required';
+      isValid = false;
+    }
+
+    if (!formData.companyType) {
+      newErrors.companyType = 'Company type is required';
+      isValid = false;
+    }
+
+    if (!formData.companyIndustry) {
+      newErrors.companyIndustry = 'Company industry is required';
+      isValid = false;
+    }
+
+    if (!formData.password) {
+      newErrors.password = 'Password is required';
+      isValid = false;
+    } else if (formData.password.length < 8) {
+      newErrors.password = 'Password must be at least 8 characters';
+      isValid = false;
+    }
+
+    if (formData.password !== formData.confirmPassword) {
+      newErrors.confirmPassword = 'Passwords do not match';
+      isValid = false;
+    }
+
+    setErrors(newErrors);
+    return isValid;
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
+    setErrors(prevState => ({
+      ...prevState,
+      [name]: undefined
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (password !== confirmPassword) {
-      alert('Passwords do not match');
+    if (!validateForm()) {
       return;
     }
-    if (!agreeTerms) {
-      alert('Please agree to the terms and conditions');
-      return;
-    }
-    console.log('Complete signup:', { 
-      name, email, password, role, companyName, companyEmail, country, industry,
-      crp: selectedCountryData?.crp,
-      wacc: selectedIndustryData?.wacc
-    });
-    // Show email verification page
-    setShowEmailVerification(true);
-  };
 
-  const handleEmailVerified = () => {
-    console.log('Email verified successfully');
-    // Complete account creation and redirect to AI chatbot
-    if (onAccountCreated) {
-      onAccountCreated();
-    }
-  };
+    setIsSubmitting(true);
+    console.log('Form submitted:', formData);
 
-  const isFormValid = name && email && password && confirmPassword && role && companyName && companyEmail && country && industry && agreeTerms;
+    // Simulate API call
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setShowEmailVerification(true);
+    }, 2000);
+  };
 
   if (showEmailVerification) {
     return (
       <EmailVerificationPage
-        email={email}
+        email={formData.email}
         onBack={() => setShowEmailVerification(false)}
-        onVerified={handleEmailVerified}
+        onVerified={onAccountCreated}
       />
     );
   }
@@ -109,14 +138,14 @@ const SignupForm = ({ onBack, onSwitchToLogin, onAccountCreated }: SignupFormPro
   return (
     <div className="min-h-screen bg-valoov-dark-gray">
       <div className="valoov-gradient min-h-screen flex items-center justify-center">
-        <div className="container mx-auto px-4 max-w-2xl">
+        <div className="container mx-auto px-4 max-w-md">
           <Button 
             variant="ghost" 
             onClick={onBack}
             className="mb-6 text-valoov-teal hover:text-valoov-teal/80"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
-            Back to Home
+            Back to Registration
           </Button>
 
           <Card className="bg-card/30 backdrop-blur border-valoov-teal/30">
@@ -125,285 +154,223 @@ const SignupForm = ({ onBack, onSwitchToLogin, onAccountCreated }: SignupFormPro
                 <img 
                   src="/lovable-uploads/10986bb1-03cf-4cef-b5a2-8a61c6dfd7a1.png" 
                   alt="VALOOV AI Logo" 
-                  className="h-20 w-auto object-contain"
+                  className="h-24 w-auto object-contain"
                 />
               </div>
-              <CardTitle className="text-2xl">Join VALOOV</CardTitle>
-              <CardDescription>
-                Create your account and set up your company profile
-              </CardDescription>
+              <CardTitle className="text-2xl text-white">Create an Account</CardTitle>
+              <CardDescription>Start your company valuation journey</CardDescription>
             </CardHeader>
             <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-6">
-                {/* Personal Information */}
-                <div className="space-y-4">
-                  <h3 className="text-lg font-semibold text-white">Personal Information</h3>
-                  
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="name">Full Name</Label>
+                    <Label htmlFor="firstName">First Name</Label>
                     <div className="relative">
                       <User className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                       <Input
-                        id="name"
+                        id="firstName"
                         type="text"
-                        placeholder="Enter your full name"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
+                        name="firstName"
+                        placeholder="Enter your first name"
+                        value={formData.firstName}
+                        onChange={handleChange}
                         className="pl-10"
-                        required
                       />
                     </div>
+                    {errors.firstName && <p className="text-sm text-destructive">{errors.firstName}</p>}
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="email">Business Email</Label>
+                    <Label htmlFor="lastName">Last Name</Label>
                     <div className="relative">
-                      <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                      <User className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                       <Input
-                        id="email"
-                        type="email"
-                        placeholder="Enter your business email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        id="lastName"
+                        type="text"
+                        name="lastName"
+                        placeholder="Enter your last name"
+                        value={formData.lastName}
+                        onChange={handleChange}
                         className="pl-10"
-                        required
                       />
                     </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="password">Password</Label>
-                      <div className="relative">
-                        <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                        <Input
-                          id="password"
-                          type={showPassword ? "text" : "password"}
-                          placeholder="Create a secure password"
-                          value={password}
-                          onChange={(e) => setPassword(e.target.value)}
-                          className="pl-10 pr-10"
-                          required
-                        />
-                        <button
-                          type="button"
-                          onClick={() => setShowPassword(!showPassword)}
-                          className="absolute right-3 top-3 text-muted-foreground hover:text-foreground"
-                        >
-                          {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                        </button>
-                      </div>
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="confirmPassword">Confirm Password</Label>
-                      <div className="relative">
-                        <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                        <Input
-                          id="confirmPassword"
-                          type={showConfirmPassword ? "text" : "password"}
-                          placeholder="Confirm your password"
-                          value={confirmPassword}
-                          onChange={(e) => setConfirmPassword(e.target.value)}
-                          className="pl-10 pr-10"
-                          required
-                        />
-                        <button
-                          type="button"
-                          onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                          className="absolute right-3 top-3 text-muted-foreground hover:text-foreground"
-                        >
-                          {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                        </button>
-                      </div>
-                    </div>
+                    {errors.lastName && <p className="text-sm text-destructive">{errors.lastName}</p>}
                   </div>
                 </div>
 
-                {/* Company Information */}
-                <div className="space-y-4">
-                  <h3 className="text-lg font-semibold text-white">Company Information</h3>
-                  
-                  <div className="space-y-2">
-                    <Label htmlFor="role">Role</Label>
-                    <Select value={role} onValueChange={setRole}>
-                      <SelectTrigger className="w-full">
-                        <div className="flex items-center">
-                          <User className="h-4 w-4 mr-2 text-muted-foreground" />
-                          <SelectValue placeholder="Select your role" />
-                        </div>
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="company">
-                          <div className="flex items-center">
-                            <Building className="h-4 w-4 mr-2" />
-                            <span>Company</span>
-                          </div>
-                        </SelectItem>
-                        <SelectItem value="admin">
-                          <div className="flex items-center">
-                            <Shield className="h-4 w-4 mr-2" />
-                            <span>Admin</span>
-                          </div>
-                        </SelectItem>
-                      </SelectContent>
-                    </Select>
+                <div className="space-y-2">
+                  <Label htmlFor="email">Email</Label>
+                  <div className="relative">
+                    <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                    <Input
+                      id="email"
+                      type="email"
+                      name="email"
+                      placeholder="Enter your email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      className="pl-10"
+                    />
                   </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="companyName">Company Name</Label>
-                      <div className="relative">
-                        <Building className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                        <Input
-                          id="companyName"
-                          type="text"
-                          placeholder="Enter company name"
-                          value={companyName}
-                          onChange={(e) => setCompanyName(e.target.value)}
-                          className="pl-10"
-                          required
-                        />
-                      </div>
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="companyEmail">Company Email</Label>
-                      <div className="relative">
-                        <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                        <Input
-                          id="companyEmail"
-                          type="email"
-                          placeholder="Enter company email"
-                          value={companyEmail}
-                          onChange={(e) => setCompanyEmail(e.target.value)}
-                          className="pl-10"
-                          required
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="country">Country</Label>
-                    <Select value={country} onValueChange={setCountry}>
-                      <SelectTrigger className="w-full">
-                        <div className="flex items-center">
-                          <Globe className="h-4 w-4 mr-2 text-muted-foreground" />
-                          <SelectValue placeholder="Select country" />
-                        </div>
-                      </SelectTrigger>
-                      <SelectContent className="max-h-60">
-                        {Object.entries(countryData).map(([countryName, data]) => (
-                          <SelectItem key={countryName} value={countryName}>
-                            <div className="flex items-center justify-between w-full">
-                              <span>{countryName}</span>
-                              <Badge variant="outline" className="ml-2 text-xs">
-                                CRP: {data.crp}%
-                              </Badge>
-                            </div>
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                    {selectedCountryData && (
-                      <div className="text-sm text-muted-foreground">
-                        Country Risk Premium: <span className="text-financial-cyan font-medium">{selectedCountryData.crp}%</span>
-                      </div>
-                    )}
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="industry">Industry</Label>
-                    <Select value={industry} onValueChange={setIndustry}>
-                      <SelectTrigger className="w-full">
-                        <div className="flex items-center">
-                          <Factory className="h-4 w-4 mr-2 text-muted-foreground" />
-                          <SelectValue placeholder="Select industry" />
-                        </div>
-                      </SelectTrigger>
-                      <SelectContent className="max-h-60">
-                        {Object.entries(industryData).map(([industryName, data]) => (
-                          <SelectItem key={industryName} value={industryName}>
-                            <div className="flex flex-col items-start">
-                              <div className="flex items-center justify-between w-full">
-                                <span className="font-medium">{industryName}</span>
-                                <Badge variant="outline" className="ml-2 text-xs">
-                                  WACC: {data.wacc}%
-                                </Badge>
-                              </div>
-                              <span className="text-xs text-muted-foreground">{data.description}</span>
-                            </div>
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                    {selectedIndustryData && (
-                      <div className="text-sm text-muted-foreground">
-                        Industry WACC: <span className="text-valoov-orange font-medium">{selectedIndustryData.wacc}%</span>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Summary */}
-                  {selectedCountryData && selectedIndustryData && (
-                    <Card className="bg-card/20 border-valoov-teal/20">
-                      <CardContent className="p-4">
-                        <h4 className="font-medium text-white mb-2">Auto-Detected Parameters</h4>
-                        <div className="grid grid-cols-2 gap-4 text-sm">
-                          <div>
-                            <span className="text-muted-foreground">Country Risk Premium:</span>
-                            <div className="text-financial-cyan font-medium">{selectedCountryData.crp}%</div>
-                          </div>
-                          <div>
-                            <span className="text-muted-foreground">Industry WACC:</span>
-                            <div className="text-valoov-orange font-medium">{selectedIndustryData.wacc}%</div>
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  )}
+                  {errors.email && <p className="text-sm text-destructive">{errors.email}</p>}
                 </div>
 
-                <div className="flex items-start space-x-2">
-                  <Checkbox 
-                    id="terms" 
-                    checked={agreeTerms}
-                    onCheckedChange={(checked) => setAgreeTerms(checked as boolean)}
-                    className="mt-1"
-                  />
-                  <Label htmlFor="terms" className="text-sm leading-relaxed">
-                    I agree to the{' '}
-                    <a href="#" className="text-financial-cyan hover:text-financial-cyan/80">
-                      Terms of Service
-                    </a>{' '}
-                    and{' '}
-                    <a href="#" className="text-financial-cyan hover:text-financial-cyan/80">
-                      Privacy Policy
-                    </a>
-                  </Label>
+                <div className="space-y-2">
+                  <Label htmlFor="companyName">Company Name</Label>
+                  <div className="relative">
+                    <Building className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                    <Input
+                      id="companyName"
+                      type="text"
+                      name="companyName"
+                      placeholder="Enter your company name"
+                      value={formData.companyName}
+                      onChange={handleChange}
+                      className="pl-10"
+                    />
+                  </div>
+                  {errors.companyName && <p className="text-sm text-destructive">{errors.companyName}</p>}
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="companyType">Company Type</Label>
+                    <div className="relative">
+                      <Factory className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                      <Input
+                        id="companyType"
+                        type="text"
+                        name="companyType"
+                        placeholder="e.g., Startup, SME"
+                        value={formData.companyType}
+                        onChange={handleChange}
+                        className="pl-10"
+                      />
+                    </div>
+                    {errors.companyType && <p className="text-sm text-destructive">{errors.companyType}</p>}
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="companyIndustry">Company Industry</Label>
+                    <div className="relative">
+                      <Shield className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                      <Input
+                        id="companyIndustry"
+                        type="text"
+                        name="companyIndustry"
+                        placeholder="e.g., Tech, Finance"
+                        value={formData.companyIndustry}
+                        onChange={handleChange}
+                        className="pl-10"
+                      />
+                    </div>
+                    {errors.companyIndustry && <p className="text-sm text-destructive">{errors.companyIndustry}</p>}
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="password">Password</Label>
+                  <div className="relative">
+                    <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                    <Input
+                      id="password"
+                      type={showPassword ? 'text' : 'password'}
+                      name="password"
+                      placeholder="Enter your password"
+                      value={formData.password}
+                      onChange={handleChange}
+                      className="pl-10"
+                    />
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-2 top-1/2 -translate-y-1/2 h-8 w-8"
+                    >
+                      {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                      <span className="sr-only">Toggle password</span>
+                    </Button>
+                  </div>
+                  {errors.password && <p className="text-sm text-destructive">{errors.password}</p>}
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="confirmPassword">Confirm Password</Label>
+                  <div className="relative">
+                    <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                    <Input
+                      id="confirmPassword"
+                      type={showConfirmPassword ? 'text' : 'password'}
+                      name="confirmPassword"
+                      placeholder="Confirm your password"
+                      value={formData.confirmPassword}
+                      onChange={handleChange}
+                      className="pl-10"
+                    />
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                      className="absolute right-2 top-1/2 -translate-y-1/2 h-8 w-8"
+                    >
+                      {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                      <span className="sr-only">Toggle confirm password</span>
+                    </Button>
+                  </div>
+                  {errors.confirmPassword && <p className="text-sm text-destructive">{errors.confirmPassword}</p>}
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="country">Country</Label>
+                  <Select onValueChange={(value) => setFormData(prevState => ({ ...prevState, country: value }))}>
+                    <SelectTrigger className="w-full">
+                      <Globe className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                      <SelectValue placeholder="Select a country" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="US">United States</SelectItem>
+                      <SelectItem value="CA">Canada</SelectItem>
+                      <SelectItem value="GB">United Kingdom</SelectItem>
+                      <SelectItem value="ES">Spain</SelectItem>
+                      <SelectItem value="FR">France</SelectItem>
+                      {/* Add more countries as needed */}
+                    </SelectContent>
+                  </Select>
                 </div>
 
                 <Button 
                   type="submit" 
                   className="w-full bg-valoov-teal hover:bg-valoov-teal/80"
-                  disabled={!isFormValid}
+                  disabled={isSubmitting}
                 >
-                  Create Account
+                  {isSubmitting ? (
+                    <>
+                      <svg className="animate-spin h-5 w-5 mr-2" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M12 4V2m0 18v-2m-5.196-3.09a1 1 0 0 0 1.414 1.414l2.828-2.828a1 1 0 0 0-1.414-1.414l-2.828 2.828M5.464 5.464a1 1 0 0 0 1.414 1.414l2.828-2.828a1 1 0 0 0-1.414-1.414l-2.828 2.828M4 12H2m18 0h-2m3.09 5.196a1 1 0 0 0-1.414 1.414l-2.828-2.828a1 1 0 0 0 1.414-1.414l2.828 2.828M18.536 5.464a1 1 0 0 0-1.414 1.414l-2.828-2.828a1 1 0 0 0 1.414-1.414l2.828 2.828z"/>
+                      </svg>
+                      Creating Account...
+                    </>
+                  ) : (
+                    'Create Account'
+                  )}
                 </Button>
-              </form>
 
-              <div className="mt-6 text-center">
-                <p className="text-sm text-muted-foreground">
-                  Already have an account?{' '}
-                  <button
-                    onClick={onSwitchToLogin}
-                    className="text-valoov-orange hover:text-valoov-orange/80 font-medium"
+                <div className="text-center">
+                  <p className="text-sm text-muted-foreground">
+                    Already have an account?
+                  </p>
+                  <Button
+                    type="button"
+                    variant="link"
+                    onClick={onLogin}
+                    className="text-valoov-orange hover:text-valoov-orange/80"
                   >
-                    Sign in here
-                  </button>
-                </p>
-              </div>
+                    Log In
+                  </Button>
+                </div>
+              </form>
             </CardContent>
           </Card>
         </div>
