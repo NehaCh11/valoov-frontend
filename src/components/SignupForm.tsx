@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import EmailVerificationPage from './EmailVerificationPage';
+import TwoFactorSetup from './TwoFactorSetup';
 
 interface SignupFormProps {
   onBack: () => void;
@@ -41,6 +42,7 @@ const SignupForm = ({ onBack, onLogin, onAccountCreated }: SignupFormProps) => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [errors, setErrors] = useState<Partial<FormData>>({});
   const [showEmailVerification, setShowEmailVerification] = useState(false);
+  const [showTwoFactorSetup, setShowTwoFactorSetup] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const validateForm = (): boolean => {
@@ -144,9 +146,25 @@ const SignupForm = ({ onBack, onLogin, onAccountCreated }: SignupFormProps) => {
   };
 
   const handleEmailVerified = () => {
-    console.log('Email verified, redirecting to questionnaire');
+    console.log('Email verified, proceeding to 2FA setup');
+    setShowEmailVerification(false);
+    setShowTwoFactorSetup(true);
+  };
+
+  const handleTwoFactorComplete = () => {
+    console.log('2FA setup completed, redirecting to questionnaire');
     onAccountCreated();
   };
+
+  if (showTwoFactorSetup) {
+    return (
+      <TwoFactorSetup
+        email={formData.email}
+        onBack={() => setShowTwoFactorSetup(false)}
+        onComplete={handleTwoFactorComplete}
+      />
+    );
+  }
 
   if (showEmailVerification) {
     return (
