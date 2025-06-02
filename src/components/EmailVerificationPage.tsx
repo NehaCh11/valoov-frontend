@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { ArrowLeft, Mail, RefreshCw } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -89,9 +88,9 @@ const EmailVerificationPage = ({ email, onBack, onVerified }: EmailVerificationP
             <CardHeader className="text-center">
               <div className="flex justify-center mb-4">
                 <img 
-                  src="/lovable-uploads/17dd4d7d-77a4-46b2-8bcc-c7b2923ba0e5.png" 
-                  alt="VALOOV Logo" 
-                  className="h-16 w-auto"
+                  src="/lovable-uploads/10986bb1-03cf-4cef-b5a2-8a61c6dfd7a1.png" 
+                  alt="VALOOV AI Logo" 
+                  className="h-16 w-auto object-contain"
                 />
               </div>
               <CardTitle className="text-2xl text-white">Verify Your Email</CardTitle>
