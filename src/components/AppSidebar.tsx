@@ -6,7 +6,8 @@ import {
   Settings,
   Building2,
   Eye,
-  PlusCircle
+  PlusCircle,
+  History
 } from 'lucide-react';
 import {
   Sidebar,
@@ -46,6 +47,11 @@ const menuItems = [
     title: "Valuation Report",
     icon: FileText,
     id: "valuation-report"
+  },
+  {
+    title: "History",
+    icon: History,
+    id: "history"
   }
 ];
 

@@ -13,6 +13,7 @@ import ChatbotQuestionnaire from '@/components/ChatbotQuestionnaire';
 import RevenueProjections from '@/components/RevenueProjections';
 import Portfolio from '@/components/Portfolio';
 import LandingPage from '@/components/LandingPage';
+import { History } from '@/components/History';
 
 const Index = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -48,6 +49,8 @@ const Index = () => {
         return <ValuationReport />;
       case 'questionnaire':
         return <ChatbotQuestionnaire />;
+      case 'history':
+        return <History />;
       case 'projections':
         return <RevenueProjections />;
       case 'reports':
