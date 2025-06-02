@@ -1,3 +1,4 @@
+
 import {
   BarChart3,
   TrendingUp,
@@ -7,7 +8,8 @@ import {
   Building2,
   Eye,
   PlusCircle,
-  History
+  History,
+  Home
 } from 'lucide-react';
 import {
   Sidebar,
@@ -27,35 +29,12 @@ interface AppSidebarProps {
   setActiveView: (view: string) => void;
 }
 
-const menuItems = [
+const mainItems = [
   {
     title: "Dashboard",
-    icon: BarChart3,
+    icon: Home,
     id: "dashboard"
   },
-  {
-    title: "Valuation Overview",
-    icon: Eye,
-    id: "valuation-overview"
-  },
-  {
-    title: "Generate Valuation Report",
-    icon: PlusCircle,
-    id: "generate-report"
-  },
-  {
-    title: "Valuation Report",
-    icon: FileText,
-    id: "valuation-report"
-  },
-  {
-    title: "History",
-    icon: History,
-    id: "history"
-  }
-];
-
-const toolsItems = [
   {
     title: "AI Questionnaire",
     icon: Bot,
@@ -63,16 +42,42 @@ const toolsItems = [
   }
 ];
 
-const settingsItems = [
+const valuationItems = [
   {
-    title: "Settings",
-    icon: Settings,
-    id: "settings"
+    title: "Valuation Overview",
+    icon: Eye,
+    id: "valuation-overview"
   },
+  {
+    title: "Generate Report",
+    icon: PlusCircle,
+    id: "generate-report"
+  },
+  {
+    title: "Valuation Report",
+    icon: FileText,
+    id: "valuation-report"
+  }
+];
+
+const reportsItems = [
+  {
+    title: "History",
+    icon: History,
+    id: "history"
+  }
+];
+
+const accountItems = [
   {
     title: "Company Profile",
     icon: Building2,
     id: "profile"
+  },
+  {
+    title: "Settings",
+    icon: Settings,
+    id: "settings"
   }
 ];
 
@@ -91,10 +96,10 @@ export function AppSidebar({ activeView, setActiveView }: AppSidebarProps) {
 
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Valuation</SidebarGroupLabel>
+          <SidebarGroupLabel>Main</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {menuItems.map((item) => {
+              {mainItems.map((item) => {
                 const Icon = item.icon;
                 return (
                   <SidebarMenuItem key={item.id}>
@@ -114,10 +119,33 @@ export function AppSidebar({ activeView, setActiveView }: AppSidebarProps) {
         </SidebarGroup>
 
         <SidebarGroup>
-          <SidebarGroupLabel>Tools</SidebarGroupLabel>
+          <SidebarGroupLabel>Valuation</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {toolsItems.map((item) => {
+              {valuationItems.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <SidebarMenuItem key={item.id}>
+                    <SidebarMenuButton 
+                      onClick={() => setActiveView(item.id)}
+                      isActive={activeView === item.id}
+                      className="w-full"
+                    >
+                      <Icon className="h-4 w-4" />
+                      <span>{item.title}</span>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                );
+              })}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        <SidebarGroup>
+          <SidebarGroupLabel>Reports</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {reportsItems.map((item) => {
                 const Icon = item.icon;
                 return (
                   <SidebarMenuItem key={item.id}>
@@ -140,7 +168,7 @@ export function AppSidebar({ activeView, setActiveView }: AppSidebarProps) {
           <SidebarGroupLabel>Account</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {settingsItems.map((item) => {
+              {accountItems.map((item) => {
                 const Icon = item.icon;
                 return (
                   <SidebarMenuItem key={item.id}>
