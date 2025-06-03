@@ -25,23 +25,23 @@ export function GenerateValuationReport() {
     },
     {
       id: 2,
+      title: 'Upload Docs',
+      description: 'Supporting financial documents',
+      icon: Upload,
+      completed: true
+    },
+    {
+      id: 3,
       title: 'Questionnaire',
       description: '37-question qualitative assessment',
       icon: Bot,
       completed: true
     },
     {
-      id: 3,
+      id: 4,
       title: 'Projections',
       description: '3-year financial forecast',
       icon: TrendingUp,
-      completed: true
-    },
-    {
-      id: 4,
-      title: 'Upload Docs',
-      description: 'Supporting financial documents',
-      icon: Upload,
       completed: true
     },
     {
