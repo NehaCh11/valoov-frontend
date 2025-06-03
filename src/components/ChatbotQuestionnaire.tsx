@@ -83,9 +83,9 @@ const ChatbotQuestionnaire = () => {
   const currentQuestion = questions[currentQuestionIndex];
 
   useEffect(() => {
-    // Add initial bot message for tax return upload
+    // Add initial bot message for tax return upload as a simple text message
     if (messages.length === 0) {
-      addBotMessage("Hello! I'm here to help with your company valuation. Before we begin with the business questions, I need you to upload your tax return files in PDF format (covering the past 3 years). This information is essential for an accurate valuation assessment.");
+      addBotMessage("Hello! I'm here to help with your company valuation. Before we begin, please upload your tax return files in PDF format (covering the past 3 years). This information is essential for an accurate valuation assessment.");
     }
   }, []);
 
@@ -141,12 +141,12 @@ const ChatbotQuestionnaire = () => {
         setTaxReturnsUploaded(prev => [...prev, newTaxReturn]);
         
         // Add user message showing the upload
-        addUserMessage(`Tax return uploaded: ${file.name}`);
+        addUserMessage(`📄 Tax return uploaded: ${file.name}`);
         
         // Check if we have enough files to proceed
         if (taxReturnsUploaded.length >= 0) { // Allow proceeding after first upload
           setTimeout(() => {
-            addBotMessage("Thank you for uploading your tax return! You can upload additional years if needed, or we can proceed to the business questionnaire. Click 'Start Questionnaire' when you're ready to begin.");
+            addBotMessage("Thank you for uploading your tax return! You can upload additional years if needed, or we can proceed to the business questionnaire.");
             setShowQuestionnaire(true);
           }, 1000);
         }
@@ -198,11 +198,11 @@ const ChatbotQuestionnaire = () => {
       };
       
       setTaxReturnsUploaded(prev => [...prev, newTaxReturn]);
-      addUserMessage(`Tax return uploaded: ${pdfFile.name}`);
+      addUserMessage(`📄 Tax return uploaded: ${pdfFile.name}`);
       
       if (taxReturnsUploaded.length >= 0) {
         setTimeout(() => {
-          addBotMessage("Thank you for uploading your tax return! You can upload additional years if needed, or we can proceed to the business questionnaire. Click 'Start Questionnaire' when you're ready to begin.");
+          addBotMessage("Thank you for uploading your tax return! You can upload additional years if needed, or we can proceed to the business questionnaire.");
           setShowQuestionnaire(true);
         }, 1000);
       }
@@ -427,96 +427,74 @@ const ChatbotQuestionnaire = () => {
           </div>
         ))}
 
-        {/* Tax Return Upload Section */}
+        {/* Simple Upload Button in Chat - Only show if no files uploaded yet */}
         {!showQuestionnaire && taxReturnsUploaded.length === 0 && (
-          <div className="max-w-4xl mx-auto">
-            <Card className="bg-white border-gray-200">
-              <CardContent className="p-6">
-                <div
-                  className={cn(
-                    "border-2 border-dashed rounded-lg p-8 text-center transition-colors cursor-pointer",
-                    isDragOver ? "border-blue-500 bg-blue-50" : "border-gray-300 hover:border-blue-400 hover:bg-blue-50"
-                  )}
-                  onDragOver={handleDragOver}
-                  onDragLeave={handleDragLeave}
-                  onDrop={handleDrop}
-                  onClick={handleTaxReturnUpload}
-                >
-                  <Upload className="h-12 w-12 mx-auto mb-4 text-gray-400" />
-                  <h3 className="text-lg font-medium mb-2 text-gray-900">
-                    Upload Tax Return Files
-                  </h3>
-                  <p className="text-gray-600 mb-4">
-                    Drag and drop your tax return PDF files here, or click to browse
-                  </p>
-                  <p className="text-sm text-gray-500">
-                    Please upload PDF files covering the past 3 years
-                  </p>
-                  <Button className="mt-4 bg-blue-600 hover:bg-blue-700">
-                    Select PDF Files
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
+          <div className="flex justify-start max-w-4xl">
+            <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 mr-3">
+              <Bot className="h-4 w-4 text-blue-600" />
+            </div>
+            <div className="bg-white border border-gray-200 text-gray-900 rounded-2xl px-4 py-3">
+              <p className="text-sm mb-3">Click the button below to upload your tax return PDF:</p>
+              <Button 
+                onClick={handleTaxReturnUpload}
+                className="bg-blue-600 hover:bg-blue-700 text-sm"
+                size="sm"
+              >
+                <Upload className="h-4 w-4 mr-2" />
+                Upload Tax Return PDF
+              </Button>
+            </div>
           </div>
         )}
 
-        {/* Uploaded Tax Returns Display */}
+        {/* Show uploaded files in a compact way */}
         {taxReturnsUploaded.length > 0 && (
-          <div className="max-w-4xl mx-auto">
-            <Card className="bg-white border-gray-200">
-              <CardContent className="p-6">
-                <h3 className="text-lg font-medium mb-4 text-gray-900 flex items-center">
-                  <FileText className="h-5 w-5 mr-2 text-green-600" />
-                  Uploaded Tax Returns
-                </h3>
-                <div className="space-y-3">
-                  {taxReturnsUploaded.map((taxReturn) => (
-                    <div
-                      key={taxReturn.id}
-                      className="flex items-center justify-between p-3 bg-gray-50 rounded-lg border"
-                    >
-                      <div className="flex items-center space-x-3">
-                        <CheckCircle className="h-5 w-5 text-green-600" />
-                        <div>
-                          <p className="font-medium text-gray-900">{taxReturn.file.name}</p>
-                          <p className="text-sm text-gray-500">
-                            {(taxReturn.file.size / 1024 / 1024).toFixed(2)} MB • Uploaded {taxReturn.uploadedAt.toLocaleTimeString()}
-                          </p>
-                        </div>
-                      </div>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => removeTaxReturn(taxReturn.id)}
-                        className="hover:bg-red-100"
-                      >
-                        <X className="h-4 w-4" />
-                      </Button>
-                    </div>
-                  ))}
-                </div>
-                
-                <div className="mt-4 flex space-x-3">
-                  <Button
-                    variant="outline"
-                    onClick={handleTaxReturnUpload}
-                    className="border-blue-600 text-blue-600 hover:bg-blue-50"
+          <div className="flex justify-start max-w-4xl">
+            <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 mr-3">
+              <Bot className="h-4 w-4 text-blue-600" />
+            </div>
+            <div className="bg-white border border-gray-200 text-gray-900 rounded-2xl px-4 py-3">
+              <p className="text-sm font-medium mb-2">📄 Uploaded Tax Returns:</p>
+              <div className="space-y-2">
+                {taxReturnsUploaded.map((taxReturn) => (
+                  <div
+                    key={taxReturn.id}
+                    className="flex items-center justify-between text-sm bg-gray-50 rounded px-2 py-1"
                   >
-                    Add More Files
-                  </Button>
-                  
-                  {showQuestionnaire && (
+                    <span className="text-green-600">✓ {taxReturn.file.name}</span>
                     <Button
-                      onClick={startQuestionnaire}
-                      className="bg-blue-600 hover:bg-blue-700"
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => removeTaxReturn(taxReturn.id)}
+                      className="h-6 w-6 p-0 hover:bg-red-100"
                     >
-                      Start Questionnaire
+                      <X className="h-3 w-3" />
                     </Button>
-                  )}
-                </div>
-              </CardContent>
-            </Card>
+                  </div>
+                ))}
+              </div>
+              
+              <div className="flex space-x-2 mt-3">
+                <Button
+                  variant="outline"
+                  onClick={handleTaxReturnUpload}
+                  size="sm"
+                  className="text-xs"
+                >
+                  Add More
+                </Button>
+                
+                {showQuestionnaire && (
+                  <Button
+                    onClick={startQuestionnaire}
+                    size="sm"
+                    className="bg-blue-600 hover:bg-blue-700 text-xs"
+                  >
+                    Start Questionnaire
+                  </Button>
+                )}
+              </div>
+            </div>
           </div>
         )}
 
