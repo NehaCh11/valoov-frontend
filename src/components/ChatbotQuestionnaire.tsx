@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -70,7 +69,7 @@ const ChatbotQuestionnaire = () => {
   const [isRecording, setIsRecording] = useState(false);
   const [selectedPdf, setSelectedPdf] = useState<File | null>(null);
   const [taxReturnsUploaded, setTaxReturnsUploaded] = useState<UploadedTaxReturn[]>([]);
-  const [showQuestionnaire, setShowQuestionnaire] = useState(false);
+  const [questionnaireStarted, setQuestionnaireStarted] = useState(false);
   const [isDragOver, setIsDragOver] = useState(false);
   
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -84,7 +83,7 @@ const ChatbotQuestionnaire = () => {
   const currentQuestion = questions[currentQuestionIndex];
 
   useEffect(() => {
-    // Add initial bot message for tax return upload as a simple text message
+    // Add initial bot message for tax return upload
     if (messages.length === 0) {
       addBotMessage("Hello! I'm here to help with your company valuation. Before we begin, please upload your tax return files in PDF format (covering the past 3 years). This information is essential for an accurate valuation assessment.");
     }
@@ -144,11 +143,14 @@ const ChatbotQuestionnaire = () => {
         // Add user message showing the upload
         addUserMessage(`📄 Tax return uploaded: ${file.name}`);
         
-        // Check if we have enough files to proceed
-        if (taxReturnsUploaded.length >= 0) { // Allow proceeding after first upload
+        // Start questionnaire immediately after first upload
+        if (!questionnaireStarted) {
           setTimeout(() => {
-            addBotMessage("Thank you for uploading your tax return! You can upload additional years if needed, or we can proceed to the business questionnaire.");
-            setShowQuestionnaire(true);
+            addBotMessage("Thank you for uploading your tax return! Now let's begin with the business questions to help with your valuation analysis.");
+            setTimeout(() => {
+              addBotMessage(currentQuestion.question);
+              setQuestionnaireStarted(true);
+            }, 1000);
           }, 1000);
         }
         
@@ -201,10 +203,14 @@ const ChatbotQuestionnaire = () => {
       setTaxReturnsUploaded(prev => [...prev, newTaxReturn]);
       addUserMessage(`📄 Tax return uploaded: ${pdfFile.name}`);
       
-      if (taxReturnsUploaded.length >= 0) {
+      // Start questionnaire immediately after first upload
+      if (!questionnaireStarted) {
         setTimeout(() => {
-          addBotMessage("Thank you for uploading your tax return! You can upload additional years if needed, or we can proceed to the business questionnaire.");
-          setShowQuestionnaire(true);
+          addBotMessage("Thank you for uploading your tax return! Now let's begin with the business questions to help with your valuation analysis.");
+          setTimeout(() => {
+            addBotMessage(currentQuestion.question);
+            setQuestionnaireStarted(true);
+          }, 1000);
         }, 1000);
       }
       
@@ -223,19 +229,8 @@ const ChatbotQuestionnaire = () => {
     }
   };
 
-  const startQuestionnaire = () => {
-    addBotMessage("Perfect! Now let's begin with the business questions. I'll ask you about different aspects of your company to help with the valuation analysis.");
-    setTimeout(() => {
-      addBotMessage(currentQuestion.question);
-    }, 1000);
-  };
-
   const removeTaxReturn = (id: string) => {
     setTaxReturnsUploaded(prev => prev.filter(tr => tr.id !== id));
-    
-    if (taxReturnsUploaded.length <= 1) {
-      setShowQuestionnaire(false);
-    }
   };
 
   const handleVoiceNote = async () => {
@@ -327,7 +322,7 @@ const ChatbotQuestionnaire = () => {
     addUserMessage(currentMessage, undefined, pdfUrl, pdfName);
 
     // Save answer if it's for a question
-    if (isCompleted === false && currentQuestion && showQuestionnaire) {
+    if (isCompleted === false && currentQuestion && questionnaireStarted) {
       setAnswers(prev => ({
         ...prev,
         [currentQuestion.id]: currentMessage
@@ -339,7 +334,7 @@ const ChatbotQuestionnaire = () => {
     setSelectedPdf(null);
 
     // Move to next question or complete
-    if (currentQuestionIndex < questions.length - 1 && !isCompleted && showQuestionnaire) {
+    if (currentQuestionIndex < questions.length - 1 && !isCompleted && questionnaireStarted) {
       setTimeout(() => {
         setCurrentQuestionIndex(prev => prev + 1);
         const nextQuestion = questions[currentQuestionIndex + 1];
@@ -354,7 +349,7 @@ const ChatbotQuestionnaire = () => {
           addBotMessage(nextQuestion.question);
         }
       }, 1000);
-    } else if (!isCompleted && showQuestionnaire) {
+    } else if (!isCompleted && questionnaireStarted) {
       setTimeout(() => {
         addBotMessage("Thank you for completing the questionnaire! I'll now analyze your responses to help with your company valuation.");
         setIsCompleted(true);
@@ -428,8 +423,8 @@ const ChatbotQuestionnaire = () => {
           </div>
         ))}
 
-        {/* Simple Upload Button in Chat - Only show if no files uploaded yet */}
-        {!showQuestionnaire && taxReturnsUploaded.length === 0 && (
+        {/* Upload Button - Only show if no files uploaded yet AND questionnaire hasn't started */}
+        {!questionnaireStarted && taxReturnsUploaded.length === 0 && (
           <div className="flex justify-start max-w-4xl">
             <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 mr-3">
               <Bot className="h-4 w-4 text-blue-600" />
@@ -475,26 +470,18 @@ const ChatbotQuestionnaire = () => {
                 ))}
               </div>
               
-              <div className="flex space-x-2 mt-3">
-                <Button
-                  variant="outline"
-                  onClick={handleTaxReturnUpload}
-                  size="sm"
-                  className="text-xs"
-                >
-                  Add More
-                </Button>
-                
-                {showQuestionnaire && (
+              {questionnaireStarted && (
+                <div className="mt-3">
                   <Button
-                    onClick={startQuestionnaire}
+                    variant="outline"
+                    onClick={handleTaxReturnUpload}
                     size="sm"
-                    className="bg-blue-600 hover:bg-blue-700 text-xs"
+                    className="text-xs"
                   >
-                    Start Questionnaire
+                    Add More Tax Returns
                   </Button>
-                )}
-              </div>
+                </div>
+              )}
             </div>
           </div>
         )}
@@ -502,7 +489,7 @@ const ChatbotQuestionnaire = () => {
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Input Area - Always show, no longer conditional */}
+      {/* Input Area - Always show */}
       <div className="border-t bg-white px-6 py-4">
         {/* PDF Preview */}
         {selectedPdf && (
