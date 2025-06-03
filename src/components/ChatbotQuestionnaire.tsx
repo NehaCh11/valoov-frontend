@@ -143,10 +143,10 @@ const ChatbotQuestionnaire = () => {
         // Add user message showing the upload
         addUserMessage(`📄 Tax return uploaded: ${file.name}`);
         
-        // Start questionnaire immediately after first upload
+        // Start questionnaire immediately after upload
         if (!questionnaireStarted) {
           setTimeout(() => {
-            addBotMessage("Thank you for uploading your tax return! Now let's begin with the business questions to help with your valuation analysis.");
+            addBotMessage("Perfect! Thank you for uploading your tax return. Now let's begin with the business questions to help with your valuation analysis.");
             setTimeout(() => {
               addBotMessage(currentQuestion.question);
               setQuestionnaireStarted(true);
@@ -203,10 +203,10 @@ const ChatbotQuestionnaire = () => {
       setTaxReturnsUploaded(prev => [...prev, newTaxReturn]);
       addUserMessage(`📄 Tax return uploaded: ${pdfFile.name}`);
       
-      // Start questionnaire immediately after first upload
+      // Start questionnaire immediately after upload
       if (!questionnaireStarted) {
         setTimeout(() => {
-          addBotMessage("Thank you for uploading your tax return! Now let's begin with the business questions to help with your valuation analysis.");
+          addBotMessage("Perfect! Thank you for uploading your tax return. Now let's begin with the business questions to help with your valuation analysis.");
           setTimeout(() => {
             addBotMessage(currentQuestion.question);
             setQuestionnaireStarted(true);
@@ -443,49 +443,6 @@ const ChatbotQuestionnaire = () => {
           </div>
         )}
 
-        {/* Show uploaded files in a compact way */}
-        {taxReturnsUploaded.length > 0 && (
-          <div className="flex justify-start max-w-4xl">
-            <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 mr-3">
-              <Bot className="h-4 w-4 text-blue-600" />
-            </div>
-            <div className="bg-white border border-gray-200 text-gray-900 rounded-2xl px-4 py-3">
-              <p className="text-sm font-medium mb-2">📄 Uploaded Tax Returns:</p>
-              <div className="space-y-2">
-                {taxReturnsUploaded.map((taxReturn) => (
-                  <div
-                    key={taxReturn.id}
-                    className="flex items-center justify-between text-sm bg-gray-50 rounded px-2 py-1"
-                  >
-                    <span className="text-green-600">✓ {taxReturn.file.name}</span>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => removeTaxReturn(taxReturn.id)}
-                      className="h-6 w-6 p-0 hover:bg-red-100"
-                    >
-                      <X className="h-3 w-3" />
-                    </Button>
-                  </div>
-                ))}
-              </div>
-              
-              {questionnaireStarted && (
-                <div className="mt-3">
-                  <Button
-                    variant="outline"
-                    onClick={handleTaxReturnUpload}
-                    size="sm"
-                    className="text-xs"
-                  >
-                    Add More Tax Returns
-                  </Button>
-                </div>
-              )}
-            </div>
-          </div>
-        )}
-
         <div ref={messagesEndRef} />
       </div>
 
@@ -532,6 +489,19 @@ const ChatbotQuestionnaire = () => {
           >
             <Paperclip className="h-4 w-4" />
           </Button>
+
+          {/* Tax Return Upload Button - Show only if questionnaire hasn't started */}
+          {!questionnaireStarted && (
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={handleTaxReturnUpload}
+              className="flex-shrink-0 h-10 w-10 p-0 rounded-full hover:bg-gray-100"
+              title="Upload Tax Return"
+            >
+              <Upload className="h-4 w-4" />
+            </Button>
+          )}
 
           {/* Message Input */}
           <div className="flex-1 relative">
