@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -501,96 +502,94 @@ const ChatbotQuestionnaire = () => {
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Input Area - Only show if questionnaire has started */}
-      {showQuestionnaire && (
-        <div className="border-t bg-white px-6 py-4">
-          {/* PDF Preview */}
-          {selectedPdf && (
-            <div className="mb-3 p-3 bg-gray-100 rounded-lg border flex items-center justify-between">
-              <div className="flex items-center space-x-2 text-sm text-gray-700">
-                <Paperclip className="h-4 w-4" />
-                <span>{selectedPdf.name}</span>
-              </div>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={clearSelectedPdf}
-                className="h-6 w-6 p-0 hover:bg-red-100"
-              >
-                <X className="h-3 w-3" />
-              </Button>
-            </div>
-          )}
-
-          <div className="flex items-end space-x-3">
-            {/* Voice Input Button */}
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={handleVoiceNote}
-              className={cn(
-                "flex-shrink-0 h-10 w-10 p-0 rounded-full",
-                isRecording ? "bg-red-100 text-red-600 hover:bg-red-200" : "hover:bg-gray-100"
-              )}
-            >
-              {isRecording ? <MicOff className="h-4 w-4" /> : <Mic className="h-4 w-4" />}
-            </Button>
-
-            {/* PDF Upload Button */}
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={handlePdfUpload}
-              className="flex-shrink-0 h-10 w-10 p-0 rounded-full hover:bg-gray-100"
-            >
+      {/* Input Area - Always show, no longer conditional */}
+      <div className="border-t bg-white px-6 py-4">
+        {/* PDF Preview */}
+        {selectedPdf && (
+          <div className="mb-3 p-3 bg-gray-100 rounded-lg border flex items-center justify-between">
+            <div className="flex items-center space-x-2 text-sm text-gray-700">
               <Paperclip className="h-4 w-4" />
-            </Button>
-
-            {/* Message Input */}
-            <div className="flex-1 relative">
-              <Textarea
-                ref={textareaRef}
-                value={currentMessage}
-                onChange={(e) => setCurrentMessage(e.target.value)}
-                onKeyPress={handleKeyPress}
-                placeholder="Type your message..."
-                className="min-h-[40px] max-h-[120px] resize-none border-gray-300 rounded-2xl pr-12 py-3"
-                rows={1}
-              />
-              <Button
-                onClick={handleSubmitMessage}
-                disabled={!currentMessage.trim()}
-                size="sm"
-                className="absolute right-2 bottom-2 h-8 w-8 p-0 rounded-full"
-              >
-                <Send className="h-4 w-4" />
-              </Button>
+              <span>{selectedPdf.name}</span>
             </div>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={clearSelectedPdf}
+              className="h-6 w-6 p-0 hover:bg-red-100"
+            >
+              <X className="h-3 w-3" />
+            </Button>
+          </div>
+        )}
 
-            {/* Hidden file inputs */}
-            <input
-              ref={fileInputRef}
-              type="file"
-              accept=".pdf,application/pdf"
-              onChange={handleFileChange}
-              className="hidden"
+        <div className="flex items-end space-x-3">
+          {/* Voice Input Button */}
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={handleVoiceNote}
+            className={cn(
+              "flex-shrink-0 h-10 w-10 p-0 rounded-full",
+              isRecording ? "bg-red-100 text-red-600 hover:bg-red-200" : "hover:bg-gray-100"
+            )}
+          >
+            {isRecording ? <MicOff className="h-4 w-4" /> : <Mic className="h-4 w-4" />}
+          </Button>
+
+          {/* PDF Upload Button */}
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={handlePdfUpload}
+            className="flex-shrink-0 h-10 w-10 p-0 rounded-full hover:bg-gray-100"
+          >
+            <Paperclip className="h-4 w-4" />
+          </Button>
+
+          {/* Message Input */}
+          <div className="flex-1 relative">
+            <Textarea
+              ref={textareaRef}
+              value={currentMessage}
+              onChange={(e) => setCurrentMessage(e.target.value)}
+              onKeyPress={handleKeyPress}
+              placeholder="Type your message..."
+              className="min-h-[40px] max-h-[120px] resize-none border-gray-300 rounded-2xl pr-12 py-3"
+              rows={1}
             />
-            <input
-              ref={taxReturnInputRef}
-              type="file"
-              accept=".pdf,application/pdf"
-              onChange={handleTaxReturnFileChange}
-              className="hidden"
-            />
+            <Button
+              onClick={handleSubmitMessage}
+              disabled={!currentMessage.trim()}
+              size="sm"
+              className="absolute right-2 bottom-2 h-8 w-8 p-0 rounded-full"
+            >
+              <Send className="h-4 w-4" />
+            </Button>
           </div>
 
-          {isRecording && (
-            <div className="mt-2 text-center">
-              <span className="text-sm text-red-600 animate-pulse">Recording... Click microphone to stop</span>
-            </div>
-          )}
+          {/* Hidden file inputs */}
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept=".pdf,application/pdf"
+            onChange={handleFileChange}
+            className="hidden"
+          />
+          <input
+            ref={taxReturnInputRef}
+            type="file"
+            accept=".pdf,application/pdf"
+            onChange={handleTaxReturnFileChange}
+            className="hidden"
+          />
         </div>
-      )}
+
+        {isRecording && (
+          <div className="mt-2 text-center">
+            <span className="text-sm text-red-600 animate-pulse">Recording... Click microphone to stop</span>
+          </div>
+        )}
+      </div>
 
       {isCompleted && (
         <div className="border-t bg-blue-50 px-6 py-4 text-center">
