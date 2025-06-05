@@ -1,17 +1,54 @@
-
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { FileText, Download, Lock } from 'lucide-react';
+import { FileText, Download, Lock, Calendar, Eye, ChevronDown, ChevronUp } from 'lucide-react';
 import { PricingDialog } from './PricingDialog';
 
 interface ValuationReportProps {
   hasPaidAccess?: boolean;
 }
 
+interface ReportHistoryItem {
+  id: string;
+  companyName: string;
+  date: string;
+  status: 'completed' | 'draft' | 'processing';
+  valuation: string;
+  plan: string;
+}
+
 export function ValuationReport({ hasPaidAccess = false }: ValuationReportProps) {
   const [showPricingDialog, setShowPricingDialog] = useState(false);
+  const [showHistory, setShowHistory] = useState(false);
+
+  // Mock data for report history
+  const reportHistory: ReportHistoryItem[] = [
+    {
+      id: 'REP-001',
+      companyName: 'InnovateTech Solutions',
+      date: '2024-12-05',
+      status: 'completed',
+      valuation: '€2,450,000',
+      plan: 'Basic Report'
+    },
+    {
+      id: 'REP-002',
+      companyName: 'TechCorp Analytics',
+      date: '2024-11-28',
+      status: 'completed',
+      valuation: '€1,850,000',
+      plan: 'Premium + Review'
+    },
+    {
+      id: 'REP-003',
+      companyName: 'DataFlow Systems',
+      date: '2024-11-15',
+      status: 'draft',
+      valuation: 'Pending',
+      plan: 'Basic Report'
+    }
+  ];
 
   const handleDownloadClick = () => {
     if (!hasPaidAccess) {
@@ -27,8 +64,111 @@ export function ValuationReport({ hasPaidAccess = false }: ValuationReportProps)
     // Handle plan selection and payment
   };
 
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'completed':
+        return 'bg-green-600 text-white';
+      case 'draft':
+        return 'bg-yellow-600 text-white';
+      case 'processing':
+        return 'bg-blue-600 text-white';
+      default:
+        return 'bg-gray-600 text-white';
+    }
+  };
+
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric'
+    });
+  };
+
   return (
     <div className="space-y-6">
+      {/* Report History Section */}
+      <Card className="bg-white border-slate-200">
+        <CardHeader>
+          <div className="flex items-center justify-between">
+            <CardTitle className="flex items-center space-x-2">
+              <FileText className="h-5 w-5 text-blue-600" />
+              <span className="text-slate-800">Report History</span>
+              <Badge className="bg-blue-100 text-blue-700 border-blue-200">
+                {reportHistory.length} Reports
+              </Badge>
+            </CardTitle>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setShowHistory(!showHistory)}
+              className="flex items-center space-x-1"
+            >
+              <span className="text-sm">{showHistory ? 'Hide' : 'Show'} History</span>
+              {showHistory ? (
+                <ChevronUp className="h-4 w-4" />
+              ) : (
+                <ChevronDown className="h-4 w-4" />
+              )}
+            </Button>
+          </div>
+        </CardHeader>
+        {showHistory && (
+          <CardContent>
+            <div className="space-y-3">
+              {reportHistory.map((report) => (
+                <div
+                  key={report.id}
+                  className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
+                >
+                  <div className="flex items-center space-x-4">
+                    <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                      <FileText className="h-5 w-5 text-blue-600" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-slate-800">{report.companyName}</h4>
+                      <div className="flex items-center space-x-3 text-sm text-slate-600">
+                        <div className="flex items-center space-x-1">
+                          <Calendar className="h-3 w-3" />
+                          <span>{formatDate(report.date)}</span>
+                        </div>
+                        <span>•</span>
+                        <span>{report.plan}</span>
+                        <span>•</span>
+                        <span>{report.valuation}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <Badge className={`text-xs ${getStatusColor(report.status)}`}>
+                      {report.status === 'completed' ? 'Completed' : 
+                       report.status === 'draft' ? 'Draft' : 'Processing'}
+                    </Badge>
+                    {report.status === 'completed' && (
+                      <div className="flex items-center space-x-2">
+                        <Button size="sm" variant="outline" className="flex items-center space-x-1">
+                          <Eye className="h-3 w-3" />
+                          <span>View</span>
+                        </Button>
+                        <Button size="sm" variant="outline" className="flex items-center space-x-1">
+                          <Download className="h-3 w-3" />
+                          <span>Download</span>
+                        </Button>
+                      </div>
+                    )}
+                    {report.status === 'draft' && (
+                      <Button size="sm" className="bg-blue-600 hover:bg-blue-700">
+                        Continue
+                      </Button>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        )}
+      </Card>
+
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold text-slate-800">Valuation Report</h1>
