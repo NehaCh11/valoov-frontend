@@ -22,6 +22,10 @@ import Dashboard from '@/pages/Dashboard';
 
 // Admin imports
 import AdminDashboard from '@/pages/admin/AdminDashboard';
+import AdminCompanies from '@/pages/admin/AdminCompanies';
+import AdminSupport from '@/pages/admin/AdminSupport';
+import AdminSubscriptions from '@/pages/admin/AdminSubscriptions';
+import AdminSettings from '@/pages/admin/AdminSettings';
 
 const queryClient = new QueryClient();
 
@@ -50,6 +54,10 @@ function App() {
           
           {/* Admin Routes */}
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
+          <Route path="/admin/companies" element={<AdminCompanies />} />
+          <Route path="/admin/support" element={<AdminSupport />} />
+          <Route path="/admin/subscriptions" element={<AdminSubscriptions />} />
+          <Route path="/admin/settings" element={<AdminSettings />} />
           
           {/* Protected Dashboard Routes */}
           <Route path="/dashboard" element={
