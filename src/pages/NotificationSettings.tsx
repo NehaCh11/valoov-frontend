@@ -8,7 +8,7 @@
  * - Communication settings
  */
 
-import NotificationSettings from '@/components/NotificationSettings';
+import { NotificationSettings } from '@/components/NotificationSettings';
 
 const NotificationSettingsPage = () => {
   return <NotificationSettings />;

@@ -8,7 +8,7 @@
  * - Profile settings
  */
 
-import CompanyProfile from '@/components/CompanyProfile';
+import { CompanyProfile } from '@/components/CompanyProfile';
 
 const CompanyProfilePage = () => {
   return <CompanyProfile />;
