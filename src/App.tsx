@@ -1,6 +1,7 @@
+
 import { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { QueryClient } from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { SidebarProvider } from "@/components/SidebarProvider";
 import { MainLayout } from "@/layouts/MainLayout";
@@ -8,7 +9,7 @@ import Index from '@/pages/Index';
 import NotFound from "@/pages/NotFound";
 import ValuationOverview from "@/pages/ValuationOverview";
 import ChatbotQuestionnaire from "@/pages/ChatbotQuestionnaire";
-import GenerateValuationReport from "@/pages/GenerateValuationReport";
+import { GenerateValuationReport } from "@/pages/GenerateValuationReport";
 import ValuationReport from "@/pages/ValuationReport";
 import History from "@/pages/History";
 import RevenueProjections from "@/pages/RevenueProjections";
@@ -17,6 +18,8 @@ import CompanyProfilePage from "@/pages/CompanyProfile";
 import NotificationSettingsPage from "@/pages/NotificationSettings";
 import LoginPage from '@/pages/Login';
 import SignupPage from '@/pages/Signup';
+
+const queryClient = new QueryClient();
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -30,7 +33,7 @@ function App() {
   };
 
   return (
-    <QueryClient>
+    <QueryClientProvider client={queryClient}>
       <Toaster />
       <Router>
         <Routes>
@@ -91,7 +94,7 @@ function App() {
             <div className="min-h-screen bg-background">
               <SidebarProvider>
                 <MainLayout>
-                  <History />
+                  <History setActiveView={() => {}} />
                 </MainLayout>
               </SidebarProvider>
             </div>
@@ -137,7 +140,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
-    </QueryClient>
+    </QueryClientProvider>
   );
 }
 
