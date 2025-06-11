@@ -17,6 +17,7 @@ import CompanyProfilePage from "@/pages/CompanyProfile";
 import NotificationSettingsPage from "@/pages/NotificationSettings";
 import LoginPage from '@/pages/Login';
 import SignupPage from '@/pages/Signup';
+import Dashboard from '@/pages/Dashboard';
 
 const queryClient = new QueryClient();
 
@@ -48,7 +49,7 @@ function App() {
             <div className="min-h-screen bg-background">
               <SidebarProvider>
                 <MainLayout>
-                  <div>Dashboard Content</div>
+                  <Dashboard />
                 </MainLayout>
               </SidebarProvider>
             </div>
