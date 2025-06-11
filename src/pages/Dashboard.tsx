@@ -2,21 +2,15 @@
 import { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { BarChart3, TrendingUp, FileText, DollarSign } from 'lucide-react';
-import { TopNavigation } from '@/components/TopNavigation';
+import { SidebarTrigger } from '@/components/ui/sidebar';
 
 const Dashboard = () => {
-  const handleSignOut = () => {
-    // Clear any stored tokens
-    localStorage.removeItem('adminToken');
-    // Redirect to home page
-    window.location.href = '/';
-  };
-
   return (
-    <div className="min-h-screen bg-background">
-      <TopNavigation onSignOut={handleSignOut} />
-      
-      <div className="container mx-auto px-6 py-8">
+    <main className="flex-1">
+      <div className="p-4 border-b bg-white">
+        <SidebarTrigger />
+      </div>
+      <div className="p-6">
         <div className="space-y-6">
           <div>
             <h1 className="text-3xl font-bold text-foreground">Dashboard</h1>
@@ -125,7 +119,7 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-    </div>
+    </main>
   );
 };
 
