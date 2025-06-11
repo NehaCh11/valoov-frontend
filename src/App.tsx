@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -18,6 +19,10 @@ import NotificationSettingsPage from "@/pages/NotificationSettings";
 import LoginPage from '@/pages/Login';
 import SignupPage from '@/pages/Signup';
 import Dashboard from '@/pages/Dashboard';
+
+// Admin imports
+import AdminLogin from '@/pages/admin/AdminLogin';
+import AdminDashboard from '@/pages/admin/AdminDashboard';
 
 const queryClient = new QueryClient();
 
@@ -43,6 +48,10 @@ function App() {
           {/* Authentication Pages */}
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
+          
+          {/* Admin Routes */}
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin/dashboard" element={<AdminDashboard />} />
           
           {/* Protected Dashboard Routes */}
           <Route path="/dashboard" element={
