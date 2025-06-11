@@ -640,7 +640,7 @@ const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
                         />
                       ) : tech.icon === "vertex-ai-logo" ? (
                         <img 
-                          src="/lovable-uploads/369b8f7d-8aa1-46b7-97d0-c465296cdfcc.png" 
+                          src="/lovable-uploads/ffa54c5b-1af2-4612-8e5d-e9e831c4775a.png" 
                           alt="Vertex AI Logo" 
                           className="h-8 w-8 object-contain"
                         />
