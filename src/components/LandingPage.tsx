@@ -1,3 +1,4 @@
+
 import { Upload, FileText, BarChart3, CheckCircle, ArrowRight, Calculator, Star, Eye, Play, X, TrendingUp, Zap, BarChart2, Bot, Brain, Code } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -128,7 +129,7 @@ const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
     {
       name: "Dialogflow CX",
       description: "Advanced conversational AI for intelligent questionnaire interactions",
-      icon: "google-logo"
+      icon: "dialogflow-logo"
     },
     {
       name: "Vertex AI",
@@ -631,6 +632,12 @@ const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
                           <img 
                             src="/lovable-uploads/b877c169-a0f0-4b2a-b3be-df374a7ff1a6.png" 
                             alt="Google Cloud Logo" 
+                            className="h-8 w-8 object-contain"
+                          />
+                        ) : tech.icon === "dialogflow-logo" ? (
+                          <img 
+                            src="/lovable-uploads/17a79a69-36c7-4c94-877b-eef8769d4d75.png" 
+                            alt="Dialogflow CX Logo" 
                             className="h-8 w-8 object-contain"
                           />
                         ) : (
