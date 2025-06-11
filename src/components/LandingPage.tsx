@@ -1,3 +1,4 @@
+
 import { Upload, FileText, BarChart3, CheckCircle, ArrowRight, Calculator, Star, Eye, Play, X, TrendingUp, Zap, BarChart2, Cloud, Bot, Brain, Code } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -641,50 +642,6 @@ const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
                 </Card>
               );
             })}
-          </div>
-
-          <div className="mt-12 text-center">
-            <Card className="bg-slate-50 border-slate-200 shadow-sm max-w-4xl mx-auto">
-              <CardContent className="py-8">
-                <div className="grid md:grid-cols-3 gap-8">
-                  <div className="text-center">
-                    <div className="flex justify-center mb-4">
-                      <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                        <CheckCircle className="h-6 w-6 text-blue-600" />
-                      </div>
-                    </div>
-                    <h4 className="text-lg font-semibold text-slate-800 mb-2">Enterprise Security</h4>
-                    <p className="text-sm text-slate-600">
-                      Bank-level encryption and compliance with European data protection standards.
-                    </p>
-                  </div>
-                  
-                  <div className="text-center">
-                    <div className="flex justify-center mb-4">
-                      <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center">
-                        <Zap className="h-6 w-6 text-orange-600" />
-                      </div>
-                    </div>
-                    <h4 className="text-lg font-semibold text-slate-800 mb-2">Lightning Fast</h4>
-                    <p className="text-sm text-slate-600">
-                      Cloud-native architecture ensures rapid processing and real-time results.
-                    </p>
-                  </div>
-                  
-                  <div className="text-center">
-                    <div className="flex justify-center mb-4">
-                      <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-                        <TrendingUp className="h-6 w-6 text-green-600" />
-                      </div>
-                    </div>
-                    <h4 className="text-lg font-semibold text-slate-800 mb-2">Always Learning</h4>
-                    <p className="text-sm text-slate-600">
-                      AI models continuously improve accuracy with market data and feedback.
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
           </div>
         </section>
 
