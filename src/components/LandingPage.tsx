@@ -1,4 +1,4 @@
-import { Upload, FileText, BarChart3, CheckCircle, ArrowRight, Calculator, Star, Eye, Play, X, TrendingUp, Zap, BarChart2, Bot, Brain, Code } from 'lucide-react';
+import { Upload, FileText, BarChart3, CheckCircle, ArrowRight, Calculator, Star, Eye, Play, X, TrendingUp, Zap, BarChart2 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -626,38 +626,31 @@ const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
                 <Card key={index} className="bg-white/80 backdrop-blur border-slate-200 hover:bg-white transition-all text-center shadow-sm">
                   <CardHeader>
                     <div className="flex justify-center mb-4">
-                      <div className="p-4 rounded-lg bg-gradient-to-br from-financial-cyan/20 to-valoov-orange/20">
-                        {tech.icon === "google-logo" ? (
-                          <img 
-                            src="/lovable-uploads/b877c169-a0f0-4b2a-b3be-df374a7ff1a6.png" 
-                            alt="Google Cloud Logo" 
-                            className="h-8 w-8 object-contain"
-                          />
-                        ) : tech.icon === "dialogflow-logo" ? (
-                          <img 
-                            src="/lovable-uploads/17a79a69-36c7-4c94-877b-eef8769d4d75.png" 
-                            alt="Dialogflow CX Logo" 
-                            className="h-8 w-8 object-contain"
-                          />
-                        ) : tech.icon === "vertex-ai-logo" ? (
-                          <img 
-                            src="/lovable-uploads/369b8f7d-8aa1-46b7-97d0-c465296cdfcc.png" 
-                            alt="Vertex AI Logo" 
-                            className="h-8 w-8 object-contain"
-                          />
-                        ) : tech.icon === "python-logo" ? (
-                          <img 
-                            src="/lovable-uploads/c15db171-d90b-469e-9240-0b374c26c27c.png" 
-                            alt="Python Logo" 
-                            className="h-8 w-8 object-contain"
-                          />
-                        ) : (
-                          (() => {
-                            const Icon = tech.icon as React.ComponentType<{ className: string }>;
-                            return <Icon className="h-8 w-8 text-financial-cyan" />;
-                          })()
-                        )}
-                      </div>
+                      {tech.icon === "google-logo" ? (
+                        <img 
+                          src="/lovable-uploads/b877c169-a0f0-4b2a-b3be-df374a7ff1a6.png" 
+                          alt="Google Cloud Logo" 
+                          className="h-8 w-8 object-contain"
+                        />
+                      ) : tech.icon === "dialogflow-logo" ? (
+                        <img 
+                          src="/lovable-uploads/17a79a69-36c7-4c94-877b-eef8769d4d75.png" 
+                          alt="Dialogflow CX Logo" 
+                          className="h-8 w-8 object-contain"
+                        />
+                      ) : tech.icon === "vertex-ai-logo" ? (
+                        <img 
+                          src="/lovable-uploads/369b8f7d-8aa1-46b7-97d0-c465296cdfcc.png" 
+                          alt="Vertex AI Logo" 
+                          className="h-8 w-8 object-contain"
+                        />
+                      ) : tech.icon === "python-logo" ? (
+                        <img 
+                          src="/lovable-uploads/c15db171-d90b-469e-9240-0b374c26c27c.png" 
+                          alt="Python Logo" 
+                          className="h-8 w-8 object-contain"
+                        />
+                      ) : null}
                     </div>
                     <CardTitle className="text-lg text-slate-800">{tech.name}</CardTitle>
                   </CardHeader>
