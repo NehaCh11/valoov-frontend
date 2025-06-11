@@ -21,7 +21,6 @@ import SignupPage from '@/pages/Signup';
 import Dashboard from '@/pages/Dashboard';
 
 // Admin imports
-import AdminLogin from '@/pages/admin/AdminLogin';
 import AdminDashboard from '@/pages/admin/AdminDashboard';
 
 const queryClient = new QueryClient();
@@ -50,7 +49,6 @@ function App() {
           <Route path="/signup" element={<SignupPage />} />
           
           {/* Admin Routes */}
-          <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
           
           {/* Protected Dashboard Routes */}

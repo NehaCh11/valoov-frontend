@@ -11,9 +11,10 @@ interface LoginFormProps {
   onBack: () => void;
   onSwitchToSignup: () => void;
   onLoginSuccess: () => void;
+  onAdminLoginSuccess?: () => void;
 }
 
-const LoginForm = ({ onBack, onSwitchToSignup, onLoginSuccess }: LoginFormProps) => {
+const LoginForm = ({ onBack, onSwitchToSignup, onLoginSuccess, onAdminLoginSuccess }: LoginFormProps) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -25,12 +26,23 @@ const LoginForm = ({ onBack, onSwitchToSignup, onLoginSuccess }: LoginFormProps)
     e.preventDefault();
     setIsLoading(true);
     
-    // Simulate authentication - for demo purposes, any valid email/password combo works
+    // Check for admin credentials first
+    if (email === 'admin@valoov.com' && password === 'admin123') {
+      console.log('Admin login successful');
+      localStorage.setItem('adminToken', 'demo-admin-token');
+      if (onAdminLoginSuccess) {
+        onAdminLoginSuccess();
+      }
+      setIsLoading(false);
+      return;
+    }
+    
+    // Regular user authentication - for demo purposes, any valid email/password combo works
     await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API call
     
     if (email && password.length >= 6) {
-      console.log('Login credentials validated:', { email, rememberMe });
-      console.log('Login successful, redirecting to dashboard');
+      console.log('User login credentials validated:', { email, rememberMe });
+      console.log('User login successful, redirecting to dashboard');
       onLoginSuccess(); // Direct login without 2FA
     } else {
       alert('Please enter a valid email and password (min 6 characters)');
@@ -75,7 +87,7 @@ const LoginForm = ({ onBack, onSwitchToSignup, onLoginSuccess }: LoginFormProps)
               <CardDescription className="text-muted-foreground">
                 {showForgotPassword 
                   ? 'Enter your email to receive a password reset link'
-                  : 'Sign in to access your company valuation dashboard'
+                  : 'Sign in to access your dashboard'
                 }
               </CardDescription>
             </CardHeader>
@@ -181,6 +193,10 @@ const LoginForm = ({ onBack, onSwitchToSignup, onLoginSuccess }: LoginFormProps)
                   >
                     {isLoading ? 'Signing In...' : 'Sign In'}
                   </Button>
+
+                  <div className="text-center text-xs text-muted-foreground">
+                    Demo admin: admin@valoov.com / admin123
+                  </div>
                 </form>
               )}
 

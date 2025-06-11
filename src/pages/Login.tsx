@@ -6,6 +6,7 @@
  * - Email/password login
  * - Two-factor authentication
  * - Password reset functionality
+ * - Admin login (admin@valoov.com)
  */
 
 import { useNavigate } from 'react-router-dom';
@@ -26,11 +27,16 @@ const LoginPage = () => {
     navigate('/dashboard');
   };
 
+  const handleAdminLoginSuccess = () => {
+    navigate('/admin/dashboard');
+  };
+
   return (
     <LoginForm 
       onBack={handleBack}
       onSwitchToSignup={handleSwitchToSignup}
       onLoginSuccess={handleLoginSuccess}
+      onAdminLoginSuccess={handleAdminLoginSuccess}
     />
   );
 };
