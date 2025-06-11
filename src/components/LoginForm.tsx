@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { ArrowLeft, Mail, Lock, Eye, EyeOff } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -60,7 +59,7 @@ const LoginForm = ({ onBack, onSwitchToSignup, onLoginSuccess, onAdminLoginSucce
   };
 
   return (
-    <div className="min-h-screen w-full bg-valoov-dark-gray">
+    <div className="min-h-screen w-full">
       <div className="valoov-gradient min-h-screen w-full flex items-center justify-center p-4">
         <div className="w-full max-w-md mx-auto">
           <Button 
