@@ -1,4 +1,3 @@
-
 import { Upload, FileText, BarChart3, CheckCircle, ArrowRight, Calculator, Star, Eye, Play, X, TrendingUp, Zap, BarChart2, Bot, Brain, Code } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -134,12 +133,12 @@ const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
     {
       name: "Vertex AI",
       description: "Machine learning platform powering our valuation analysis algorithms",
-      icon: Brain
+      icon: "vertex-ai-logo"
     },
     {
       name: "Python",
       description: "Robust programming foundation for financial modeling and data analysis",
-      icon: Code
+      icon: "python-logo"
     }
   ];
 
@@ -638,6 +637,18 @@ const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
                           <img 
                             src="/lovable-uploads/17a79a69-36c7-4c94-877b-eef8769d4d75.png" 
                             alt="Dialogflow CX Logo" 
+                            className="h-8 w-8 object-contain"
+                          />
+                        ) : tech.icon === "vertex-ai-logo" ? (
+                          <img 
+                            src="/lovable-uploads/369b8f7d-8aa1-46b7-97d0-c465296cdfcc.png" 
+                            alt="Vertex AI Logo" 
+                            className="h-8 w-8 object-contain"
+                          />
+                        ) : tech.icon === "python-logo" ? (
+                          <img 
+                            src="/lovable-uploads/c15db171-d90b-469e-9240-0b374c26c27c.png" 
+                            alt="Python Logo" 
                             className="h-8 w-8 object-contain"
                           />
                         ) : (
