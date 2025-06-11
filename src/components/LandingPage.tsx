@@ -220,9 +220,9 @@ const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
               </div>
             </div>
 
-            {/* Right side - Demo video placeholder */}
+            {/* Right side - Demo video placeholder with exact red rectangle dimensions */}
             <div className="flex justify-center lg:justify-end">
-              <div className="relative w-full max-w-lg aspect-video bg-gradient-to-br from-financial-cyan/20 to-valoov-orange/20 rounded-lg shadow-lg overflow-hidden border border-slate-200">
+              <div className="relative w-[520px] h-[340px] bg-gradient-to-br from-financial-cyan/20 to-valoov-orange/20 rounded-lg shadow-lg overflow-hidden border border-slate-200">
                 <img 
                   src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=600&h=400" 
                   alt="Demo video thumbnail" 
