@@ -33,52 +33,72 @@ import AdminUserManagement from '@/pages/admin/AdminUserManagement';
 const queryClient = new QueryClient();
 
 function App() {
-  const handleSetActiveView = (view: string) => {
-    // This is a placeholder function for setActiveView
-    // In a real app, you might want to handle navigation differently
-    console.log('Navigating to view:', view);
-  };
-
   return (
     <QueryClientProvider client={queryClient}>
-      <SidebarProvider>
-        <Router>
-          <div className="min-h-screen bg-background">
-            <Routes>
-              {/* Public Routes */}
-              <Route path="/" element={<Index />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<Signup />} />
-              
-              {/* Protected Routes */}
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/portfolio" element={<Portfolio />} />
-              <Route path="/history" element={<History setActiveView={handleSetActiveView} />} />
-              <Route path="/company-profile" element={<CompanyProfile />} />
-              <Route path="/notification-settings" element={<NotificationSettings />} />
-              <Route path="/revenue-projections" element={<RevenueProjections />} />
-              <Route path="/questionnaire" element={<ChatbotQuestionnaire />} />
-              <Route path="/valuation-dashboard" element={<ValuationDashboard />} />
-              <Route path="/valuation-overview" element={<ValuationOverview />} />
-              <Route path="/valuation-report" element={<ValuationReport />} />
-              <Route path="/generate-valuation-report" element={<GenerateValuationReport />} />
-              
-              {/* Admin Routes */}
-              <Route path="/admin/dashboard" element={<AdminDashboard />} />
-              <Route path="/admin/companies" element={<AdminCompanies />} />
-              <Route path="/admin/user-management" element={<AdminUserManagement />} />
-              <Route path="/admin/support" element={<AdminSupport />} />
-              <Route path="/admin/support/reply" element={<AdminSupportReply />} />
-              <Route path="/admin/subscriptions" element={<AdminSubscriptions />} />
-              <Route path="/admin/settings" element={<AdminSettings />} />
-              
-              {/* 404 Route */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </div>
-          <Toaster />
-        </Router>
-      </SidebarProvider>
+      <Router>
+        <div className="min-h-screen bg-background">
+          <Routes>
+            {/* Public Routes */}
+            <Route path="/" element={<Index />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            
+            {/* Protected Routes - No Sidebar */}
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/portfolio" element={<Portfolio />} />
+            <Route path="/history" element={<History setActiveView={() => {}} />} />
+            <Route path="/company-profile" element={<CompanyProfile />} />
+            <Route path="/notification-settings" element={<NotificationSettings />} />
+            <Route path="/revenue-projections" element={<RevenueProjections />} />
+            <Route path="/questionnaire" element={<ChatbotQuestionnaire />} />
+            <Route path="/valuation-dashboard" element={<ValuationDashboard />} />
+            <Route path="/valuation-overview" element={<ValuationOverview />} />
+            <Route path="/valuation-report" element={<ValuationReport />} />
+            <Route path="/generate-valuation-report" element={<GenerateValuationReport />} />
+            
+            {/* Admin Routes - With Sidebar */}
+            <Route path="/admin/dashboard" element={
+              <SidebarProvider>
+                <AdminDashboard />
+              </SidebarProvider>
+            } />
+            <Route path="/admin/companies" element={
+              <SidebarProvider>
+                <AdminCompanies />
+              </SidebarProvider>
+            } />
+            <Route path="/admin/user-management" element={
+              <SidebarProvider>
+                <AdminUserManagement />
+              </SidebarProvider>
+            } />
+            <Route path="/admin/support" element={
+              <SidebarProvider>
+                <AdminSupport />
+              </SidebarProvider>
+            } />
+            <Route path="/admin/support/reply" element={
+              <SidebarProvider>
+                <AdminSupportReply />
+              </SidebarProvider>
+            } />
+            <Route path="/admin/subscriptions" element={
+              <SidebarProvider>
+                <AdminSubscriptions />
+              </SidebarProvider>
+            } />
+            <Route path="/admin/settings" element={
+              <SidebarProvider>
+                <AdminSettings />
+              </SidebarProvider>
+            } />
+            
+            {/* 404 Route */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </div>
+        <Toaster />
+      </Router>
     </QueryClientProvider>
   );
 }
