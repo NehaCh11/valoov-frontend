@@ -1,15 +1,6 @@
-import {
-  BarChart3,
-  TrendingUp,
-  FileText,
-  Bot,
-  Settings,
-  Building2,
-  Eye,
-  PlusCircle,
-  CreditCard,
-  Home
-} from 'lucide-react';
+
+import { BarChart3, FileText, History, Settings, User, PieChart, TrendingUp, Home } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 import {
   Sidebar,
   SidebarContent,
@@ -21,176 +12,125 @@ import {
   SidebarMenuItem,
   SidebarHeader,
   SidebarFooter,
-} from '@/components/ui/sidebar';
+} from "@/components/ui/sidebar";
+
+// Menu items matching our actual routes
+const navigationItems = [
+  {
+    title: "Dashboard",
+    url: "/dashboard",
+    icon: Home,
+  },
+  {
+    title: "Valuation Overview",
+    url: "/valuation-overview",
+    icon: BarChart3,
+  },
+  {
+    title: "Start Questionnaire",
+    url: "/chatbot-questionnaire",
+    icon: FileText,
+  },
+  {
+    title: "Generate Report",
+    url: "/generate-valuation-report",
+    icon: TrendingUp,
+  },
+  {
+    title: "View Report",
+    url: "/valuation-report",
+    icon: FileText,
+  },
+  {
+    title: "History",
+    url: "/history",
+    icon: History,
+  },
+  {
+    title: "Revenue Projections",
+    url: "/revenue-projections",
+    icon: PieChart,
+  },
+  {
+    title: "Portfolio",
+    url: "/portfolio",
+    icon: BarChart3,
+  },
+];
+
+const settingsItems = [
+  {
+    title: "Company Profile",
+    url: "/company-profile",
+    icon: User,
+  },
+  {
+    title: "Notifications",
+    url: "/notification-settings",
+    icon: Settings,
+  },
+];
 
 interface AppSidebarProps {
   activeView: string;
   setActiveView: (view: string) => void;
 }
 
-const mainItems = [
-  {
-    title: "Dashboard",
-    icon: Home,
-    id: "dashboard"
-  },
-  {
-    title: "AI Questionnaire",
-    icon: Bot,
-    id: "questionnaire"
-  }
-];
-
-const valuationItems = [
-  {
-    title: "Valuation Overview",
-    icon: Eye,
-    id: "valuation-overview"
-  },
-  {
-    title: "Generate Report",
-    icon: PlusCircle,
-    id: "generate-report"
-  },
-  {
-    title: "Valuation Report",
-    icon: FileText,
-    id: "valuation-report"
-  }
-];
-
-const reportsItems = [
-  {
-    title: "Billing & Payment",
-    icon: CreditCard,
-    id: "history"
-  }
-];
-
-const accountItems = [
-  {
-    title: "Company Profile",
-    icon: Building2,
-    id: "profile"
-  },
-  {
-    title: "Settings",
-    icon: Settings,
-    id: "settings"
-  }
-];
-
 export function AppSidebar({ activeView, setActiveView }: AppSidebarProps) {
+  const location = useLocation();
+
   return (
     <Sidebar>
       <SidebarHeader className="p-4">
-        <div className="flex items-center space-x-3">
-          <img 
-            src="/lovable-uploads/10986bb1-03cf-4cef-b5a2-8a61c6dfd7a1.png" 
-            alt="VALOOV AI Logo" 
-            className="h-16 w-auto object-contain"
-          />
+        <div className="flex items-center space-x-2">
+          <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+            <span className="text-primary-foreground font-bold text-sm">V</span>
+          </div>
+          <span className="font-bold text-lg">VALOOV</span>
         </div>
       </SidebarHeader>
-
+      
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Main</SidebarGroupLabel>
+          <SidebarGroupLabel>Navigation</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {mainItems.map((item) => {
-                const Icon = item.icon;
-                return (
-                  <SidebarMenuItem key={item.id}>
-                    <SidebarMenuButton 
-                      onClick={() => setActiveView(item.id)}
-                      isActive={activeView === item.id}
-                      className="w-full"
-                    >
-                      <Icon className="h-4 w-4" />
+              {navigationItems.map((item) => (
+                <SidebarMenuItem key={item.title}>
+                  <SidebarMenuButton asChild isActive={location.pathname === item.url}>
+                    <Link to={item.url}>
+                      <item.icon />
                       <span>{item.title}</span>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                );
-              })}
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
 
         <SidebarGroup>
-          <SidebarGroupLabel>Valuation</SidebarGroupLabel>
+          <SidebarGroupLabel>Settings</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {valuationItems.map((item) => {
-                const Icon = item.icon;
-                return (
-                  <SidebarMenuItem key={item.id}>
-                    <SidebarMenuButton 
-                      onClick={() => setActiveView(item.id)}
-                      isActive={activeView === item.id}
-                      className="w-full"
-                    >
-                      <Icon className="h-4 w-4" />
+              {settingsItems.map((item) => (
+                <SidebarMenuItem key={item.title}>
+                  <SidebarMenuButton asChild isActive={location.pathname === item.url}>
+                    <Link to={item.url}>
+                      <item.icon />
                       <span>{item.title}</span>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                );
-              })}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-
-        <SidebarGroup>
-          <SidebarGroupLabel>Billing</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {reportsItems.map((item) => {
-                const Icon = item.icon;
-                return (
-                  <SidebarMenuItem key={item.id}>
-                    <SidebarMenuButton 
-                      onClick={() => setActiveView(item.id)}
-                      isActive={activeView === item.id}
-                      className="w-full"
-                    >
-                      <Icon className="h-4 w-4" />
-                      <span>{item.title}</span>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                );
-              })}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-
-        <SidebarGroup>
-          <SidebarGroupLabel>Account</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {accountItems.map((item) => {
-                const Icon = item.icon;
-                return (
-                  <SidebarMenuItem key={item.id}>
-                    <SidebarMenuButton 
-                      onClick={() => setActiveView(item.id)}
-                      isActive={activeView === item.id}
-                      className="w-full"
-                    >
-                      <Icon className="h-4 w-4" />
-                      <span>{item.title}</span>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                );
-              })}
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
 
       <SidebarFooter className="p-4">
-        <div className="text-xs text-gray-400 text-center">
-          <p>© 2024 VALOOV</p>
-          <p>Professional Valuations</p>
+        <div className="text-xs text-muted-foreground">
+          © 2024 VALOOV
         </div>
       </SidebarFooter>
     </Sidebar>
