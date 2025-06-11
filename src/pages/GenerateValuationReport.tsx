@@ -1,20 +1,42 @@
 
+/**
+ * Generate Valuation Report Page
+ * 
+ * This page displays the step-by-step progress for generating a valuation report.
+ * Features:
+ * - Progress tracking for all valuation steps
+ * - Step completion status visualization
+ * - Report generation functionality
+ * - Plan selection and billing integration
+ * - Payment processing workflow
+ * 
+ * Steps:
+ * 1. Company Info - Basic company information setup
+ * 2. Upload Docs - Supporting financial documents
+ * 3. Questionnaire - 37-question qualitative assessment
+ * 4. Projections - 3-year financial forecast
+ * 5. Generate Report - Create professional valuation
+ * 6. Choose Plan - Select valuation package
+ */
+
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { ChevronRight, CheckCircle, Circle, FileText, Building2, Bot, TrendingUp, Upload, CreditCard } from 'lucide-react';
-import { PricingModule } from './PricingModule';
-import { BillingForm } from './BillingForm';
+import { PricingModule } from '@/components/PricingModule';
+import { BillingForm } from '@/components/BillingForm';
 
 export function GenerateValuationReport() {
+  // State management for report generation flow
   const [currentStep, setCurrentStep] = useState(1);
   const [selectedPlan, setSelectedPlan] = useState<string>('');
   const [showBilling, setShowBilling] = useState(false);
   const [paymentCompleted, setPaymentCompleted] = useState(false);
   const [reportGenerated, setReportGenerated] = useState(false);
 
+  // Step configuration with completion status
   const steps = [
     {
       id: 1,
@@ -60,25 +82,36 @@ export function GenerateValuationReport() {
     }
   ];
 
+  // Calculate completion progress
   const completedSteps = steps.filter(step => step.completed).length;
   const progressPercentage = (completedSteps / steps.length) * 100;
 
+  // Available pricing plans
   const plans = {
     basic: { name: 'Basic Report', price: '€49', id: 'basic' },
     premium: { name: 'Premium + Review', price: '€199', id: 'premium' },
     enterprise: { name: 'Enterprise', price: '€499', id: 'enterprise' }
   };
 
+  /**
+   * Handles plan selection and navigates to billing
+   */
   const handlePlanSelect = (planId: string) => {
     setSelectedPlan(planId);
     setShowBilling(true);
   };
 
+  /**
+   * Handles payment completion
+   */
   const handlePaymentComplete = () => {
     setPaymentCompleted(true);
     setShowBilling(false);
   };
 
+  /**
+   * Generates the valuation report
+   */
   const handleGenerateReport = () => {
     setReportGenerated(true);
     setCurrentStep(6);
@@ -107,12 +140,13 @@ export function GenerateValuationReport() {
 
   return (
     <div className="space-y-6 bg-white min-h-screen p-6">
+      {/* Page Header */}
       <div>
         <h1 className="text-3xl font-bold text-slate-800">Generate Valuation Report</h1>
         <p className="text-slate-600 mt-1">Complete all steps to generate your comprehensive valuation report</p>
       </div>
 
-      {/* Progress Overview */}
+      {/* Progress Overview Card */}
       <Card className="bg-white border-slate-200 shadow-sm">
         <CardHeader>
           <CardTitle className="text-slate-800">Overall Progress</CardTitle>
@@ -131,7 +165,7 @@ export function GenerateValuationReport() {
         </CardContent>
       </Card>
 
-      {/* Steps */}
+      {/* Step Cards */}
       <div className="space-y-4">
         {steps.map((step, index) => {
           const Icon = step.icon;
@@ -155,6 +189,7 @@ export function GenerateValuationReport() {
             >
               <CardContent className="p-6">
                 <div className="flex items-center space-x-4">
+                  {/* Step Icon */}
                   <div className={`p-3 rounded-full ${
                     step.completed ? 'bg-green-600' : 
                     isActive ? 'bg-valoov-teal' : 'bg-slate-600'
@@ -166,6 +201,7 @@ export function GenerateValuationReport() {
                     )}
                   </div>
                   
+                  {/* Step Content */}
                   <div className="flex-1">
                     <div className="flex items-center space-x-2">
                       <h3 className="text-lg font-semibold text-slate-800">
@@ -181,6 +217,7 @@ export function GenerateValuationReport() {
                     <p className="text-slate-600">{step.description}</p>
                   </div>
                   
+                  {/* Step Actions */}
                   <div className="flex items-center space-x-2">
                     {step.completed ? (
                       <Button variant="outline" size="sm">

@@ -1,3 +1,21 @@
+/**
+ * AI Chatbot Questionnaire Page
+ * 
+ * This page handles the interactive questionnaire process for company valuation.
+ * Features:
+ * - Tax return PDF upload functionality
+ * - Voice note recording capabilities
+ * - Step-by-step business questionnaire
+ * - File attachment support
+ * - Real-time chat interface
+ * 
+ * Flow:
+ * 1. User uploads tax return PDF
+ * 2. AI starts asking business questions
+ * 3. User responds via text, voice, or file uploads
+ * 4. Process continues until questionnaire is complete
+ */
+
 import React, { useState, useRef, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -60,18 +78,26 @@ const questions: Question[] = [
   { id: 'top_risks', category: 'Legal, IP & Risk', question: 'What are the top 3 risks facing your business today?', type: 'textarea', required: true }
 ];
 
+/**
+ * Main ChatbotQuestionnaire Component
+ * Handles the entire questionnaire flow from tax return upload to completion
+ */
 const ChatbotQuestionnaire = () => {
+  // State management for questionnaire flow
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [currentMessage, setCurrentMessage] = useState('');
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [isCompleted, setIsCompleted] = useState(false);
+  
+  // File upload and voice recording state
   const [isRecording, setIsRecording] = useState(false);
   const [selectedPdf, setSelectedPdf] = useState<File | null>(null);
   const [taxReturnsUploaded, setTaxReturnsUploaded] = useState<UploadedTaxReturn[]>([]);
   const [questionnaireStarted, setQuestionnaireStarted] = useState(false);
   const [isDragOver, setIsDragOver] = useState(false);
   
+  // Refs for DOM elements and media handling
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const audioChunksRef = useRef<Blob[]>([]);
@@ -101,6 +127,9 @@ const ChatbotQuestionnaire = () => {
     }
   }, [currentMessage]);
 
+  /**
+   * Adds a bot message to the chat
+   */
   const addBotMessage = (content: string) => {
     const message: ChatMessage = {
       id: Math.random().toString(36).substr(2, 9),
@@ -111,6 +140,9 @@ const ChatbotQuestionnaire = () => {
     setMessages(prev => [...prev, message]);
   };
 
+  /**
+   * Adds a user message to the chat with optional attachments
+   */
   const addUserMessage = (content: string, audioUrl?: string, pdfUrl?: string, pdfName?: string) => {
     const message: ChatMessage = {
       id: Math.random().toString(36).substr(2, 9),
@@ -124,10 +156,16 @@ const ChatbotQuestionnaire = () => {
     setMessages(prev => [...prev, message]);
   };
 
+  /**
+   * Handles tax return PDF upload
+   */
   const handleTaxReturnUpload = () => {
     taxReturnInputRef.current?.click();
   };
 
+  /**
+   * Processes uploaded tax return files
+   */
   const handleTaxReturnFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
@@ -229,10 +267,16 @@ const ChatbotQuestionnaire = () => {
     }
   };
 
+  /**
+   * Removes uploaded tax return
+   */
   const removeTaxReturn = (id: string) => {
     setTaxReturnsUploaded(prev => prev.filter(tr => tr.id !== id));
   };
 
+  /**
+   * Handles voice recording functionality
+   */
   const handleVoiceNote = async () => {
     if (!isRecording) {
       try {
@@ -312,6 +356,9 @@ const ChatbotQuestionnaire = () => {
     }
   };
 
+  /**
+   * Handles message submission and questionnaire progression
+   */
   const handleSubmitMessage = () => {
     if (!currentMessage.trim()) return;
 
@@ -357,6 +404,9 @@ const ChatbotQuestionnaire = () => {
     }
   };
 
+  /**
+   * Handles Enter key press for message submission
+   */
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
