@@ -1,4 +1,3 @@
-
 import { BarChart3, FileText, History, Settings, User, PieChart, TrendingUp, Home } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import {
@@ -28,7 +27,7 @@ const navigationItems = [
   },
   {
     title: "Start Questionnaire",
-    url: "/chatbot-questionnaire",
+    url: "/questionnaire",
     icon: FileText,
   },
   {
