@@ -18,7 +18,7 @@ import ChatbotQuestionnaire from '@/pages/ChatbotQuestionnaire';
 import ValuationDashboard from '@/pages/ValuationDashboard';
 import ValuationOverview from '@/pages/ValuationOverview';
 import ValuationReport from '@/pages/ValuationReport';
-import GenerateValuationReport from '@/pages/GenerateValuationReport';
+import { GenerateValuationReport } from '@/pages/GenerateValuationReport';
 import NotFound from '@/pages/NotFound';
 
 // Admin Pages
@@ -32,6 +32,12 @@ import AdminSettings from '@/pages/admin/AdminSettings';
 const queryClient = new QueryClient();
 
 function App() {
+  const handleSetActiveView = (view: string) => {
+    // This is a placeholder function for setActiveView
+    // In a real app, you might want to handle navigation differently
+    console.log('Navigating to view:', view);
+  };
+
   return (
     <QueryClientProvider client={queryClient}>
       <SidebarProvider>
@@ -46,7 +52,7 @@ function App() {
               {/* Protected Routes */}
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/portfolio" element={<Portfolio />} />
-              <Route path="/history" element={<History />} />
+              <Route path="/history" element={<History setActiveView={handleSetActiveView} />} />
               <Route path="/company-profile" element={<CompanyProfile />} />
               <Route path="/notification-settings" element={<NotificationSettings />} />
               <Route path="/revenue-projections" element={<RevenueProjections />} />

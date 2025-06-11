@@ -1,4 +1,3 @@
-
 /**
  * Generate Valuation Report Page
  * 
@@ -26,14 +25,14 @@ import { Progress } from '@/components/ui/progress';
 import { ChevronRight, CheckCircle, Circle, FileText, Building2, Bot, TrendingUp, Upload, CreditCard } from 'lucide-react';
 import { PricingModule } from '@/components/PricingModule';
 
-export function GenerateValuationReport() {
-  // State management for report generation flow
+const GenerateValuationReport = () => {
+  // state management for report generation flow
   const [currentStep, setCurrentStep] = useState(1);
   const [selectedPlan, setSelectedPlan] = useState<string>('');
   const [paymentCompleted, setPaymentCompleted] = useState(false);
   const [reportGenerated, setReportGenerated] = useState(false);
 
-  // Step configuration with completion status
+  // step configuration with completion status
   const steps = [
     {
       id: 1,
@@ -79,35 +78,31 @@ export function GenerateValuationReport() {
     }
   ];
 
-  // Calculate completion progress
+  // calculate completion progress
   const completedSteps = steps.filter(step => step.completed).length;
   const progressPercentage = (completedSteps / steps.length) * 100;
 
-  // Available pricing plans
+  // available pricing plans
   const plans = {
     basic: { name: 'Basic Report', price: '€49', id: 'basic' },
     premium: { name: 'Premium + Review', price: '€199', id: 'premium' },
     enterprise: { name: 'Enterprise', price: '€499', id: 'enterprise' }
   };
 
-  /**
-   * Handles plan selection - will integrate with Stripe
-   */
+  // handles plan selection - will integrate with Stripe
   const handlePlanSelect = (planId: string) => {
     setSelectedPlan(planId);
     // TODO: Integrate with Stripe for payment processing
     console.log('Selected plan:', planId);
   };
 
-  /**
-   * Generates the valuation report
-   */
+  // generates the valuation report
   const handleGenerateReport = () => {
     setReportGenerated(true);
     setCurrentStep(6);
   };
 
-  // Show pricing module if step 6 is active and payment not completed
+  // show pricing module if step 6 is active and payment not completed
   if (currentStep === 6 && !paymentCompleted) {
     return (
       <PricingModule 
@@ -278,4 +273,6 @@ export function GenerateValuationReport() {
       )}
     </div>
   );
-}
+};
+
+export default GenerateValuationReport;
