@@ -1,4 +1,4 @@
-import { Upload, FileText, BarChart3, CheckCircle, ArrowRight, Calculator, Star, Eye, Play, X } from 'lucide-react';
+import { Upload, FileText, BarChart3, CheckCircle, ArrowRight, Calculator, Star, Eye, Play, X, TrendingUp, Zap, BarChart2 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -422,6 +422,169 @@ const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
               </TableBody>
             </Table>
           </div>
+        </section>
+
+        {/* Data Sources & Methodology Section */}
+        <section className="mb-20">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold mb-4 text-black">Data Sources & Methodology</h2>
+            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+              Our AI combines multiple valuation methods with real-time global data for comprehensive analysis.
+            </p>
+          </div>
+          
+          <div className="grid lg:grid-cols-2 gap-8 mb-12">
+            {/* Valuation Methods */}
+            <Card className="bg-white border-slate-200 shadow-sm">
+              <CardHeader>
+                <div className="flex items-center space-x-3 mb-4">
+                  <div className="p-2 rounded-lg bg-blue-100">
+                    <FileText className="h-6 w-6 text-blue-600" />
+                  </div>
+                  <CardTitle className="text-xl text-slate-800">Valuation Methods</CardTitle>
+                </div>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div className="flex items-start space-x-3">
+                  <div className="p-2 rounded-lg bg-green-100 mt-1">
+                    <BarChart3 className="h-4 w-4 text-green-600" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-slate-800 mb-1">Discounted Cash Flow (DCF)</h4>
+                    <p className="text-sm text-slate-600">Projects future cash flows and discounts them to present value.</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start space-x-3">
+                  <div className="p-2 rounded-lg bg-orange-100 mt-1">
+                    <TrendingUp className="h-4 w-4 text-orange-600" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-slate-800 mb-1">Venture Capital Method</h4>
+                    <p className="text-sm text-slate-600">Calculates post-money valuation based on projected exit value and required returns.</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start space-x-3">
+                  <div className="p-2 rounded-lg bg-purple-100 mt-1">
+                    <BarChart2 className="h-4 w-4 text-purple-600" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-slate-800 mb-1">Comparable Company Analysis</h4>
+                    <p className="text-sm text-slate-600">Benchmarks against similar companies in your industry.</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start space-x-3">
+                  <div className="p-2 rounded-lg bg-blue-100 mt-1">
+                    <Calculator className="h-4 w-4 text-blue-600" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-slate-800 mb-1">First Chicago Method</h4>
+                    <p className="text-sm text-slate-600">Weights multiple scenarios for early-stage companies.</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Global Data Sources */}
+            <Card className="bg-white border-slate-200 shadow-sm">
+              <CardHeader>
+                <div className="flex items-center space-x-3 mb-4">
+                  <div className="p-2 rounded-lg bg-orange-100">
+                    <BarChart3 className="h-6 w-6 text-orange-600" />
+                  </div>
+                  <CardTitle className="text-xl text-slate-800">Global Data Sources</CardTitle>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  <div className="flex items-center space-x-2">
+                    <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+                    <span className="text-sm text-slate-700">Global Market Intelligence</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+                    <span className="text-sm text-slate-700">Industry Benchmarks</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+                    <span className="text-sm text-slate-700">Financial Databases</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+                    <span className="text-sm text-slate-700">Startup Funding Data</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+                    <span className="text-sm text-slate-700">M&A Transactions</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+                    <span className="text-sm text-slate-700">Public Company Financials</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+                    <span className="text-sm text-slate-700">Economic Indicators</span>
+                  </div>
+                </div>
+
+                <div className="mt-6 pt-6 border-t border-slate-200">
+                  <h4 className="font-semibold text-slate-800 mb-2">Data Transparency</h4>
+                  <p className="text-sm text-slate-600">
+                    We believe in complete transparency in our valuation process. Every data point used in your valuation is documented and traceable to its source.
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* The Valoov Advantage */}
+          <Card className="bg-slate-50 border-slate-200 shadow-sm">
+            <CardContent className="py-12">
+              <div className="text-center mb-8">
+                <h3 className="text-2xl font-bold text-black mb-2">The Valoov Advantage</h3>
+              </div>
+              
+              <div className="grid md:grid-cols-3 gap-8">
+                <div className="text-center">
+                  <div className="flex justify-center mb-4">
+                    <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
+                      <CheckCircle className="h-8 w-8 text-blue-600" />
+                    </div>
+                  </div>
+                  <h4 className="text-lg font-semibold text-slate-800 mb-2">Accuracy</h4>
+                  <p className="text-sm text-slate-600">
+                    Our multi-method approach reduces variance and increases confidence in valuation results.
+                  </p>
+                </div>
+                
+                <div className="text-center">
+                  <div className="flex justify-center mb-4">
+                    <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center">
+                      <Zap className="h-8 w-8 text-orange-600" />
+                    </div>
+                  </div>
+                  <h4 className="text-lg font-semibold text-slate-800 mb-2">Speed</h4>
+                  <p className="text-sm text-slate-600">
+                    Get results in minutes instead of weeks with traditional valuation services.
+                  </p>
+                </div>
+                
+                <div className="text-center">
+                  <div className="flex justify-center mb-4">
+                    <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
+                      <TrendingUp className="h-8 w-8 text-green-600" />
+                    </div>
+                  </div>
+                  <h4 className="text-lg font-semibold text-slate-800 mb-2">Continuous Updates</h4>
+                  <p className="text-sm text-slate-600">
+                    Valuations stay current with market conditions and your business performance.
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         </section>
 
           {/* Testimonials Section */}
