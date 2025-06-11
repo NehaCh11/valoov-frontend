@@ -1,8 +1,8 @@
-
-import { Upload, FileText, BarChart3, CheckCircle, ArrowRight, Calculator, Star, Eye, Play } from 'lucide-react';
+import { Upload, FileText, BarChart3, CheckCircle, ArrowRight, Calculator, Star, Eye, Play, X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 
 interface LandingPageProps {
   onLogin?: () => void;
@@ -61,6 +61,80 @@ const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
     { country: "France", flag: "🇫🇷", status: "Available" },
     { country: "Spain", flag: "🇪🇸", status: "Available" }
   ];
+
+  const comparisonData = [
+    {
+      feature: "AI-powered analysis",
+      valoov: true,
+      traditional: false,
+      competitors: true
+    },
+    {
+      feature: "Multiple valuation methods",
+      valoov: true,
+      traditional: true,
+      competitors: true
+    },
+    {
+      feature: "Investor-ready reports",
+      valoov: true,
+      traditional: true,
+      competitors: true
+    },
+    {
+      feature: "Real-time data updates",
+      valoov: true,
+      traditional: false,
+      competitors: false
+    },
+    {
+      feature: "Industry benchmarking",
+      valoov: true,
+      traditional: true,
+      competitors: true
+    },
+    {
+      feature: "Time to complete",
+      valoov: "Minutes",
+      traditional: "Weeks",
+      competitors: "Days"
+    },
+    {
+      feature: "Cost",
+      valoov: "Affordable",
+      traditional: "Expensive",
+      competitors: "Moderate"
+    },
+    {
+      feature: "Value confidence score",
+      valoov: true,
+      traditional: false,
+      competitors: false
+    },
+    {
+      feature: "ESOP compliance tools",
+      valoov: true,
+      traditional: true,
+      competitors: false
+    }
+  ];
+
+  const renderComparisonValue = (value: boolean | string) => {
+    if (typeof value === 'boolean') {
+      return value ? (
+        <CheckCircle className="h-5 w-5 text-valoov-teal mx-auto" />
+      ) : (
+        <X className="h-5 w-5 text-red-500 mx-auto" />
+      );
+    }
+    return (
+      <span className={`
+        ${value === 'Minutes' || value === 'Affordable' ? 'text-financial-cyan font-semibold' : 'text-slate-600'}
+      `}>
+        {value}
+      </span>
+    );
+  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -262,6 +336,89 @@ const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
               </CardContent>
             </Card>
           </section>
+
+        {/* How We Compare Section */}
+        <section className="mb-20">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold mb-4 text-black">How We Compare</h2>
+            <p className="text-xl text-slate-600">See how Valoov stacks up against traditional valuation methods and competitors.</p>
+          </div>
+          
+          <Card className="bg-white/80 backdrop-blur border-slate-200 shadow-sm">
+            <CardContent className="p-0">
+              <Table>
+                <TableHeader>
+                  <TableRow className="border-b-2">
+                    <TableHead className="font-bold text-slate-800 py-6"></TableHead>
+                    <TableHead className="text-center py-6">
+                      <div className="bg-financial-cyan text-white rounded-lg px-4 py-2 font-bold">
+                        📊 Valoov
+                      </div>
+                    </TableHead>
+                    <TableHead className="text-center py-6">
+                      <div className="bg-slate-600 text-white rounded-lg px-4 py-2 font-bold">
+                        Traditional Valuator
+                      </div>
+                    </TableHead>
+                    <TableHead className="text-center py-6">
+                      <div className="bg-slate-400 text-white rounded-lg px-4 py-2 font-bold">
+                        Competitors
+                      </div>
+                    </TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {comparisonData.map((row, index) => (
+                    <TableRow key={index} className="hover:bg-slate-50">
+                      <TableCell className="font-medium text-slate-800 py-4">
+                        {row.feature}
+                      </TableCell>
+                      <TableCell className="text-center py-4">
+                        {renderComparisonValue(row.valoov)}
+                      </TableCell>
+                      <TableCell className="text-center py-4">
+                        {renderComparisonValue(row.traditional)}
+                      </TableCell>
+                      <TableCell className="text-center py-4">
+                        {renderComparisonValue(row.competitors)}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                  <TableRow className="border-t-2">
+                    <TableCell className="font-bold text-slate-800 py-6">
+                      Overall value
+                    </TableCell>
+                    <TableCell className="text-center py-6">
+                      <div className="flex justify-center">
+                        {[...Array(5)].map((_, i) => (
+                          <Star key={i} className="h-4 w-4 text-valoov-orange fill-current" />
+                        ))}
+                      </div>
+                    </TableCell>
+                    <TableCell className="text-center py-6">
+                      <div className="flex justify-center">
+                        {[...Array(3)].map((_, i) => (
+                          <Star key={i} className="h-4 w-4 text-valoov-orange fill-current" />
+                        ))}
+                        {[...Array(2)].map((_, i) => (
+                          <Star key={i} className="h-4 w-4 text-slate-300" />
+                        ))}
+                      </div>
+                    </TableCell>
+                    <TableCell className="text-center py-6">
+                      <div className="flex justify-center">
+                        {[...Array(4)].map((_, i) => (
+                          <Star key={i} className="h-4 w-4 text-valoov-orange fill-current" />
+                        ))}
+                        <Star className="h-4 w-4 text-slate-300" />
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </CardContent>
+          </Card>
+        </section>
 
           {/* Testimonials Section */}
           <section className="mb-20">
