@@ -1,8 +1,7 @@
-
 import { AdminLayout } from '@/layouts/AdminLayout';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Building2, Users, TrendingUp, Plus, Search, Filter } from 'lucide-react';
+import { Building2, Users, TrendingUp, Search, Filter } from 'lucide-react';
 
 const AdminCompanies = () => {
   return (
@@ -12,12 +11,6 @@ const AdminCompanies = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <h1 className="text-2xl font-bold text-valoov-orange">Company Management</h1>
-            <div className="flex items-center space-x-4">
-              <Button className="bg-blue-500 hover:bg-blue-600 text-white">
-                <Plus className="h-4 w-4 mr-2" />
-                Add Company
-              </Button>
-            </div>
           </div>
         </div>
       </div>
