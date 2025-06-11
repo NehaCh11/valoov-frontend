@@ -1,9 +1,7 @@
-import { useState } from 'react';
 import { Upload, FileText, BarChart3, CheckCircle, ArrowRight, Calculator, Star, Eye } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import LoginForm from '@/components/LoginForm';
-import SignupForm from '@/components/SignupForm';
 
 interface LandingPageProps {
   onLogin?: () => void;
@@ -11,22 +9,7 @@ interface LandingPageProps {
 }
 
 const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
-  const [showLogin, setShowLogin] = useState(false);
-  const [showSignup, setShowSignup] = useState(false);
-
-  const handleLoginSuccess = () => {
-    setShowLogin(false);
-    if (onLogin) {
-      onLogin();
-    }
-  };
-
-  const handleAccountCreated = () => {
-    setShowSignup(false);
-    if (onAccountCreated) {
-      onAccountCreated();
-    }
-  };
+  const navigate = useNavigate();
 
   const howItWorksSteps = [
     {
@@ -78,20 +61,6 @@ const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
     { country: "Spain", flag: "🇪🇸", status: "Available" }
   ];
 
-  if (showLogin) {
-    return (
-      <LoginForm 
-        onBack={() => setShowLogin(false)} 
-        onSwitchToSignup={() => { setShowLogin(false); setShowSignup(true); }} 
-        onLoginSuccess={handleLoginSuccess}
-      />
-    );
-  }
-
-  if (showSignup) {
-    return <SignupForm onBack={() => setShowSignup(false)} onLogin={() => { setShowSignup(false); setShowLogin(true); }} onAccountCreated={handleAccountCreated} />;
-  }
-
   return (
     <div className="min-h-screen bg-white">
       <div className="bg-white min-h-screen">
@@ -109,13 +78,13 @@ const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
               <Button 
                 variant="outline" 
                 className="border-financial-cyan text-financial-cyan hover:bg-financial-cyan/10 font-medium"
-                onClick={() => setShowLogin(true)}
+                onClick={() => navigate('/login')}
               >
                 Sign In
               </Button>
               <Button 
                 className="bg-valoov-orange hover:bg-valoov-orange/80 text-white font-medium"
-                onClick={() => setShowSignup(true)}
+                onClick={() => navigate('/signup')}
               >
                 Sign Up
               </Button>
@@ -154,7 +123,7 @@ const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
               <Button 
                 size="lg" 
                 className="bg-financial-cyan hover:bg-financial-cyan/80 text-white px-8 py-4 text-lg font-semibold"
-                onClick={() => setShowSignup(true)}
+                onClick={() => navigate('/signup')}
               >
                 Start Your Valuation
                 <ArrowRight className="ml-2 h-5 w-5" />
@@ -307,7 +276,7 @@ const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
                   <Button 
                     size="lg" 
                     className="bg-white text-valoov-teal hover:bg-white/90 px-8 py-4 text-lg font-semibold"
-                    onClick={() => setShowSignup(true)}
+                    onClick={() => navigate('/signup')}
                   >
                     <Calculator className="mr-2 h-5 w-5" />
                     Start Your Valuation

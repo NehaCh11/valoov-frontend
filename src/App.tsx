@@ -1,192 +1,144 @@
-
-import React from "react";
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { SidebarProvider, SidebarInset } from '@/components/ui/sidebar';
-import { AppSidebar } from '@/components/AppSidebar';
-import { TopNavigation } from '@/components/TopNavigation';
 import { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { QueryClient } from "@tanstack/react-query";
+import { Toaster } from "@/components/ui/toaster";
+import { SidebarProvider } from "@/components/SidebarProvider";
+import { MainLayout } from "@/layouts/MainLayout";
+import Index from '@/pages/Index';
+import NotFound from "@/pages/NotFound";
+import ValuationOverview from "@/pages/ValuationOverview";
+import ChatbotQuestionnaire from "@/pages/ChatbotQuestionnaire";
+import GenerateValuationReport from "@/pages/GenerateValuationReport";
+import ValuationReport from "@/pages/ValuationReport";
+import History from "@/pages/History";
+import RevenueProjections from "@/pages/RevenueProjections";
+import Portfolio from "@/pages/Portfolio";
+import CompanyProfilePage from "@/pages/CompanyProfile";
+import NotificationSettingsPage from "@/pages/NotificationSettings";
+import LoginPage from '@/pages/Login';
+import SignupPage from '@/pages/Signup';
 
-// Import all page components
-import LandingPage from '@/components/LandingPage';
-import ValuationDashboard from '@/pages/ValuationDashboard';
-import ValuationOverview from '@/pages/ValuationOverview';
-import ValuationReport from '@/pages/ValuationReport';
-import ChatbotQuestionnaire from '@/pages/ChatbotQuestionnaire';
-import { GenerateValuationReport } from '@/pages/GenerateValuationReport';
-import History from '@/pages/History';
-import RevenueProjections from '@/pages/RevenueProjections';
-import Portfolio from '@/pages/Portfolio';
-import NotificationSettings from '@/pages/NotificationSettings';
-import CompanyProfile from '@/pages/CompanyProfile';
-import NotFound from "./pages/NotFound";
+function App() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-const queryClient = new QueryClient();
-
-const App = () => {
-  // Authentication state management
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [activeView, setActiveView] = useState('questionnaire');
-
-  /**
-   * Handles user login and sets initial view
-   */
-  const handleLogin = () => {
-    setIsLoggedIn(true);
-    setActiveView('questionnaire');
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
   };
 
-  /**
-   * Handles account creation and sets initial view
-   */
-  const handleAccountCreated = () => {
-    setIsLoggedIn(true);
-    setActiveView('questionnaire');
+  const closeSidebar = () => {
+    setIsSidebarOpen(false);
   };
-
-  /**
-   * Handles user sign out and resets state
-   */
-  const handleSignOut = () => {
-    setIsLoggedIn(false);
-    setActiveView('questionnaire');
-  };
-
-  /**
-   * Layout wrapper for authenticated pages
-   */
-  const AuthenticatedLayout = ({ children }: { children: React.ReactNode }) => (
-    <div className="min-h-screen bg-financial-dark">
-      <div className="valoov-gradient min-h-screen">
-        <SidebarProvider>
-          <div className="min-h-screen flex w-full">
-            <AppSidebar activeView={activeView} setActiveView={setActiveView} />
-            <SidebarInset>
-              <TopNavigation onSignOut={handleSignOut} />
-              <main className="flex-1 p-6">
-                {children}
-              </main>
-            </SidebarInset>
-          </div>
-        </SidebarProvider>
-      </div>
-    </div>
-  );
 
   return (
-    <QueryClientProvider client={queryClient}>
+    <QueryClient>
       <Toaster />
-      <Sonner />
-      <BrowserRouter>
+      <Router>
         <Routes>
-          {/* Landing page route */}
-          <Route 
-            path="/" 
-            element={
-              !isLoggedIn ? (
-                <LandingPage onLogin={handleLogin} onAccountCreated={handleAccountCreated} />
-              ) : (
-                <AuthenticatedLayout>
+          {/* Landing Page */}
+          <Route path="/" element={<Index />} />
+          
+          {/* Authentication Pages */}
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignupPage />} />
+          
+          {/* Protected Dashboard Routes */}
+          <Route path="/dashboard" element={
+            <div className="min-h-screen bg-background">
+              <SidebarProvider>
+                <MainLayout>
+                  {/* Your dashboard content here */}
+                </MainLayout>
+              </SidebarProvider>
+            </div>
+          } />
+          <Route path="/valuation-overview" element={
+            <div className="min-h-screen bg-background">
+              <SidebarProvider>
+                <MainLayout>
+                  <ValuationOverview />
+                </MainLayout>
+              </SidebarProvider>
+            </div>
+          } />
+          <Route path="/chatbot-questionnaire" element={
+            <div className="min-h-screen bg-background">
+              <SidebarProvider>
+                <MainLayout>
                   <ChatbotQuestionnaire />
-                </AuthenticatedLayout>
-              )
-            } 
-          />
+                </MainLayout>
+              </SidebarProvider>
+            </div>
+          } />
+          <Route path="/generate-valuation-report" element={
+            <div className="min-h-screen bg-background">
+              <SidebarProvider>
+                <MainLayout>
+                  <GenerateValuationReport />
+                </MainLayout>
+              </SidebarProvider>
+            </div>
+          } />
+          <Route path="/valuation-report" element={
+            <div className="min-h-screen bg-background">
+              <SidebarProvider>
+                <MainLayout>
+                  <ValuationReport />
+                </MainLayout>
+              </SidebarProvider>
+            </div>
+          } />
+          <Route path="/history" element={
+            <div className="min-h-screen bg-background">
+              <SidebarProvider>
+                <MainLayout>
+                  <History />
+                </MainLayout>
+              </SidebarProvider>
+            </div>
+          } />
+          <Route path="/revenue-projections" element={
+            <div className="min-h-screen bg-background">
+              <SidebarProvider>
+                <MainLayout>
+                  <RevenueProjections />
+                </MainLayout>
+              </SidebarProvider>
+            </div>
+          } />
+          <Route path="/portfolio" element={
+            <div className="min-h-screen bg-background">
+              <SidebarProvider>
+                <MainLayout>
+                  <Portfolio />
+                </MainLayout>
+              </SidebarProvider>
+            </div>
+          } />
+          <Route path="/company-profile" element={
+            <div className="min-h-screen bg-background">
+              <SidebarProvider>
+                <MainLayout>
+                  <CompanyProfilePage />
+                </MainLayout>
+              </SidebarProvider>
+            </div>
+          } />
+          <Route path="/notification-settings" element={
+            <div className="min-h-screen bg-background">
+              <SidebarProvider>
+                <MainLayout>
+                  <NotificationSettingsPage />
+                </MainLayout>
+              </SidebarProvider>
+            </div>
+          } />
           
-          {/* Protected routes - only accessible when logged in */}
-          {isLoggedIn && (
-            <>
-              <Route 
-                path="/dashboard" 
-                element={
-                  <AuthenticatedLayout>
-                    <ValuationDashboard />
-                  </AuthenticatedLayout>
-                } 
-              />
-              <Route 
-                path="/valuation-overview" 
-                element={
-                  <AuthenticatedLayout>
-                    <ValuationOverview />
-                  </AuthenticatedLayout>
-                } 
-              />
-              <Route 
-                path="/valuation-report" 
-                element={
-                  <AuthenticatedLayout>
-                    <ValuationReport />
-                  </AuthenticatedLayout>
-                } 
-              />
-              <Route 
-                path="/questionnaire" 
-                element={
-                  <AuthenticatedLayout>
-                    <ChatbotQuestionnaire />
-                  </AuthenticatedLayout>
-                } 
-              />
-              <Route 
-                path="/generate-report" 
-                element={
-                  <AuthenticatedLayout>
-                    <GenerateValuationReport />
-                  </AuthenticatedLayout>
-                } 
-              />
-              <Route 
-                path="/history" 
-                element={
-                  <AuthenticatedLayout>
-                    <History setActiveView={setActiveView} />
-                  </AuthenticatedLayout>
-                } 
-              />
-              <Route 
-                path="/projections" 
-                element={
-                  <AuthenticatedLayout>
-                    <RevenueProjections />
-                  </AuthenticatedLayout>
-                } 
-              />
-              <Route 
-                path="/reports" 
-                element={
-                  <AuthenticatedLayout>
-                    <Portfolio />
-                  </AuthenticatedLayout>
-                } 
-              />
-              <Route 
-                path="/settings" 
-                element={
-                  <AuthenticatedLayout>
-                    <NotificationSettings />
-                  </AuthenticatedLayout>
-                } 
-              />
-              <Route 
-                path="/profile" 
-                element={
-                  <AuthenticatedLayout>
-                    <CompanyProfile />
-                  </AuthenticatedLayout>
-                } 
-              />
-            </>
-          )}
-          
-          {/* Catch-all route for 404 */}
+          {/* 404 Page */}
           <Route path="*" element={<NotFound />} />
         </Routes>
-      </BrowserRouter>
-    </QueryClientProvider>
+      </Router>
+    </QueryClient>
   );
-};
+}
 
 export default App;
