@@ -119,18 +119,23 @@ const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
     }
   ];
 
-  const renderComparisonValue = (value: boolean | string) => {
+  const renderComparisonValue = (value: boolean | string, column: 'valoov' | 'traditional' | 'competitors') => {
     if (typeof value === 'boolean') {
       return value ? (
-        <CheckCircle className="h-5 w-5 text-valoov-teal mx-auto" />
+        <CheckCircle className="h-5 w-5 text-green-500 mx-auto" />
       ) : (
         <X className="h-5 w-5 text-red-500 mx-auto" />
       );
     }
+    
+    // Handle text values with specific colors
+    let textColor = 'text-slate-600';
+    if (column === 'valoov' && (value === 'Minutes' || value === 'Affordable')) {
+      textColor = 'text-blue-500 font-medium';
+    }
+    
     return (
-      <span className={`
-        ${value === 'Minutes' || value === 'Affordable' ? 'text-financial-cyan font-semibold' : 'text-slate-600'}
-      `}>
+      <span className={textColor}>
         {value}
       </span>
     );
@@ -340,84 +345,83 @@ const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
         {/* How We Compare Section */}
         <section className="mb-20">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4 text-black">How We Compare</h2>
-            <p className="text-xl text-slate-600">See how Valoov stacks up against traditional valuation methods and competitors.</p>
+            <h2 className="text-4xl font-bold mb-4 text-slate-700">How We Compare</h2>
+            <p className="text-lg text-slate-600">See how Valoov stacks up against traditional valuation methods and competitors.</p>
           </div>
           
-          <Card className="bg-white/80 backdrop-blur border-slate-200 shadow-sm">
-            <CardContent className="p-0">
-              <Table>
-                <TableHeader>
-                  <TableRow className="border-b-2">
-                    <TableHead className="font-bold text-slate-800 py-6"></TableHead>
-                    <TableHead className="text-center py-6">
-                      <div className="bg-financial-cyan text-white rounded-lg px-4 py-2 font-bold">
-                        📊 Valoov
-                      </div>
-                    </TableHead>
-                    <TableHead className="text-center py-6">
-                      <div className="bg-slate-600 text-white rounded-lg px-4 py-2 font-bold">
-                        Traditional Valuator
-                      </div>
-                    </TableHead>
-                    <TableHead className="text-center py-6">
-                      <div className="bg-slate-400 text-white rounded-lg px-4 py-2 font-bold">
-                        Competitors
-                      </div>
-                    </TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {comparisonData.map((row, index) => (
-                    <TableRow key={index} className="hover:bg-slate-50">
-                      <TableCell className="font-medium text-slate-800 py-4">
-                        {row.feature}
-                      </TableCell>
-                      <TableCell className="text-center py-4">
-                        {renderComparisonValue(row.valoov)}
-                      </TableCell>
-                      <TableCell className="text-center py-4">
-                        {renderComparisonValue(row.traditional)}
-                      </TableCell>
-                      <TableCell className="text-center py-4">
-                        {renderComparisonValue(row.competitors)}
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                  <TableRow className="border-t-2">
-                    <TableCell className="font-bold text-slate-800 py-6">
-                      Overall value
+          <div className="max-w-4xl mx-auto">
+            <Table className="bg-white rounded-lg overflow-hidden shadow-sm border border-slate-200">
+              <TableHeader>
+                <TableRow className="border-none">
+                  <TableHead className="w-1/4 p-0"></TableHead>
+                  <TableHead className="w-1/4 p-0">
+                    <div className="bg-sky-400 text-white text-center py-4 px-6 font-semibold text-base flex items-center justify-center">
+                      <span className="text-xl mr-2">📊</span>
+                      Valoov
+                    </div>
+                  </TableHead>
+                  <TableHead className="w-1/4 p-0">
+                    <div className="bg-slate-600 text-white text-center py-4 px-6 font-semibold text-base">
+                      Traditional Valuator
+                    </div>
+                  </TableHead>
+                  <TableHead className="w-1/4 p-0">
+                    <div className="bg-slate-400 text-white text-center py-4 px-6 font-semibold text-base">
+                      Competitors
+                    </div>
+                  </TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {comparisonData.map((row, index) => (
+                  <TableRow key={index} className="border-b border-slate-100 hover:bg-slate-50">
+                    <TableCell className="font-medium text-slate-700 py-4 px-6 text-left">
+                      {row.feature}
                     </TableCell>
-                    <TableCell className="text-center py-6">
-                      <div className="flex justify-center">
-                        {[...Array(5)].map((_, i) => (
-                          <Star key={i} className="h-4 w-4 text-valoov-orange fill-current" />
-                        ))}
-                      </div>
+                    <TableCell className="text-center py-4 px-6">
+                      {renderComparisonValue(row.valoov, 'valoov')}
                     </TableCell>
-                    <TableCell className="text-center py-6">
-                      <div className="flex justify-center">
-                        {[...Array(3)].map((_, i) => (
-                          <Star key={i} className="h-4 w-4 text-valoov-orange fill-current" />
-                        ))}
-                        {[...Array(2)].map((_, i) => (
-                          <Star key={i} className="h-4 w-4 text-slate-300" />
-                        ))}
-                      </div>
+                    <TableCell className="text-center py-4 px-6">
+                      {renderComparisonValue(row.traditional, 'traditional')}
                     </TableCell>
-                    <TableCell className="text-center py-6">
-                      <div className="flex justify-center">
-                        {[...Array(4)].map((_, i) => (
-                          <Star key={i} className="h-4 w-4 text-valoov-orange fill-current" />
-                        ))}
-                        <Star className="h-4 w-4 text-slate-300" />
-                      </div>
+                    <TableCell className="text-center py-4 px-6">
+                      {renderComparisonValue(row.competitors, 'competitors')}
                     </TableCell>
                   </TableRow>
-                </TableBody>
-              </Table>
-            </CardContent>
-          </Card>
+                ))}
+                <TableRow className="border-none">
+                  <TableCell className="font-semibold text-slate-700 py-6 px-6 text-left text-base">
+                    Overall value
+                  </TableCell>
+                  <TableCell className="text-center py-6 px-6">
+                    <div className="flex justify-center">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className="h-4 w-4 text-yellow-400 fill-current" />
+                      ))}
+                    </div>
+                  </TableCell>
+                  <TableCell className="text-center py-6 px-6">
+                    <div className="flex justify-center">
+                      {[...Array(3)].map((_, i) => (
+                        <Star key={i} className="h-4 w-4 text-yellow-400 fill-current" />
+                      ))}
+                      {[...Array(2)].map((_, i) => (
+                        <Star key={i} className="h-4 w-4 text-slate-300" />
+                      ))}
+                    </div>
+                  </TableCell>
+                  <TableCell className="text-center py-6 px-6">
+                    <div className="flex justify-center">
+                      {[...Array(4)].map((_, i) => (
+                        <Star key={i} className="h-4 w-4 text-yellow-400 fill-current" />
+                      ))}
+                      <Star className="h-4 w-4 text-slate-300" />
+                    </div>
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </div>
         </section>
 
           {/* Testimonials Section */}
