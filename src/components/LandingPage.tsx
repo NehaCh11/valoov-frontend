@@ -1,4 +1,3 @@
-
 import { Upload, FileText, BarChart3, CheckCircle, ArrowRight, Calculator, Star, Eye, Play, X, TrendingUp, Zap, BarChart2, Bot, Brain, Code } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -129,7 +128,7 @@ const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
     {
       name: "Dialogflow CX",
       description: "Advanced conversational AI for intelligent questionnaire interactions",
-      icon: Bot
+      icon: "google-logo"
     },
     {
       name: "Vertex AI",
