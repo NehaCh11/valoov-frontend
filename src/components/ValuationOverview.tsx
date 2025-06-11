@@ -5,7 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { TrendingUp, FileText, Calculator, BarChart3, Lock } from 'lucide-react';
-import ChatbotQuestionnaire from '@/components/ChatbotQuestionnaire';
+import ChatbotQuestionnaire from '@/pages/ChatbotQuestionnaire';
 import { PricingModule } from '@/components/PricingModule';
 import { useState } from 'react';
 

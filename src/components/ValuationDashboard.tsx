@@ -6,7 +6,7 @@ import { Progress } from '@/components/ui/progress';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { TrendingUp, FileText, Building2, Calculator, DollarSign, BarChart3 } from 'lucide-react';
 import { PieChart, Pie, Cell, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
-import ChatbotQuestionnaire from './ChatbotQuestionnaire';
+import ChatbotQuestionnaire from '@/pages/ChatbotQuestionnaire';
 
 export function ValuationDashboard() {
   const [isQuestionnaireOpen, setIsQuestionnaireOpen] = useState(false);
