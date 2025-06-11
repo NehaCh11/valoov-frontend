@@ -60,9 +60,9 @@ const LoginForm = ({ onBack, onSwitchToSignup, onLoginSuccess, onAdminLoginSucce
   };
 
   return (
-    <div className="min-h-screen bg-valoov-dark-gray">
-      <div className="valoov-gradient min-h-screen flex items-center justify-center p-4">
-        <div className="w-full max-w-md">
+    <div className="min-h-screen w-full bg-valoov-dark-gray">
+      <div className="valoov-gradient min-h-screen w-full flex items-center justify-center p-4">
+        <div className="w-full max-w-md mx-auto">
           <Button 
             variant="ghost" 
             onClick={onBack}
@@ -72,7 +72,7 @@ const LoginForm = ({ onBack, onSwitchToSignup, onLoginSuccess, onAdminLoginSucce
             Back to Home
           </Button>
 
-          <Card className="bg-card/30 backdrop-blur border-valoov-teal/30">
+          <Card className="bg-card/30 backdrop-blur border-valoov-teal/30 w-full">
             <CardHeader className="text-center space-y-4">
               <div className="flex justify-center">
                 <img 
