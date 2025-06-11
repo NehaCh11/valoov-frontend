@@ -1,4 +1,5 @@
-import { Upload, FileText, BarChart3, CheckCircle, ArrowRight, Calculator, Star, Eye } from 'lucide-react';
+
+import { Upload, FileText, BarChart3, CheckCircle, ArrowRight, Calculator, Star, Eye, Play } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -94,47 +95,75 @@ const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
 
         {/* Hero Section */}
         <div className="container mx-auto px-4 pt-12 pb-16">
-          <div className="text-center mb-16">
-            <h1 className="text-6xl font-bold text-black mb-6" style={{ textShadow: '0 0 15px rgba(30, 41, 59, 0.1)' }}>
-              Professional Company Valuation Platform
-            </h1>
-            <p className="text-2xl text-financial-cyan mb-4 font-medium">
-              Get accurate valuations for businesses in France and Spain
-            </p>
-            <p className="text-xl text-slate-600 mb-8 max-w-4xl mx-auto leading-relaxed">
-              Upload your tax documents, complete our expert questionnaire, and receive professional 
-              valuation reports using multiple proven financial models. Trusted by businesses across Europe.
-            </p>
-            
-            {/* Region Availability */}
-            <div className="flex justify-center gap-6 mb-8">
-              {regions.map((region) => (
-                <div key={region.country} className="flex items-center space-x-2 bg-white/80 backdrop-blur rounded-lg px-4 py-2 border border-slate-200 shadow-sm">
-                  <span className="text-2xl">{region.flag}</span>
-                  <div className="text-left">
-                    <p className="font-semibold text-slate-800">{region.country}</p>
-                    <p className="text-xs text-valoov-teal">{region.status}</p>
+          <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
+            {/* Left side - Text content */}
+            <div className="text-center lg:text-left">
+              <h1 className="text-5xl lg:text-6xl font-bold text-black mb-6" style={{ textShadow: '0 0 15px rgba(30, 41, 59, 0.1)' }}>
+                Professional Company Valuation Platform
+              </h1>
+              <p className="text-2xl text-financial-cyan mb-4 font-medium">
+                Get accurate valuations for businesses in France and Spain
+              </p>
+              <p className="text-xl text-slate-600 mb-8 leading-relaxed">
+                Upload your tax documents, complete our expert questionnaire, and receive professional 
+                valuation reports using multiple proven financial models. Trusted by businesses across Europe.
+              </p>
+              
+              {/* Region Availability */}
+              <div className="flex justify-center lg:justify-start gap-6 mb-8">
+                {regions.map((region) => (
+                  <div key={region.country} className="flex items-center space-x-2 bg-white/80 backdrop-blur rounded-lg px-4 py-2 border border-slate-200 shadow-sm">
+                    <span className="text-2xl">{region.flag}</span>
+                    <div className="text-left">
+                      <p className="font-semibold text-slate-800">{region.country}</p>
+                      <p className="text-xs text-valoov-teal">{region.status}</p>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                <Button 
+                  size="lg" 
+                  className="bg-financial-cyan hover:bg-financial-cyan/80 text-white px-8 py-4 text-lg font-semibold"
+                  onClick={() => navigate('/signup')}
+                >
+                  Start Your Valuation
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+                <Button 
+                  variant="outline" 
+                  size="lg" 
+                  className="border-valoov-orange text-valoov-orange hover:bg-valoov-orange/10 px-8 py-4 text-lg font-medium"
+                >
+                  View Sample Report
+                </Button>
+              </div>
             </div>
 
-            <div className="flex gap-4 justify-center">
-              <Button 
-                size="lg" 
-                className="bg-financial-cyan hover:bg-financial-cyan/80 text-white px-8 py-4 text-lg font-semibold"
-                onClick={() => navigate('/signup')}
-              >
-                Start Your Valuation
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-              <Button 
-                variant="outline" 
-                size="lg" 
-                className="border-valoov-orange text-valoov-orange hover:bg-valoov-orange/10 px-8 py-4 text-lg font-medium"
-              >
-                View Sample Report
-              </Button>
+            {/* Right side - Demo video placeholder */}
+            <div className="flex justify-center lg:justify-end">
+              <div className="relative w-full max-w-lg aspect-video bg-gradient-to-br from-financial-cyan/20 to-valoov-orange/20 rounded-lg shadow-lg overflow-hidden border border-slate-200">
+                <img 
+                  src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=600&h=400" 
+                  alt="Demo video thumbnail" 
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
+                  <Button 
+                    size="lg" 
+                    className="bg-white/90 text-valoov-teal hover:bg-white h-16 w-16 rounded-full p-0"
+                  >
+                    <Play className="h-8 w-8 ml-1" fill="currentColor" />
+                  </Button>
+                </div>
+                <div className="absolute bottom-4 left-4 right-4">
+                  <div className="bg-white/90 backdrop-blur rounded-lg p-3">
+                    <p className="text-sm font-semibold text-slate-800">Watch Demo</p>
+                    <p className="text-xs text-slate-600">See how VALOOV works in 2 minutes</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
