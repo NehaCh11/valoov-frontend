@@ -7,8 +7,7 @@
  * - Progress tracking for all valuation steps
  * - Step completion status visualization
  * - Report generation functionality
- * - Plan selection and billing integration
- * - Payment processing workflow
+ * - Plan selection for Stripe integration
  * 
  * Steps:
  * 1. Company Info - Basic company information setup
@@ -26,13 +25,11 @@ import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { ChevronRight, CheckCircle, Circle, FileText, Building2, Bot, TrendingUp, Upload, CreditCard } from 'lucide-react';
 import { PricingModule } from '@/components/PricingModule';
-import { BillingForm } from '@/components/BillingForm';
 
 export function GenerateValuationReport() {
   // State management for report generation flow
   const [currentStep, setCurrentStep] = useState(1);
   const [selectedPlan, setSelectedPlan] = useState<string>('');
-  const [showBilling, setShowBilling] = useState(false);
   const [paymentCompleted, setPaymentCompleted] = useState(false);
   const [reportGenerated, setReportGenerated] = useState(false);
 
@@ -94,19 +91,12 @@ export function GenerateValuationReport() {
   };
 
   /**
-   * Handles plan selection and navigates to billing
+   * Handles plan selection - will integrate with Stripe
    */
   const handlePlanSelect = (planId: string) => {
     setSelectedPlan(planId);
-    setShowBilling(true);
-  };
-
-  /**
-   * Handles payment completion
-   */
-  const handlePaymentComplete = () => {
-    setPaymentCompleted(true);
-    setShowBilling(false);
+    // TODO: Integrate with Stripe for payment processing
+    console.log('Selected plan:', planId);
   };
 
   /**
@@ -116,17 +106,6 @@ export function GenerateValuationReport() {
     setReportGenerated(true);
     setCurrentStep(6);
   };
-
-  // Show billing form if a plan is selected
-  if (showBilling && selectedPlan) {
-    return (
-      <BillingForm
-        selectedPlan={plans[selectedPlan as keyof typeof plans]}
-        onBack={() => setShowBilling(false)}
-        onPayment={handlePaymentComplete}
-      />
-    );
-  }
 
   // Show pricing module if step 6 is active and payment not completed
   if (currentStep === 6 && !paymentCompleted) {
