@@ -725,6 +725,84 @@ const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
           </div>
         </div>
       </div>
+
+      {/* Footer */}
+      <footer className="bg-slate-900 text-white">
+        <div className="container mx-auto px-4 py-12">
+          <div className="grid md:grid-cols-4 gap-8">
+            {/* Company Info */}
+            <div className="space-y-4">
+              <img 
+                src="/lovable-uploads/ccbfeb8f-e488-4725-8c91-82d50190256a.png" 
+                alt="VALOOV AI Logo" 
+                className="h-12 w-auto object-contain"
+              />
+              <p className="text-slate-300 text-sm">
+                Professional company valuation platform for businesses in France and Spain. 
+                Get accurate valuations with AI-powered analysis.
+              </p>
+              <div className="flex space-x-4">
+                <div className="w-8 h-8 bg-slate-800 rounded-full flex items-center justify-center">
+                  <span className="text-xs">📧</span>
+                </div>
+                <div className="w-8 h-8 bg-slate-800 rounded-full flex items-center justify-center">
+                  <span className="text-xs">📱</span>
+                </div>
+                <div className="w-8 h-8 bg-slate-800 rounded-full flex items-center justify-center">
+                  <span className="text-xs">🔗</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Product */}
+            <div>
+              <h3 className="font-semibold mb-4">Product</h3>
+              <ul className="space-y-2 text-sm text-slate-300">
+                <li><a href="#" className="hover:text-white transition-colors">Valuation Reports</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">AI Questionnaire</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Revenue Projections</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Industry Benchmarks</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">ESOP Compliance</a></li>
+              </ul>
+            </div>
+
+            {/* Company */}
+            <div>
+              <h3 className="font-semibold mb-4">Company</h3>
+              <ul className="space-y-2 text-sm text-slate-300">
+                <li><a href="#" className="hover:text-white transition-colors">About Us</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Careers</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Press</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Partners</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
+              </ul>
+            </div>
+
+            {/* Support */}
+            <div>
+              <h3 className="font-semibold mb-4">Support</h3>
+              <ul className="space-y-2 text-sm text-slate-300">
+                <li><a href="#" className="hover:text-white transition-colors">Help Center</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Documentation</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">API Reference</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Security</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Status</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="border-t border-slate-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+            <div className="text-sm text-slate-400 mb-4 md:mb-0">
+              © 2024 VALOOV. All rights reserved.
+            </div>
+            <div className="flex space-x-6 text-sm text-slate-400">
+              <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
+              <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+              <a href="#" className="hover:text-white transition-colors">Cookie Policy</a>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
