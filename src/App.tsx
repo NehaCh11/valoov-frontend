@@ -18,7 +18,7 @@ import ChatbotQuestionnaire from '@/pages/ChatbotQuestionnaire';
 import ValuationDashboard from '@/pages/ValuationDashboard';
 import ValuationOverview from '@/pages/ValuationOverview';
 import ValuationReport from '@/pages/ValuationReport';
-import { GenerateValuationReport } from '@/pages/GenerateValuationReport';
+import GenerateValuationReport from '@/pages/GenerateValuationReport';
 import NotFound from '@/pages/NotFound';
 
 // Admin Pages
