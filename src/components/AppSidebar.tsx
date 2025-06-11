@@ -82,7 +82,7 @@ export function AppSidebar({ activeView, setActiveView }: AppSidebarProps) {
   return (
     <Sidebar>
       <SidebarHeader className="p-4">
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center justify-center space-x-2">
           <img 
             src="/lovable-uploads/ccbfeb8f-e488-4725-8c91-82d50190256a.png" 
             alt="VALOOV AI Logo" 
