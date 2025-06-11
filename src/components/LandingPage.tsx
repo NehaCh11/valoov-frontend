@@ -1,4 +1,4 @@
-import { Upload, FileText, BarChart3, CheckCircle, ArrowRight, Calculator, Star, Eye, Play, X, TrendingUp, Zap, BarChart2 } from 'lucide-react';
+import { Upload, FileText, BarChart3, CheckCircle, ArrowRight, Calculator, Star, Eye, Play, X, TrendingUp, Zap, BarChart2, Cloud, Bot, Brain, Code } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -116,6 +116,29 @@ const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
       valoov: true,
       traditional: true,
       competitors: false
+    }
+  ];
+
+  const techStack = [
+    {
+      name: "Google Cloud",
+      description: "Enterprise-grade cloud infrastructure for scalable, secure data processing",
+      icon: Cloud
+    },
+    {
+      name: "Dialogflow CX",
+      description: "Advanced conversational AI for intelligent questionnaire interactions",
+      icon: Bot
+    },
+    {
+      name: "Vertex AI",
+      description: "Machine learning platform powering our valuation analysis algorithms",
+      icon: Brain
+    },
+    {
+      name: "Python",
+      description: "Robust programming foundation for financial modeling and data analysis",
+      icon: Code
     }
   ];
 
@@ -585,6 +608,84 @@ const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
               </div>
             </CardContent>
           </Card>
+        </section>
+
+        {/* Powered By Advanced Technology Section */}
+        <section className="mb-20">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold mb-4 text-black">Powered By Advanced Technology</h2>
+            <p className="text-xl text-slate-600 max-w-3xl mx-auto">
+              Our platform leverages cutting-edge cloud technologies and AI to deliver accurate, 
+              reliable valuations with enterprise-grade security and performance.
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {techStack.map((tech, index) => {
+              const Icon = tech.icon;
+              return (
+                <Card key={index} className="bg-white/80 backdrop-blur border-slate-200 hover:bg-white transition-all text-center shadow-sm">
+                  <CardHeader>
+                    <div className="flex justify-center mb-4">
+                      <div className="p-4 rounded-lg bg-gradient-to-br from-financial-cyan/20 to-valoov-orange/20">
+                        <Icon className="h-8 w-8 text-financial-cyan" />
+                      </div>
+                    </div>
+                    <CardTitle className="text-lg text-slate-800">{tech.name}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <CardDescription className="text-center text-sm text-slate-600">
+                      {tech.description}
+                    </CardDescription>
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </div>
+
+          <div className="mt-12 text-center">
+            <Card className="bg-slate-50 border-slate-200 shadow-sm max-w-4xl mx-auto">
+              <CardContent className="py-8">
+                <div className="grid md:grid-cols-3 gap-8">
+                  <div className="text-center">
+                    <div className="flex justify-center mb-4">
+                      <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                        <CheckCircle className="h-6 w-6 text-blue-600" />
+                      </div>
+                    </div>
+                    <h4 className="text-lg font-semibold text-slate-800 mb-2">Enterprise Security</h4>
+                    <p className="text-sm text-slate-600">
+                      Bank-level encryption and compliance with European data protection standards.
+                    </p>
+                  </div>
+                  
+                  <div className="text-center">
+                    <div className="flex justify-center mb-4">
+                      <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center">
+                        <Zap className="h-6 w-6 text-orange-600" />
+                      </div>
+                    </div>
+                    <h4 className="text-lg font-semibold text-slate-800 mb-2">Lightning Fast</h4>
+                    <p className="text-sm text-slate-600">
+                      Cloud-native architecture ensures rapid processing and real-time results.
+                    </p>
+                  </div>
+                  
+                  <div className="text-center">
+                    <div className="flex justify-center mb-4">
+                      <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                        <TrendingUp className="h-6 w-6 text-green-600" />
+                      </div>
+                    </div>
+                    <h4 className="text-lg font-semibold text-slate-800 mb-2">Always Learning</h4>
+                    <p className="text-sm text-slate-600">
+                      AI models continuously improve accuracy with market data and feedback.
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
         </section>
 
           {/* Testimonials Section */}
