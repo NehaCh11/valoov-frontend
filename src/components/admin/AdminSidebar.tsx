@@ -1,5 +1,5 @@
 
-import { BarChart3, Building2, Ticket, Package, Settings } from "lucide-react";
+import { BarChart3, Building2, Ticket, Package, Settings, Users } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import {
   Sidebar,
@@ -25,6 +25,11 @@ const adminMenuItems = [
     title: "Company Management",
     url: "/admin/companies",
     icon: Building2,
+  },
+  {
+    title: "User Management",
+    url: "/admin/user-management",
+    icon: Users,
   },
   {
     title: "Support Tickets",

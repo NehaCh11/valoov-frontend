@@ -28,6 +28,7 @@ import AdminSupport from '@/pages/admin/AdminSupport';
 import AdminSupportReply from '@/pages/admin/AdminSupportReply';
 import AdminSubscriptions from '@/pages/admin/AdminSubscriptions';
 import AdminSettings from '@/pages/admin/AdminSettings';
+import AdminUserManagement from '@/pages/admin/AdminUserManagement';
 
 const queryClient = new QueryClient();
 
@@ -65,6 +66,7 @@ function App() {
               {/* Admin Routes */}
               <Route path="/admin/dashboard" element={<AdminDashboard />} />
               <Route path="/admin/companies" element={<AdminCompanies />} />
+              <Route path="/admin/user-management" element={<AdminUserManagement />} />
               <Route path="/admin/support" element={<AdminSupport />} />
               <Route path="/admin/support/reply" element={<AdminSupportReply />} />
               <Route path="/admin/subscriptions" element={<AdminSubscriptions />} />
