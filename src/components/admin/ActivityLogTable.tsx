@@ -66,7 +66,19 @@ export const ActivityLogTable = () => {
   return (
     <Card>
       <CardHeader className="border-b-2 border-blue-500">
-        <CardTitle className="text-lg">Table (Activity Log)</CardTitle>
+        <div className="flex justify-between items-center">
+          <CardTitle className="text-lg">Table (Activity Log)</CardTitle>
+          <div className="flex space-x-2">
+            <Button variant="outline" size="sm" className="text-blue-600 border-blue-300">
+              <Eye className="h-4 w-4 mr-2" />
+              View Reports
+            </Button>
+            <Button variant="outline" size="sm" className="text-blue-600 border-blue-300">
+              <Ticket className="h-4 w-4 mr-2" />
+              View Support Tickets
+            </Button>
+          </div>
+        </div>
       </CardHeader>
       <CardContent className="p-0">
         <Table>
@@ -137,17 +149,6 @@ export const ActivityLogTable = () => {
             ))}
           </TableBody>
         </Table>
-        
-        <div className="p-4 space-y-2">
-          <Button variant="outline" size="sm" className="text-blue-600 border-blue-300">
-            <Eye className="h-4 w-4 mr-2" />
-            View Reports
-          </Button>
-          <Button variant="outline" size="sm" className="text-blue-600 border-blue-300">
-            <Ticket className="h-4 w-4 mr-2" />
-            View Support Tickets
-          </Button>
-        </div>
       </CardContent>
     </Card>
   );
