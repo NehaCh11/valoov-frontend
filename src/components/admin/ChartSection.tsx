@@ -21,14 +21,14 @@ export const ChartSection = () => {
   return (
     <Card>
       <CardHeader className="border-b-2 border-blue-500">
-        <CardTitle className="text-lg">📊 (Optional add-on below table)</CardTitle>
+        <CardTitle className="text-lg">📊</CardTitle>
         <p className="text-sm text-gray-600">Use horizontal layout for:</p>
       </CardHeader>
       <CardContent className="p-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Line Chart */}
           <div className="space-y-2">
-            <h3 className="font-semibold text-blue-600">1. No of Companies Valuated Line Chart (Calendar Monthly, Weekly, Yearly)</h3>
+            <h3 className="font-semibold text-black">1. No of Companies Valuated Line Chart (Calendar Monthly, Weekly, Yearly)</h3>
             <div className="h-64 w-full">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={lineChartData}>
@@ -44,7 +44,7 @@ export const ChartSection = () => {
 
           {/* Pie Chart */}
           <div className="space-y-2">
-            <h3 className="font-semibold text-blue-600">2. Subscription Purchases Plan Distribution Pie Chart</h3>
+            <h3 className="font-semibold text-black">2. Subscription Purchases Plan Distribution Pie Chart</h3>
             <div className="h-64 w-full">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
