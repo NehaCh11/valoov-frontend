@@ -50,7 +50,9 @@ function App() {
               <SidebarProvider>
                 <div className="min-h-screen flex w-full">
                   <AppSidebar activeView="dashboard" setActiveView={() => {}} />
-                  <Dashboard />
+                  <div className="flex-1 pl-1">
+                    <Dashboard />
+                  </div>
                 </div>
               </SidebarProvider>
             } />
@@ -58,7 +60,9 @@ function App() {
               <SidebarProvider>
                 <div className="min-h-screen flex w-full">
                   <AppSidebar activeView="portfolio" setActiveView={() => {}} />
-                  <Portfolio />
+                  <div className="flex-1 pl-1">
+                    <Portfolio />
+                  </div>
                 </div>
               </SidebarProvider>
             } />
@@ -66,7 +70,9 @@ function App() {
               <SidebarProvider>
                 <div className="min-h-screen flex w-full">
                   <AppSidebar activeView="history" setActiveView={() => {}} />
-                  <History setActiveView={() => {}} />
+                  <div className="flex-1 pl-1">
+                    <History setActiveView={() => {}} />
+                  </div>
                 </div>
               </SidebarProvider>
             } />
@@ -74,7 +80,9 @@ function App() {
               <SidebarProvider>
                 <div className="min-h-screen flex w-full">
                   <AppSidebar activeView="company-profile" setActiveView={() => {}} />
-                  <CompanyProfile />
+                  <div className="flex-1 pl-1">
+                    <CompanyProfile />
+                  </div>
                 </div>
               </SidebarProvider>
             } />
@@ -82,7 +90,9 @@ function App() {
               <SidebarProvider>
                 <div className="min-h-screen flex w-full">
                   <AppSidebar activeView="notification-settings" setActiveView={() => {}} />
-                  <NotificationSettings />
+                  <div className="flex-1 pl-1">
+                    <NotificationSettings />
+                  </div>
                 </div>
               </SidebarProvider>
             } />
@@ -90,7 +100,9 @@ function App() {
               <SidebarProvider>
                 <div className="min-h-screen flex w-full">
                   <AppSidebar activeView="revenue-projections" setActiveView={() => {}} />
-                  <RevenueProjections />
+                  <div className="flex-1 pl-1">
+                    <RevenueProjections />
+                  </div>
                 </div>
               </SidebarProvider>
             } />
@@ -98,7 +110,9 @@ function App() {
               <SidebarProvider>
                 <div className="min-h-screen flex w-full">
                   <AppSidebar activeView="questionnaire" setActiveView={() => {}} />
-                  <ChatbotQuestionnaire />
+                  <div className="flex-1 pl-1">
+                    <ChatbotQuestionnaire />
+                  </div>
                 </div>
               </SidebarProvider>
             } />
@@ -106,7 +120,9 @@ function App() {
               <SidebarProvider>
                 <div className="min-h-screen flex w-full">
                   <AppSidebar activeView="valuation-dashboard" setActiveView={() => {}} />
-                  <ValuationDashboard />
+                  <div className="flex-1 pl-1">
+                    <ValuationDashboard />
+                  </div>
                 </div>
               </SidebarProvider>
             } />
@@ -114,7 +130,9 @@ function App() {
               <SidebarProvider>
                 <div className="min-h-screen flex w-full">
                   <AppSidebar activeView="valuation-overview" setActiveView={() => {}} />
-                  <ValuationOverview />
+                  <div className="flex-1 pl-1">
+                    <ValuationOverview />
+                  </div>
                 </div>
               </SidebarProvider>
             } />
@@ -122,7 +140,9 @@ function App() {
               <SidebarProvider>
                 <div className="min-h-screen flex w-full">
                   <AppSidebar activeView="valuation-report" setActiveView={() => {}} />
-                  <ValuationReport />
+                  <div className="flex-1 pl-1">
+                    <ValuationReport />
+                  </div>
                 </div>
               </SidebarProvider>
             } />
@@ -130,7 +150,9 @@ function App() {
               <SidebarProvider>
                 <div className="min-h-screen flex w-full">
                   <AppSidebar activeView="generate-valuation-report" setActiveView={() => {}} />
-                  <GenerateValuationReport />
+                  <div className="flex-1 pl-1">
+                    <GenerateValuationReport />
+                  </div>
                 </div>
               </SidebarProvider>
             } />
@@ -140,7 +162,9 @@ function App() {
               <SidebarProvider>
                 <div className="min-h-screen flex w-full">
                   <AdminSidebar />
-                  <AdminDashboard />
+                  <div className="flex-1 pl-1">
+                    <AdminDashboard />
+                  </div>
                 </div>
               </SidebarProvider>
             } />
@@ -148,7 +172,9 @@ function App() {
               <SidebarProvider>
                 <div className="min-h-screen flex w-full">
                   <AdminSidebar />
-                  <AdminCompanies />
+                  <div className="flex-1 pl-1">
+                    <AdminCompanies />
+                  </div>
                 </div>
               </SidebarProvider>
             } />
@@ -156,7 +182,9 @@ function App() {
               <SidebarProvider>
                 <div className="min-h-screen flex w-full">
                   <AdminSidebar />
-                  <AdminUserManagement />
+                  <div className="flex-1 pl-1">
+                    <AdminUserManagement />
+                  </div>
                 </div>
               </SidebarProvider>
             } />
@@ -164,7 +192,9 @@ function App() {
               <SidebarProvider>
                 <div className="min-h-screen flex w-full">
                   <AdminSidebar />
-                  <AdminSupport />
+                  <div className="flex-1 pl-1">
+                    <AdminSupport />
+                  </div>
                 </div>
               </SidebarProvider>
             } />
@@ -172,7 +202,9 @@ function App() {
               <SidebarProvider>
                 <div className="min-h-screen flex w-full">
                   <AdminSidebar />
-                  <AdminSupportReply />
+                  <div className="flex-1 pl-1">
+                    <AdminSupportReply />
+                  </div>
                 </div>
               </SidebarProvider>
             } />
@@ -180,7 +212,9 @@ function App() {
               <SidebarProvider>
                 <div className="min-h-screen flex w-full">
                   <AdminSidebar />
-                  <AdminSubscriptions />
+                  <div className="flex-1 pl-1">
+                    <AdminSubscriptions />
+                  </div>
                 </div>
               </SidebarProvider>
             } />
@@ -188,7 +222,9 @@ function App() {
               <SidebarProvider>
                 <div className="min-h-screen flex w-full">
                   <AdminSidebar />
-                  <AdminSettings />
+                  <div className="flex-1 pl-1">
+                    <AdminSettings />
+                  </div>
                 </div>
               </SidebarProvider>
             } />
