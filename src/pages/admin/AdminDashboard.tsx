@@ -26,7 +26,7 @@ const AdminDashboard = () => {
   return (
     <AdminLayout>
       {/* Header */}
-      <div className="bg-white shadow-sm border-b">
+      <div className="bg-white">
         <div className="px-6">
           <div className="flex justify-between items-center h-16">
             <h1 className="text-2xl font-bold text-black">Admin Dashboard</h1>
@@ -45,7 +45,7 @@ const AdminDashboard = () => {
       </div>
 
       {/* Dashboard Content */}
-      <div className="space-y-8 p-6 ml-[50px]">
+      <div className="space-y-8 p-6 pt-4 ml-[50px]">
         {/* Stats Cards Row */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <AdminStatsCard
