@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
@@ -113,7 +114,11 @@ export const ActivityLogTable = () => {
         <div className="flex justify-between items-center">
           <CardTitle className="text-lg">Activity Log</CardTitle>
           <div className="flex space-x-2">
-            <Button variant="outline" size="sm" className="text-black border-blue-300">
+            <Button 
+              style={{ backgroundColor: '#48B2BB' }}
+              className="hover:opacity-90 text-white"
+              size="sm"
+            >
               <Eye className="h-4 w-4 mr-2" />
               View Reports
             </Button>
