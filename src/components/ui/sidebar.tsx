@@ -219,20 +219,22 @@ const Sidebar = React.forwardRef<
         data-variant={variant}
         data-side={side}
       >
-        {/* This is what handles the sidebar gap on desktop */}
+        {/* ✅ Conditionally render sidebar spacer to prevent unwanted gap */}
+        {state === "expanded" && (
+          <div
+            className={cn(
+              "duration-200 relative h-svh transition-[width] ease-linear bg-transparent",
+              "group-data-[side=right]:rotate-180",
+              variant === "floating" || variant === "inset"
+                ? "w-[calc(var(--sidebar-width-icon)_+_theme(spacing.4))]"
+                : "w-[--sidebar-width]"
+            )}
+          />
+        )}
+
         <div
           className={cn(
-            "duration-200 relative h-svh w-[--sidebar-width] bg-transparent transition-[width] ease-linear",
-            "group-data-[collapsible=offcanvas]:w-0",
-            "group-data-[side=right]:rotate-180",
-            variant === "floating" || variant === "inset"
-              ? "group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)_+_theme(spacing.4))]"
-              : "group-data-[collapsible=icon]:w-[--sidebar-width-icon]"
-          )}
-        />
-        <div
-          className={cn(
-            "duration-200 fixed inset-y-0 z-10 hidden h-svh w-[--sidebar-width] transition-[left,right,width] ease-linear md:flex",
+            "duration-200 fixed inset-y-0 z-10 hidden h-svh transition-[left,right,width] ease-linear md:flex w-[--sidebar-width]",
             side === "left"
               ? "left-0 group-data-[collapsible=offcanvas]:left-[calc(var(--sidebar-width)*-1)]"
               : "right-0 group-data-[collapsible=offcanvas]:right-[calc(var(--sidebar-width)*-1)]",
@@ -256,6 +258,7 @@ const Sidebar = React.forwardRef<
   }
 )
 Sidebar.displayName = "Sidebar"
+
 
 const SidebarTrigger = React.forwardRef<
   React.ElementRef<typeof Button>,
