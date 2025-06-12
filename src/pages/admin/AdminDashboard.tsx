@@ -1,3 +1,4 @@
+
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -5,7 +6,7 @@ import { AdminStatsCard } from '@/components/admin/AdminStatsCard';
 import { ActivityLogTable } from '@/components/admin/ActivityLogTable';
 import { ChartSection } from '@/components/admin/ChartSection';
 import { AdminLayout } from '@/layouts/AdminLayout';
-import { Building2, Users, FileText, Headphones, Plus, LogOut } from 'lucide-react';
+import { Building2, Users, FileText, Headphones, Plus } from 'lucide-react';
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
@@ -16,11 +17,6 @@ const AdminDashboard = () => {
       navigate('/admin/login');
     }
   }, [navigate]);
-
-  const handleLogout = () => {
-    localStorage.removeItem('adminToken');
-    navigate('/login');
-  };
 
   const handleAddNew = () => {
     // Add new admin button functionality
@@ -41,14 +37,6 @@ const AdminDashboard = () => {
               >
                 <Plus className="h-4 w-4 mr-2" />
                 Add New Admin Button
-              </Button>
-              <Button 
-                onClick={handleLogout}
-                variant="outline"
-                className="text-red-600 border-red-300 hover:bg-red-50"
-              >
-                <LogOut className="h-4 w-4 mr-2" />
-                Logout
               </Button>
             </div>
           </div>
