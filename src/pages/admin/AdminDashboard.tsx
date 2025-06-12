@@ -44,7 +44,7 @@ const AdminDashboard = () => {
       </div>
 
       {/* Dashboard Content */}
-      <div className="space-y-8 p-6">
+      <div className="space-y-8 p-6 ml-[50px]">
         {/* Stats Cards Row */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <AdminStatsCard
