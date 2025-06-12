@@ -19,54 +19,54 @@ const pieChartData = [
 
 export const ChartSection = () => {
   return (
-    <Card>
-      <CardHeader className="border-b-2 border-blue-500">
-        <CardTitle className="text-lg">📊</CardTitle>
-        <p className="text-sm text-gray-600">Use horizontal layout for:</p>
-      </CardHeader>
-      <CardContent className="p-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Line Chart */}
-          <div className="space-y-2">
-            <h3 className="font-semibold text-black">1. No of Companies Valuated Line Chart (Calendar Monthly, Weekly, Yearly)</h3>
-            <div className="h-64 w-full">
-              <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={lineChartData}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="name" />
-                  <YAxis />
-                  <Tooltip />
-                  <Line type="monotone" dataKey="companies" stroke="#3b82f6" strokeWidth={3} />
-                </LineChart>
-              </ResponsiveContainer>
-            </div>
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      {/* Line Chart Card */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-lg text-black">No of Companies Valuated</CardTitle>
+        </CardHeader>
+        <CardContent className="p-6">
+          <div className="h-64 w-full">
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart data={lineChartData}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Tooltip />
+                <Line type="monotone" dataKey="companies" stroke="#3b82f6" strokeWidth={3} />
+              </LineChart>
+            </ResponsiveContainer>
           </div>
+        </CardContent>
+      </Card>
 
-          {/* Pie Chart */}
-          <div className="space-y-2">
-            <h3 className="font-semibold text-black">2. Subscription Purchases Plan Distribution Pie Chart</h3>
-            <div className="h-64 w-full">
-              <ResponsiveContainer width="100%" height="100%">
-                <PieChart>
-                  <Pie
-                    data={pieChartData}
-                    cx="50%"
-                    cy="50%"
-                    outerRadius={80}
-                    dataKey="value"
-                    label={({ name, value }) => `${name}: ${value}%`}
-                  >
-                    {pieChartData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={entry.color} />
-                    ))}
-                  </Pie>
-                  <Tooltip />
-                </PieChart>
-              </ResponsiveContainer>
-            </div>
+      {/* Pie Chart Card */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-lg text-black">Purchases Plan Distribution</CardTitle>
+        </CardHeader>
+        <CardContent className="p-6">
+          <div className="h-64 w-full">
+            <ResponsiveContainer width="100%" height="100%">
+              <PieChart>
+                <Pie
+                  data={pieChartData}
+                  cx="50%"
+                  cy="50%"
+                  outerRadius={80}
+                  dataKey="value"
+                  label={({ name, value }) => `${name}: ${value}%`}
+                >
+                  {pieChartData.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={entry.color} />
+                  ))}
+                </Pie>
+                <Tooltip />
+              </PieChart>
+            </ResponsiveContainer>
           </div>
-        </div>
-      </CardContent>
-    </Card>
+        </CardContent>
+      </Card>
+    </div>
   );
 };
