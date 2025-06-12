@@ -195,47 +195,44 @@ export const ActivityLogTable = () => {
         </Table>
         
         {/* Pagination */}
-        <div className="flex justify-center py-4">
-          <Pagination>
-            <PaginationContent>
-              <PaginationItem>
-                <PaginationPrevious 
-                  href="#" 
-                  onClick={(e) => {
-                    e.preventDefault();
-                    if (currentPage > 1) handlePageChange(currentPage - 1);
-                  }}
-                  className={currentPage === 1 ? 'pointer-events-none opacity-50' : ''}
-                />
-              </PaginationItem>
-              
-              {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                <PaginationItem key={page}>
-                  <PaginationLink
-                    href="#"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handlePageChange(page);
-                    }}
-                    isActive={currentPage === page}
-                  >
-                    {page}
-                  </PaginationLink>
-                </PaginationItem>
-              ))}
-              
-              <PaginationItem>
-                <PaginationNext 
-                  href="#" 
-                  onClick={(e) => {
-                    e.preventDefault();
-                    if (currentPage < totalPages) handlePageChange(currentPage + 1);
-                  }}
-                  className={currentPage === totalPages ? 'pointer-events-none opacity-50' : ''}
-                />
-              </PaginationItem>
-            </PaginationContent>
-          </Pagination>
+        <div className="flex justify-between items-center py-4 px-4">
+          {/* Previous Button - Left Side */}
+          <PaginationPrevious 
+            href="#" 
+            onClick={(e) => {
+              e.preventDefault();
+              if (currentPage > 1) handlePageChange(currentPage - 1);
+            }}
+            className={currentPage === 1 ? 'pointer-events-none opacity-50' : ''}
+          />
+          
+          {/* Page Numbers - Center */}
+          <div className="flex space-x-1">
+            {[1, 2, 3, 4, 5, 6, 7].map((page) => (
+              <PaginationLink
+                key={page}
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handlePageChange(page);
+                }}
+                isActive={currentPage === page}
+                className="px-3 py-1"
+              >
+                {page}
+              </PaginationLink>
+            ))}
+          </div>
+          
+          {/* Next Button - Right Side */}
+          <PaginationNext 
+            href="#" 
+            onClick={(e) => {
+              e.preventDefault();
+              if (currentPage < 7) handlePageChange(currentPage + 1);
+            }}
+            className={currentPage === 7 ? 'pointer-events-none opacity-50' : ''}
+          />
         </div>
       </CardContent>
     </Card>
