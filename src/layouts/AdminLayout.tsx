@@ -16,7 +16,9 @@ export function AdminLayout({ children }: AdminLayoutProps) {
   return (
     <SidebarProvider>
       <div className="min-h-screen flex flex-col w-full">
-        <TopNavigation onSignOut={handleSignOut} />
+        <div style={{ backgroundColor: '#FAFAFA' }} className="border-b border-border/40 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+          <TopNavigation onSignOut={handleSignOut} />
+        </div>
         <div className="flex flex-1">
           <AdminSidebar />
           <main className="flex-1">
