@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { AdminLayout } from '@/layouts/AdminLayout';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -6,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Building2, Users, TrendingUp, MoreHorizontal, Eye, Pause, Trash2 } from 'lucide-react';
+import { AdminStatsCard } from '@/components/admin/AdminStatsCard';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -100,38 +100,27 @@ const AdminCompanies = () => {
       <div className="space-y-6 p-6">
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <Card className="shadow-lg hover:shadow-xl transition-shadow duration-200">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Total Companies</CardTitle>
-              <Building2 className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">1,234</div>
-              <p className="text-xs text-muted-foreground">+12% from last month</p>
-            </CardContent>
-          </Card>
-
-          <Card className="shadow-lg hover:shadow-xl transition-shadow duration-200">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Active Users</CardTitle>
-              <Users className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">2,567</div>
-              <p className="text-xs text-muted-foreground">+8% from last month</p>
-            </CardContent>
-          </Card>
-
-          <Card className="shadow-lg hover:shadow-xl transition-shadow duration-200">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Total Valuations</CardTitle>
-              <TrendingUp className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">5,432</div>
-              <p className="text-xs text-muted-foreground">+15% from last month</p>
-            </CardContent>
-          </Card>
+          <AdminStatsCard
+            title="1,234"
+            value="View Companies"
+            subtitle="Total companies valuated"
+            icon={Building2}
+            color="#48B2BB"
+          />
+          <AdminStatsCard
+            title="2,567"
+            value="Active Users"
+            subtitle="Active subscribers"
+            icon={Users}
+            color="#48B2BB"
+          />
+          <AdminStatsCard
+            title="5,432"
+            value="Total Valuations"
+            subtitle="Reports generated"
+            icon={TrendingUp}
+            color="#48B2BB"
+          />
         </div>
 
         {/* Company Table */}
