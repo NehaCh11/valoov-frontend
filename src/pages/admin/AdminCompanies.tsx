@@ -8,15 +8,15 @@ const AdminCompanies = () => {
   return (
     <AdminLayout>
       {/* Header */}
-      <div className="bg-white shadow-sm border-b mb-6">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="bg-white shadow-sm border-b">
+        <div className="px-6">
           <div className="flex justify-between items-center h-16">
             <h1 className="text-2xl font-bold text-black">Company Management</h1>
           </div>
         </div>
       </div>
 
-      <div className="space-y-6 px-6">
+      <div className="space-y-6 p-6">
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <Card className="shadow-lg hover:shadow-xl transition-shadow duration-200">
