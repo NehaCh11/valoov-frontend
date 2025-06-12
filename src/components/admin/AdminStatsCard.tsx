@@ -12,7 +12,7 @@ interface AdminStatsCardProps {
 
 export const AdminStatsCard = ({ title, value, subtitle, icon: Icon, color }: AdminStatsCardProps) => {
   return (
-    <Card className="border-2" style={{ borderColor: color }}>
+    <Card className="shadow-md hover:shadow-lg transition-shadow duration-200">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
         <CardTitle className="text-sm font-medium">{title}</CardTitle>
         <Icon className="h-6 w-6" style={{ color }} />
