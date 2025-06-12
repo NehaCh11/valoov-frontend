@@ -11,25 +11,27 @@ interface AdminStatsCardProps {
 }
 
 export const AdminStatsCard = ({ title, value, subtitle, icon: Icon, color }: AdminStatsCardProps) => {
-  const isViewReports = value === "View Reports";
-  
   return (
     <Card className="shadow-md hover:shadow-lg transition-shadow duration-200">
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <CardTitle className="text-sm font-medium">{title}</CardTitle>
-        <div 
-          className={`h-8 w-8 rounded flex items-center justify-center ${isViewReports ? 'text-white' : ''}`}
-          style={{ backgroundColor: isViewReports ? color : 'transparent' }}
-        >
-          <Icon 
-            className="h-6 w-6" 
-            style={{ color: isViewReports ? 'white' : color }} 
-          />
+      <CardContent className="p-6">
+        <div className="flex flex-col items-center text-center space-y-3">
+          {/* Icon at the top */}
+          <div 
+            className="h-12 w-12 rounded-lg flex items-center justify-center"
+            style={{ backgroundColor: color }}
+          >
+            <Icon className="h-6 w-6 text-white" />
+          </div>
+          
+          {/* Number/Count */}
+          <div className="text-3xl font-bold text-black">{title}</div>
+          
+          {/* Title/Heading */}
+          <div className="text-lg font-semibold text-black">{value}</div>
+          
+          {/* Subtitle */}
+          <p className="text-sm text-muted-foreground">{subtitle}</p>
         </div>
-      </CardHeader>
-      <CardContent>
-        <div className="text-2xl font-bold">{value}</div>
-        <p className="text-xs text-muted-foreground">{subtitle}</p>
       </CardContent>
     </Card>
   );
