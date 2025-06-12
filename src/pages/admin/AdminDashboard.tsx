@@ -19,7 +19,7 @@ const AdminDashboard = () => {
   }, [navigate]);
 
   const handleAddNew = () => {
-    // Add new admin button functionality
+    // Add new admin functionality
     console.log('Add new admin clicked');
   };
 
@@ -33,10 +33,11 @@ const AdminDashboard = () => {
             <div className="flex items-center space-x-4">
               <Button 
                 onClick={handleAddNew}
-                className="bg-blue-500 hover:bg-blue-600 text-white"
+                style={{ backgroundColor: '#48B2BB' }}
+                className="hover:opacity-90 text-white"
               >
                 <Plus className="h-4 w-4 mr-2" />
-                Add New Admin Button
+                Add New Admin
               </Button>
             </div>
           </div>
@@ -52,28 +53,28 @@ const AdminDashboard = () => {
             value="View Companies"
             subtitle="Total companies valuated"
             icon={Building2}
-            color="#3b82f6"
+            color="#48B2BB"
           />
           <AdminStatsCard
             title="1,234"
             value="Active"
             subtitle="Active subscribers"
             icon={Users}
-            color="#3b82f6"
+            color="#48B2BB"
           />
           <AdminStatsCard
             title="1,234"
-            value="Valuated Reports"
+            value="View Reports"
             subtitle="Reports generated"
             icon={FileText}
-            color="#3b82f6"
+            color="#48B2BB"
           />
           <AdminStatsCard
             title="1,234"
             value="User Support"
             subtitle="Support tickets"
             icon={Headphones}
-            color="#3b82f6"
+            color="#48B2BB"
           />
         </div>
 
