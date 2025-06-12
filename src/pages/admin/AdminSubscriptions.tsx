@@ -2,9 +2,25 @@
 import { AdminLayout } from '@/layouts/AdminLayout';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Package, CreditCard, Users, TrendingUp, Plus } from 'lucide-react';
 
 const AdminSubscriptions = () => {
+  const subscriptionPlans = [
+    {
+      planName: 'Starter',
+      price: '€29',
+      reportsPerMonth: '1',
+      analystAccess: 'No',
+    },
+    {
+      planName: 'Pro',
+      price: '€49',
+      reportsPerMonth: '5',
+      analystAccess: 'Yes',
+    },
+  ];
+
   return (
     <AdminLayout>
       {/* Header */}
@@ -15,7 +31,7 @@ const AdminSubscriptions = () => {
             <div className="flex items-center space-x-4">
               <Button className="bg-blue-500 hover:bg-blue-600 text-white">
                 <Plus className="h-4 w-4 mr-2" />
-                Add Plan
+                Create New Subscription
               </Button>
             </div>
           </div>
@@ -70,15 +86,46 @@ const AdminSubscriptions = () => {
           </Card>
         </div>
 
-        {/* Subscription Plans */}
+        {/* Plan Features Table */}
         <Card>
           <CardHeader>
-            <CardTitle>Subscription Plans</CardTitle>
+            <CardTitle>Plan Features Table:</CardTitle>
           </CardHeader>
-          <CardContent>
-            <div className="text-center py-12 text-muted-foreground">
-              Subscription management interface will be implemented here
-            </div>
+          <CardContent className="p-0">
+            <Table>
+              <TableHeader>
+                <TableRow className="bg-gray-800 hover:bg-gray-800">
+                  <TableHead className="font-semibold text-white">Plan Name</TableHead>
+                  <TableHead className="font-semibold text-white">Price</TableHead>
+                  <TableHead className="font-semibold text-white">Reports/Month</TableHead>
+                  <TableHead className="font-semibold text-white">Analyst Access</TableHead>
+                  <TableHead className="font-semibold text-white">Action</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {subscriptionPlans.map((plan, index) => (
+                  <TableRow key={index} className="border-b">
+                    <TableCell className="font-medium text-black">
+                      {plan.planName}
+                    </TableCell>
+                    <TableCell className="text-black">
+                      {plan.price}
+                    </TableCell>
+                    <TableCell className="text-black">
+                      {plan.reportsPerMonth}
+                    </TableCell>
+                    <TableCell className="text-black">
+                      {plan.analystAccess}
+                    </TableCell>
+                    <TableCell>
+                      <Button variant="outline" size="sm" className="text-black border-gray-300">
+                        Create, edit, delete plans
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
           </CardContent>
         </Card>
       </div>
