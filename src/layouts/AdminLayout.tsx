@@ -12,9 +12,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
       <div className="min-h-screen flex w-full">
         <AdminSidebar />
         <main className="flex-1">
-          <div>
-            {children}
-          </div>
+          {children}
         </main>
       </div>
     </SidebarProvider>
