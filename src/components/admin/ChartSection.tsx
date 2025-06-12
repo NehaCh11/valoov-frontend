@@ -1,5 +1,6 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 
 const lineChartData = [
@@ -23,7 +24,19 @@ export const ChartSection = () => {
       {/* Line Chart Card */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-lg text-black">No of Companies Valuated</CardTitle>
+          <div className="flex justify-between items-center">
+            <CardTitle className="text-lg text-black">No of Companies Valuated</CardTitle>
+            <Select defaultValue="monthly">
+              <SelectTrigger className="w-32">
+                <SelectValue placeholder="Period" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="weekly">Weekly</SelectItem>
+                <SelectItem value="monthly">Monthly</SelectItem>
+                <SelectItem value="yearly">Yearly</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
         </CardHeader>
         <CardContent className="p-6">
           <div className="h-64 w-full">
@@ -43,7 +56,19 @@ export const ChartSection = () => {
       {/* Pie Chart Card */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-lg text-black">Purchases Plan Distribution</CardTitle>
+          <div className="flex justify-between items-center">
+            <CardTitle className="text-lg text-black">Purchases Plan Distribution</CardTitle>
+            <Select defaultValue="monthly">
+              <SelectTrigger className="w-32">
+                <SelectValue placeholder="Period" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="weekly">Weekly</SelectItem>
+                <SelectItem value="monthly">Monthly</SelectItem>
+                <SelectItem value="yearly">Yearly</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
         </CardHeader>
         <CardContent className="p-6">
           <div className="h-64 w-full">
