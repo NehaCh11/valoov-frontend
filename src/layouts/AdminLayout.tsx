@@ -21,7 +21,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
         </div>
         <div className="flex flex-1">
           <AdminSidebar />
-          <main className="flex-1 overflow-hidden mr-[200px]">
+          <main className="flex-1 overflow-hidden">
             {children}
           </main>
         </div>
