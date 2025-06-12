@@ -1,3 +1,4 @@
+
 import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { VariantProps, cva } from "class-variance-authority"
@@ -19,9 +20,9 @@ import {
 
 const SIDEBAR_COOKIE_NAME = "sidebar:state"
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7
-const SIDEBAR_WIDTH = "4rem" // Reduced from 8rem to 4rem (more compact)
+const SIDEBAR_WIDTH = "2rem" // Reduced to minimal width (32px)
 const SIDEBAR_WIDTH_MOBILE = "18rem"
-const SIDEBAR_WIDTH_ICON = "3rem"
+const SIDEBAR_WIDTH_ICON = "2rem" // Also reduced icon width to match
 const SIDEBAR_KEYBOARD_SHORTCUT = "b"
 
 type SidebarContext = {
