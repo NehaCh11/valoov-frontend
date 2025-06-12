@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
@@ -88,95 +87,92 @@ export const ActivityLogTable = () => {
   };
 
   return (
-    <div className="space-y-2">
-      <p className="text-sm text-gray-600">(Optional add-on below table)</p>
-      <Card>
-        <CardHeader className="border-b-2 border-blue-500">
-          <div className="flex justify-between items-center">
-            <CardTitle className="text-lg">Activity Log</CardTitle>
-            <div className="flex space-x-2">
-              <Button variant="outline" size="sm" className="text-black border-blue-300">
-                <Eye className="h-4 w-4 mr-2" />
-                View Reports
-              </Button>
-              <Button variant="outline" size="sm" className="text-black border-blue-300">
-                <Ticket className="h-4 w-4 mr-2" />
-                View Support Tickets
-              </Button>
-            </div>
+    <Card>
+      <CardHeader className="border-b-2 border-blue-500">
+        <div className="flex justify-between items-center">
+          <CardTitle className="text-lg">Activity Log</CardTitle>
+          <div className="flex space-x-2">
+            <Button variant="outline" size="sm" className="text-black border-blue-300">
+              <Eye className="h-4 w-4 mr-2" />
+              View Reports
+            </Button>
+            <Button variant="outline" size="sm" className="text-black border-blue-300">
+              <Ticket className="h-4 w-4 mr-2" />
+              View Support Tickets
+            </Button>
           </div>
-        </CardHeader>
-        <CardContent className="p-0">
-          <Table>
-            <TableHeader>
-              <TableRow className="bg-blue-50">
-                <TableHead className="font-semibold text-black border-r border-blue-300">Name</TableHead>
-                <TableHead className="font-semibold text-black border-r border-blue-300">Email</TableHead>
-                <TableHead className="font-semibold text-black border-r border-blue-300">Last Login</TableHead>
-                <TableHead className="font-semibold text-black border-r border-blue-300">Status</TableHead>
-                <TableHead className="font-semibold text-black border-r border-blue-300">Last Activity Performed</TableHead>
-                <TableHead className="font-semibold text-black">Actions</TableHead>
+        </div>
+      </CardHeader>
+      <CardContent className="p-0">
+        <Table>
+          <TableHeader>
+            <TableRow className="bg-blue-50">
+              <TableHead className="font-semibold text-black border-r border-blue-300">Name</TableHead>
+              <TableHead className="font-semibold text-black border-r border-blue-300">Email</TableHead>
+              <TableHead className="font-semibold text-black border-r border-blue-300">Last Login</TableHead>
+              <TableHead className="font-semibold text-black border-r border-blue-300">Status</TableHead>
+              <TableHead className="font-semibold text-black border-r border-blue-300">Last Activity Performed</TableHead>
+              <TableHead className="font-semibold text-black">Actions</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {data.map((row) => (
+              <TableRow key={row.id} className="border-b">
+                <TableCell className="border-r border-gray-200 font-medium text-black">
+                  {row.name}
+                </TableCell>
+                <TableCell className="border-r border-gray-200 text-black">
+                  {row.email}
+                </TableCell>
+                <TableCell className="border-r border-gray-200">
+                  {row.lastLogin}
+                </TableCell>
+                <TableCell className="border-r border-gray-200">
+                  <div className="flex items-center space-x-2">
+                    <div className={`w-2 h-2 rounded-full ${row.status === 'Active' ? 'bg-green-500' : 'bg-red-500'}`} />
+                    <span className={row.status === 'Active' ? 'text-green-600' : 'text-red-600'}>
+                      {row.status}
+                    </span>
+                  </div>
+                </TableCell>
+                <TableCell className="border-r border-gray-200">
+                  <Badge variant="outline" className="text-black border-blue-300">
+                    {row.lastActivity}
+                  </Badge>
+                </TableCell>
+                <TableCell>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button variant="ghost" size="sm" className="text-black">
+                        <Edit className="h-4 w-4 mr-1" />
+                        Edit
+                        <Pause className="h-4 w-4 ml-1" />
+                        Suspend
+                        <Trash2 className="h-4 w-4 ml-1" />
+                        Remove
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                      <DropdownMenuItem>
+                        <Edit className="h-4 w-4 mr-2" />
+                        Edit
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => handleStatusToggle(row.id)}>
+                        <Pause className="h-4 w-4 mr-2" />
+                        {row.status === 'Active' ? 'Suspend' : 'Activate'}
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => handleRemove(row.id)} className="text-red-600">
+                        <Trash2 className="h-4 w-4 mr-2" />
+                        Remove
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </TableCell>
               </TableRow>
-            </TableHeader>
-            <TableBody>
-              {data.map((row) => (
-                <TableRow key={row.id} className="border-b">
-                  <TableCell className="border-r border-gray-200 font-medium text-black">
-                    {row.name}
-                  </TableCell>
-                  <TableCell className="border-r border-gray-200 text-black">
-                    {row.email}
-                  </TableCell>
-                  <TableCell className="border-r border-gray-200">
-                    {row.lastLogin}
-                  </TableCell>
-                  <TableCell className="border-r border-gray-200">
-                    <div className="flex items-center space-x-2">
-                      <div className={`w-2 h-2 rounded-full ${row.status === 'Active' ? 'bg-green-500' : 'bg-red-500'}`} />
-                      <span className={row.status === 'Active' ? 'text-green-600' : 'text-red-600'}>
-                        {row.status}
-                      </span>
-                    </div>
-                  </TableCell>
-                  <TableCell className="border-r border-gray-200">
-                    <Badge variant="outline" className="text-black border-blue-300">
-                      {row.lastActivity}
-                    </Badge>
-                  </TableCell>
-                  <TableCell>
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" size="sm" className="text-black">
-                          <Edit className="h-4 w-4 mr-1" />
-                          Edit
-                          <Pause className="h-4 w-4 ml-1" />
-                          Suspend
-                          <Trash2 className="h-4 w-4 ml-1" />
-                          Remove
-                        </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end">
-                        <DropdownMenuItem>
-                          <Edit className="h-4 w-4 mr-2" />
-                          Edit
-                        </DropdownMenuItem>
-                        <DropdownMenuItem onClick={() => handleStatusToggle(row.id)}>
-                          <Pause className="h-4 w-4 mr-2" />
-                          {row.status === 'Active' ? 'Suspend' : 'Activate'}
-                        </DropdownMenuItem>
-                        <DropdownMenuItem onClick={() => handleRemove(row.id)} className="text-red-600">
-                          <Trash2 className="h-4 w-4 mr-2" />
-                          Remove
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </CardContent>
-      </Card>
-    </div>
+            ))}
+          </TableBody>
+        </Table>
+      </CardContent>
+    </Card>
   );
 };
