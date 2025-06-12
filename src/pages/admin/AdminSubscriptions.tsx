@@ -11,7 +11,7 @@ const AdminSubscriptions = () => {
       <div className="bg-white shadow-sm border-b -m-6 mb-6">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <h1 className="text-2xl font-bold text-valoov-orange">Manage Subscriptions</h1>
+            <h1 className="text-2xl font-bold text-black">Manage Subscriptions</h1>
             <div className="flex items-center space-x-4">
               <Button className="bg-blue-500 hover:bg-blue-600 text-white">
                 <Plus className="h-4 w-4 mr-2" />

@@ -65,7 +65,7 @@ const AdminSupportReply = () => {
               <ArrowLeft className="h-4 w-4 mr-2" />
               Back to Tickets
             </Button>
-            <h1 className="text-2xl font-bold text-valoov-orange">Reply to Ticket</h1>
+            <h1 className="text-2xl font-bold text-black">Reply to Ticket</h1>
           </div>
         </div>
       </div>

@@ -1,3 +1,4 @@
+
 import { AdminLayout } from '@/layouts/AdminLayout';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -10,7 +11,7 @@ const AdminCompanies = () => {
       <div className="bg-white shadow-sm border-b -m-6 mb-6">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <h1 className="text-2xl font-bold text-valoov-orange">Company Management</h1>
+            <h1 className="text-2xl font-bold text-black">Company Management</h1>
           </div>
         </div>
       </div>
