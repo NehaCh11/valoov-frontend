@@ -78,11 +78,11 @@ const AdminDashboard = () => {
           />
         </div>
 
-        {/* Activity Log Table */}
-        <ActivityLogTable />
-
         {/* Chart Section */}
         <ChartSection />
+
+        {/* Activity Log Table */}
+        <ActivityLogTable />
       </div>
     </AdminLayout>
   );
