@@ -10,6 +10,15 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from '@/components/ui/pagination';
 
 interface ActivityLog {
   id: string;
@@ -73,6 +82,14 @@ const mockData: ActivityLog[] = [
 
 export const ActivityLogTable = () => {
   const [data, setData] = useState<ActivityLog[]>(mockData);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
+
+  // Calculate pagination
+  const totalPages = Math.ceil(data.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentData = data.slice(startIndex, endIndex);
 
   const handleStatusToggle = (id: string) => {
     setData(prev => prev.map(item => 
@@ -84,6 +101,10 @@ export const ActivityLogTable = () => {
 
   const handleRemove = (id: string) => {
     setData(prev => prev.filter(item => item.id !== id));
+  };
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
   };
 
   return (
@@ -116,7 +137,7 @@ export const ActivityLogTable = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {data.map((row) => (
+            {currentData.map((row) => (
               <TableRow key={row.id} className="border-b">
                 <TableCell className="border-r border-gray-200 font-medium text-black">
                   {row.name}
@@ -172,6 +193,50 @@ export const ActivityLogTable = () => {
             ))}
           </TableBody>
         </Table>
+        
+        {/* Pagination */}
+        <div className="flex justify-center py-4">
+          <Pagination>
+            <PaginationContent>
+              <PaginationItem>
+                <PaginationPrevious 
+                  href="#" 
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (currentPage > 1) handlePageChange(currentPage - 1);
+                  }}
+                  className={currentPage === 1 ? 'pointer-events-none opacity-50' : ''}
+                />
+              </PaginationItem>
+              
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                <PaginationItem key={page}>
+                  <PaginationLink
+                    href="#"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handlePageChange(page);
+                    }}
+                    isActive={currentPage === page}
+                  >
+                    {page}
+                  </PaginationLink>
+                </PaginationItem>
+              ))}
+              
+              <PaginationItem>
+                <PaginationNext 
+                  href="#" 
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (currentPage < totalPages) handlePageChange(currentPage + 1);
+                  }}
+                  className={currentPage === totalPages ? 'pointer-events-none opacity-50' : ''}
+                />
+              </PaginationItem>
+            </PaginationContent>
+          </Pagination>
+        </div>
       </CardContent>
     </Card>
   );
