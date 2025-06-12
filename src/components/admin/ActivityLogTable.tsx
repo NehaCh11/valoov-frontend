@@ -46,6 +46,30 @@ const mockData: ActivityLog[] = [
     status: 'Active',
     lastActivity: 'View Support Tickets',
   },
+  {
+    id: '4',
+    name: 'John Smith',
+    email: 'john@valoov.com',
+    lastLogin: '03 Jun 2025 - 16:30 PM',
+    status: 'Active',
+    lastActivity: 'Update Profile',
+  },
+  {
+    id: '5',
+    name: 'Lisa Wong',
+    email: 'lisa@valoov.com',
+    lastLogin: '03 Jun 2025 - 13:15 PM',
+    status: 'Suspended',
+    lastActivity: 'Download Report',
+  },
+  {
+    id: '6',
+    name: 'Alex Brown',
+    email: 'alex@valoov.com',
+    lastLogin: '02 Jun 2025 - 10:45 AM',
+    status: 'Active',
+    lastActivity: 'Create Company',
+  },
 ];
 
 export const ActivityLogTable = () => {
@@ -115,9 +139,9 @@ export const ActivityLogTable = () => {
                     </div>
                   </TableCell>
                   <TableCell className="border-r border-gray-200">
-                    <Button variant="outline" size="sm" className="text-black border-blue-300">
+                    <Badge variant="outline" className="text-black border-blue-300">
                       {row.lastActivity}
-                    </Button>
+                    </Badge>
                   </TableCell>
                   <TableCell>
                     <DropdownMenu>
