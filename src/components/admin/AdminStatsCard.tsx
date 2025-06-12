@@ -14,7 +14,7 @@ export const AdminStatsCard = ({ title, value, subtitle, icon: Icon, color }: Ad
   return (
     <Card className="shadow-md hover:shadow-lg transition-shadow duration-200">
       <CardContent className="p-6">
-        <div className="flex flex-col items-center text-center space-y-3">
+        <div className="flex flex-col items-start space-y-3">
           {/* Icon at the top */}
           <div 
             className="h-12 w-12 rounded-lg flex items-center justify-center"
