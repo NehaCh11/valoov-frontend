@@ -8,7 +8,7 @@ const AdminSubscriptions = () => {
   return (
     <AdminLayout>
       {/* Header */}
-      <div className="bg-white shadow-sm border-b">
+      <div className="bg-white">
         <div className="px-6">
           <div className="flex justify-between items-center h-16">
             <h1 className="text-2xl font-bold text-black">Manage Subscriptions</h1>
