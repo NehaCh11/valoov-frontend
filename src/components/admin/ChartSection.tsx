@@ -21,7 +21,7 @@ export const ChartSection = () => {
   return (
     <Card>
       <CardHeader className="border-b-2 border-blue-500">
-        <CardTitle className="text-lg">📊 Chart Section (Optional add-on below table)</CardTitle>
+        <CardTitle className="text-lg">📊 (Optional add-on below table)</CardTitle>
         <p className="text-sm text-gray-600">Use horizontal layout for:</p>
       </CardHeader>
       <CardContent className="p-6">

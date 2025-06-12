@@ -67,7 +67,7 @@ export const ActivityLogTable = () => {
     <Card>
       <CardHeader className="border-b-2 border-blue-500">
         <div className="flex justify-between items-center">
-          <CardTitle className="text-lg">Table (Activity Log)</CardTitle>
+          <CardTitle className="text-lg">Activity Log</CardTitle>
           <div className="flex space-x-2">
             <Button variant="outline" size="sm" className="text-blue-600 border-blue-300">
               <Eye className="h-4 w-4 mr-2" />
