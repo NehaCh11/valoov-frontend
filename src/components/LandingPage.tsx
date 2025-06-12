@@ -1,3 +1,4 @@
+
 import { Upload, FileText, BarChart3, CheckCircle, ArrowRight, Calculator, Star, Eye, Play, X, TrendingUp, Zap, BarChart2 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -292,7 +293,7 @@ const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
                           <Icon className="h-8 w-8 text-valoov-orange" />
                         </div>
                       </div>
-                      <CardTitle className="text-xl text-slate-800">{step.title}</CardTitle>
+                      <CardTitle className="text-xl text-black">{step.title}</CardTitle>
                     </CardHeader>
                     <CardContent>
                       <CardDescription className="text-center text-base text-slate-600">
@@ -368,7 +369,7 @@ const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
         {/* How We Compare Section */}
         <section className="mb-20">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4 text-slate-700">How We Compare</h2>
+            <h2 className="text-4xl font-bold mb-4 text-black">How We Compare</h2>
             <p className="text-lg text-slate-600">See how Valoov stacks up against traditional valuation methods and competitors.</p>
           </div>
           
@@ -464,7 +465,7 @@ const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
                   <div className="p-2 rounded-lg bg-blue-100">
                     <FileText className="h-6 w-6 text-blue-600" />
                   </div>
-                  <CardTitle className="text-xl text-slate-800">Valuation Methods</CardTitle>
+                  <CardTitle className="text-xl text-black">Valuation Methods</CardTitle>
                 </div>
               </CardHeader>
               <CardContent className="space-y-6">
@@ -473,7 +474,7 @@ const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
                     <BarChart3 className="h-4 w-4 text-green-600" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-slate-800 mb-1">Discounted Cash Flow (DCF)</h4>
+                    <h4 className="font-semibold text-black mb-1">Discounted Cash Flow (DCF)</h4>
                     <p className="text-sm text-slate-600">Projects future cash flows and discounts them to present value.</p>
                   </div>
                 </div>
@@ -483,7 +484,7 @@ const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
                     <TrendingUp className="h-4 w-4 text-orange-600" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-slate-800 mb-1">Venture Capital Method</h4>
+                    <h4 className="font-semibold text-black mb-1">Venture Capital Method</h4>
                     <p className="text-sm text-slate-600">Calculates post-money valuation based on projected exit value and required returns.</p>
                   </div>
                 </div>
@@ -493,7 +494,7 @@ const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
                     <BarChart2 className="h-4 w-4 text-purple-600" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-slate-800 mb-1">Comparable Company Analysis</h4>
+                    <h4 className="font-semibold text-black mb-1">Comparable Company Analysis</h4>
                     <p className="text-sm text-slate-600">Benchmarks against similar companies in your industry.</p>
                   </div>
                 </div>
@@ -503,7 +504,7 @@ const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
                     <Calculator className="h-4 w-4 text-blue-600" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-slate-800 mb-1">First Chicago Method</h4>
+                    <h4 className="font-semibold text-black mb-1">First Chicago Method</h4>
                     <p className="text-sm text-slate-600">Weights multiple scenarios for early-stage companies.</p>
                   </div>
                 </div>
@@ -517,7 +518,7 @@ const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
                   <div className="p-2 rounded-lg bg-orange-100">
                     <BarChart3 className="h-6 w-6 text-orange-600" />
                   </div>
-                  <CardTitle className="text-xl text-slate-800">Global Data Sources</CardTitle>
+                  <CardTitle className="text-xl text-black">Global Data Sources</CardTitle>
                 </div>
               </CardHeader>
               <CardContent>
@@ -553,7 +554,7 @@ const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
                 </div>
 
                 <div className="mt-6 pt-6 border-t border-slate-200">
-                  <h4 className="font-semibold text-slate-800 mb-2">Data Transparency</h4>
+                  <h4 className="font-semibold text-black mb-2">Data Transparency</h4>
                   <p className="text-sm text-slate-600">
                     We believe in complete transparency in our valuation process. Every data point used in your valuation is documented and traceable to its source.
                   </p>
@@ -576,7 +577,7 @@ const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
                       <CheckCircle className="h-8 w-8 text-blue-600" />
                     </div>
                   </div>
-                  <h4 className="text-lg font-semibold text-slate-800 mb-2">Accuracy</h4>
+                  <h4 className="text-lg font-semibold text-black mb-2">Accuracy</h4>
                   <p className="text-sm text-slate-600">
                     Our multi-method approach reduces variance and increases confidence in valuation results.
                   </p>
@@ -588,7 +589,7 @@ const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
                       <Zap className="h-8 w-8 text-orange-600" />
                     </div>
                   </div>
-                  <h4 className="text-lg font-semibold text-slate-800 mb-2">Speed</h4>
+                  <h4 className="text-lg font-semibold text-black mb-2">Speed</h4>
                   <p className="text-sm text-slate-600">
                     Get results in minutes instead of weeks with traditional valuation services.
                   </p>
@@ -600,7 +601,7 @@ const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
                       <TrendingUp className="h-8 w-8 text-green-600" />
                     </div>
                   </div>
-                  <h4 className="text-lg font-semibold text-slate-800 mb-2">Continuous Updates</h4>
+                  <h4 className="text-lg font-semibold text-black mb-2">Continuous Updates</h4>
                   <p className="text-sm text-slate-600">
                     Valuations stay current with market conditions and your business performance.
                   </p>
@@ -652,7 +653,7 @@ const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
                         />
                       ) : null}
                     </div>
-                    <CardTitle className="text-lg text-slate-800">{tech.name}</CardTitle>
+                    <CardTitle className="text-lg text-black">{tech.name}</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <CardDescription className="text-center text-sm text-slate-600">
@@ -681,7 +682,7 @@ const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
                         <Star key={i} className="h-4 w-4 text-valoov-orange fill-current" />
                       ))}
                     </div>
-                    <CardTitle className="text-lg text-slate-800">{testimonial.name}</CardTitle>
+                    <CardTitle className="text-lg text-black">{testimonial.name}</CardTitle>
                     <CardDescription className="text-slate-600">
                       {testimonial.company} • {testimonial.location}
                     </CardDescription>
