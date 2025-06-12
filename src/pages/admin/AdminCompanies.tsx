@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { AdminLayout } from '@/layouts/AdminLayout';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -89,7 +90,7 @@ const AdminCompanies = () => {
   return (
     <AdminLayout>
       {/* Header */}
-      <div className="bg-white shadow-sm border-b">
+      <div className="bg-white shadow-sm">
         <div className="px-6">
           <div className="flex justify-between items-center h-16">
             <h1 className="text-2xl font-bold text-black">Company Management</h1>
