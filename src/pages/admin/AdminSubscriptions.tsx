@@ -1,4 +1,3 @@
-
 import { AdminLayout } from '@/layouts/AdminLayout';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -7,6 +6,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Package, CreditCard, Users, TrendingUp, Plus } from 'lucide-react';
 import { useState } from 'react';
 
@@ -14,8 +14,7 @@ const AdminSubscriptions = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState({
     planName: '',
-    priceMonthly: '',
-    priceYearly: '',
+    price: '',
     valuationsPerMonth: '',
     analystReviewIncluded: false,
     customPlanCreation: false,
@@ -50,8 +49,7 @@ const AdminSubscriptions = () => {
     // Reset form
     setFormData({
       planName: '',
-      priceMonthly: '',
-      priceYearly: '',
+      price: '',
       valuationsPerMonth: '',
       analystReviewIncluded: false,
       customPlanCreation: false,
@@ -79,7 +77,7 @@ const AdminSubscriptions = () => {
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-[500px]">
                   <DialogHeader>
-                    <DialogTitle className="text-xl font-bold">Create New Subscription Plan</DialogTitle>
+                    <DialogTitle className="text-xl font-bold">Create Subscription Plan</DialogTitle>
                   </DialogHeader>
                   <div className="space-y-6 py-4">
                     <div className="space-y-2">
@@ -92,25 +90,21 @@ const AdminSubscriptions = () => {
                       />
                     </div>
 
-                    <div className="grid grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="priceMonthly">Price (monthly)</Label>
-                        <Input
-                          id="priceMonthly"
-                          placeholder="e.g., €29"
-                          value={formData.priceMonthly}
-                          onChange={(e) => handleInputChange('priceMonthly', e.target.value)}
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="priceYearly">Price (yearly)</Label>
-                        <Input
-                          id="priceYearly"
-                          placeholder="e.g., €290"
-                          value={formData.priceYearly}
-                          onChange={(e) => handleInputChange('priceYearly', e.target.value)}
-                        />
-                      </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="price">Price</Label>
+                      <Select onValueChange={(value) => handleInputChange('price', value)}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select price option" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="€29/month">€29/month</SelectItem>
+                          <SelectItem value="€49/month">€49/month</SelectItem>
+                          <SelectItem value="€99/month">€99/month</SelectItem>
+                          <SelectItem value="€290/year">€290/year</SelectItem>
+                          <SelectItem value="€490/year">€490/year</SelectItem>
+                          <SelectItem value="€990/year">€990/year</SelectItem>
+                        </SelectContent>
+                      </Select>
                     </div>
 
                     <div className="space-y-2">
