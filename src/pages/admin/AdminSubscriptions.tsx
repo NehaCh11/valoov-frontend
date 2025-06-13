@@ -3,9 +3,25 @@ import { AdminLayout } from '@/layouts/AdminLayout';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Checkbox } from '@/components/ui/checkbox';
 import { Package, CreditCard, Users, TrendingUp, Plus } from 'lucide-react';
+import { useState } from 'react';
 
 const AdminSubscriptions = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    planName: '',
+    priceMonthly: '',
+    priceYearly: '',
+    valuationsPerMonth: '',
+    analystReviewIncluded: false,
+    customPlanCreation: false,
+    integrateStripe: false
+  });
+
   const subscriptionPlans = [
     {
       planName: 'Starter',
@@ -21,6 +37,28 @@ const AdminSubscriptions = () => {
     },
   ];
 
+  const handleInputChange = (field: string, value: string | boolean) => {
+    setFormData(prev => ({
+      ...prev,
+      [field]: value
+    }));
+  };
+
+  const handleSubmit = () => {
+    console.log('Form data:', formData);
+    setIsModalOpen(false);
+    // Reset form
+    setFormData({
+      planName: '',
+      priceMonthly: '',
+      priceYearly: '',
+      valuationsPerMonth: '',
+      analystReviewIncluded: false,
+      customPlanCreation: false,
+      integrateStripe: false
+    });
+  };
+
   return (
     <AdminLayout>
       {/* Header */}
@@ -29,13 +67,106 @@ const AdminSubscriptions = () => {
           <div className="flex justify-between items-center h-16">
             <h1 className="text-2xl font-bold text-black">Manage Subscriptions</h1>
             <div className="flex items-center space-x-4">
-              <Button 
-                style={{ backgroundColor: '#48B2BB' }}
-                className="hover:opacity-90 text-white"
-              >
-                <Plus className="h-4 w-4 mr-2" />
-                Create New Subscription
-              </Button>
+              <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+                <DialogTrigger asChild>
+                  <Button 
+                    style={{ backgroundColor: '#48B2BB' }}
+                    className="hover:opacity-90 text-white"
+                  >
+                    <Plus className="h-4 w-4 mr-2" />
+                    Create New Subscription
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-[500px]">
+                  <DialogHeader>
+                    <DialogTitle className="text-xl font-bold">Create New Subscription Plan</DialogTitle>
+                  </DialogHeader>
+                  <div className="space-y-6 py-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="planName">Plan Name: e.g., Starter, Pro, Enterprise</Label>
+                      <Input
+                        id="planName"
+                        placeholder="Enter plan name"
+                        value={formData.planName}
+                        onChange={(e) => handleInputChange('planName', e.target.value)}
+                      />
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="priceMonthly">Price (monthly)</Label>
+                        <Input
+                          id="priceMonthly"
+                          placeholder="e.g., €29"
+                          value={formData.priceMonthly}
+                          onChange={(e) => handleInputChange('priceMonthly', e.target.value)}
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="priceYearly">Price (yearly)</Label>
+                        <Input
+                          id="priceYearly"
+                          placeholder="e.g., €290"
+                          value={formData.priceYearly}
+                          onChange={(e) => handleInputChange('priceYearly', e.target.value)}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="valuations">Valuations included per month</Label>
+                      <Input
+                        id="valuations"
+                        placeholder="Enter number of valuations"
+                        value={formData.valuationsPerMonth}
+                        onChange={(e) => handleInputChange('valuationsPerMonth', e.target.value)}
+                      />
+                    </div>
+
+                    <div className="space-y-4">
+                      <div className="flex items-center space-x-2">
+                        <Checkbox
+                          id="analystReview"
+                          checked={formData.analystReviewIncluded}
+                          onCheckedChange={(checked) => handleInputChange('analystReviewIncluded', checked as boolean)}
+                        />
+                        <Label htmlFor="analystReview">Analyst review included?</Label>
+                      </div>
+
+                      <div className="flex items-center space-x-2">
+                        <Checkbox
+                          id="customPlan"
+                          checked={formData.customPlanCreation}
+                          onCheckedChange={(checked) => handleInputChange('customPlanCreation', checked as boolean)}
+                        />
+                        <Label htmlFor="customPlan">Custom plan creation</Label>
+                      </div>
+
+                      <div className="flex items-center space-x-2">
+                        <Checkbox
+                          id="integrateStripe"
+                          checked={formData.integrateStripe}
+                          onCheckedChange={(checked) => handleInputChange('integrateStripe', checked as boolean)}
+                        />
+                        <Label htmlFor="integrateStripe">Integrate with Stripe / Paddle</Label>
+                      </div>
+                    </div>
+
+                    <div className="flex justify-end space-x-2 pt-4">
+                      <Button variant="outline" onClick={() => setIsModalOpen(false)}>
+                        Cancel
+                      </Button>
+                      <Button 
+                        onClick={handleSubmit}
+                        style={{ backgroundColor: '#48B2BB' }}
+                        className="hover:opacity-90 text-white"
+                      >
+                        Create Subscription
+                      </Button>
+                    </div>
+                  </div>
+                </DialogContent>
+              </Dialog>
             </div>
           </div>
         </div>
