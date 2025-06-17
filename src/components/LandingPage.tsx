@@ -738,10 +738,12 @@ const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
                 alt="VALOOV AI Logo" 
                 className="h-12 w-auto object-contain"
               />
-              <p className="text-slate-300 text-sm">
-                Professional company valuation platform for businesses in France and Spain. 
-                Get accurate valuations with AI-powered analysis.
-              </p>
+              <div className="text-slate-300 text-sm">
+                <div>Professional company valuation platform</div>
+                <div>for businesses in France and Spain.</div>
+                <div>Get accurate valuations</div>
+                <div>with AI-powered analysis.</div>
+              </div>
               <div className="flex space-x-4">
                 <div className="w-8 h-8 bg-slate-800 rounded-full flex items-center justify-center hover:bg-slate-700 transition-colors cursor-pointer">
                   <Facebook className="h-4 w-4" />
