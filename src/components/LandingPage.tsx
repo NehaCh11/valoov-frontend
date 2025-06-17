@@ -1,9 +1,10 @@
-
 import { Upload, FileText, BarChart3, CheckCircle, ArrowRight, Calculator, Star, Eye, Play, X, TrendingUp, Zap, BarChart2, Facebook, Linkedin, Youtube, Twitter } from 'lucide-react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { SampleReportDialog } from './SampleReportDialog';
 
 interface LandingPageProps {
   onLogin?: () => void;
@@ -12,6 +13,7 @@ interface LandingPageProps {
 
 const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
   const navigate = useNavigate();
+  const [showSampleReportDialog, setShowSampleReportDialog] = useState(false);
 
   const howItWorksSteps = [
     {
@@ -238,6 +240,7 @@ const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
                   variant="outline" 
                   size="lg" 
                   className="border-valoov-orange text-valoov-orange hover:bg-valoov-orange/10 px-8 py-4 text-lg font-medium"
+                  onClick={() => setShowSampleReportDialog(true)}
                 >
                   View Sample Report
                 </Button>
@@ -336,7 +339,10 @@ const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
                         <span>Professional PDF format</span>
                       </li>
                     </ul>
-                    <Button className="mt-6 bg-valoov-orange hover:bg-valoov-orange/80">
+                    <Button 
+                      className="mt-6 bg-valoov-orange hover:bg-valoov-orange/80"
+                      onClick={() => setShowSampleReportDialog(true)}
+                    >
                       <Eye className="mr-2 h-4 w-4" />
                       View Full Sample
                     </Button>
@@ -777,6 +783,12 @@ const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
           </div>
         </div>
       </footer>
+
+      {/* Sample Report Dialog */}
+      <SampleReportDialog
+        isOpen={showSampleReportDialog}
+        onClose={() => setShowSampleReportDialog(false)}
+      />
     </div>
   );
 };
