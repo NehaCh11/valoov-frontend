@@ -1,4 +1,4 @@
-import { Upload, FileText, BarChart3, CheckCircle, ArrowRight, Calculator, Star, Eye, Play, X, TrendingUp, Zap, BarChart2, Facebook, Linkedin, Youtube, Twitter } from 'lucide-react';
+import { Upload, FileText, BarChart3, CheckCircle, ArrowRight, Calculator, Star, Eye, Play, X, TrendingUp, Zap, BarChart2, Linkedin } from 'lucide-react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -751,18 +751,14 @@ const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
                 <div>with AI-powered analysis.</div>
               </div>
               <div className="flex space-x-4">
-                <div className="w-8 h-8 bg-slate-800 rounded-full flex items-center justify-center hover:bg-slate-700 transition-colors cursor-pointer">
-                  <Facebook className="h-4 w-4" />
-                </div>
-                <div className="w-8 h-8 bg-slate-800 rounded-full flex items-center justify-center hover:bg-slate-700 transition-colors cursor-pointer">
+                <a 
+                  href="https://www.linkedin.com/company/107446991/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-8 h-8 bg-slate-800 rounded-full flex items-center justify-center hover:bg-slate-700 transition-colors cursor-pointer"
+                >
                   <Linkedin className="h-4 w-4" />
-                </div>
-                <div className="w-8 h-8 bg-slate-800 rounded-full flex items-center justify-center hover:bg-slate-700 transition-colors cursor-pointer">
-                  <Youtube className="h-4 w-4" />
-                </div>
-                <div className="w-8 h-8 bg-slate-800 rounded-full flex items-center justify-center hover:bg-slate-700 transition-colors cursor-pointer">
-                  <Twitter className="h-4 w-4" />
-                </div>
+                </a>
               </div>
             </div>
 
