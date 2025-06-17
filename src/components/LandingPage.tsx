@@ -1,3 +1,4 @@
+
 import { Upload, FileText, BarChart3, CheckCircle, ArrowRight, Calculator, Star, Eye, Play, X, TrendingUp, Zap, BarChart2, Facebook, Linkedin, Youtube, Twitter } from 'lucide-react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -740,9 +741,9 @@ const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
             {/* Company Info */}
             <div className="space-y-4">
               <img 
-                src="/lovable-uploads/324db3e0-4f76-45f5-80fd-11deb3389a14.png" 
+                src="/lovable-uploads/c2363ec6-8449-47b4-8f72-880977005997.png" 
                 alt="VALOOV AI Logo" 
-                className="h-12 w-auto object-contain"
+                className="h-24 w-auto object-contain"
               />
               <div className="text-slate-300 text-sm">
                 <div>Professional company valuation platform</div>
