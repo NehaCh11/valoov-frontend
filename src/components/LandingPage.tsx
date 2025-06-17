@@ -1,3 +1,4 @@
+
 import { Upload, FileText, BarChart3, CheckCircle, ArrowRight, Calculator, Star, Eye, Play, X, TrendingUp, Zap, BarChart2, Facebook, Linkedin, Youtube, Twitter } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -733,7 +734,7 @@ const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
             {/* Company Info */}
             <div className="space-y-4">
               <img 
-                src="/lovable-uploads/ccbfeb8f-e488-4725-8c91-82d50190256a.png" 
+                src="/lovable-uploads/324db3e0-4f76-45f5-80fd-11deb3389a14.png" 
                 alt="VALOOV AI Logo" 
                 className="h-12 w-auto object-contain"
               />
