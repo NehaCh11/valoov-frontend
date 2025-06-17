@@ -705,8 +705,8 @@ const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
           <div className="text-center">
             <Card className="valoov-gradient-alt border-valoov-teal/30 shadow-lg">
               <CardContent className="py-16">
-                <h2 className="text-4xl font-bold mb-6 text-black">Ready to Value Your Company?</h2>
-                <p className="text-xl text-slate-800 mb-8 max-w-3xl mx-auto">
+                <h2 className="text-4xl font-bold mb-6 text-white">Ready to Value Your Company?</h2>
+                <p className="text-xl text-white mb-8 max-w-3xl mx-auto">
                   Join hundreds of businesses across France and Spain who trust VALOOV for accurate, 
                   professional company valuations with comprehensive reporting.
                 </p>
@@ -722,7 +722,7 @@ const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
                   <Button 
                     variant="outline" 
                     size="lg" 
-                    className="border-white text-black bg-white hover:bg-white/90 px-8 py-4 text-lg"
+                    className="border-white text-white bg-transparent hover:bg-white/10 px-8 py-4 text-lg"
                     onClick={() => setShowSampleReportDialog(true)}
                   >
                     Schedule Demo
