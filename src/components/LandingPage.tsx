@@ -1,4 +1,3 @@
-
 import { Upload, FileText, BarChart3, CheckCircle, ArrowRight, Calculator, Star, Eye, Play, X, TrendingUp, Zap, BarChart2, Linkedin } from 'lucide-react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -724,6 +723,7 @@ const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
                     variant="outline" 
                     size="lg" 
                     className="border-white text-black bg-white hover:bg-white/90 px-8 py-4 text-lg"
+                    onClick={() => setShowSampleReportDialog(true)}
                   >
                     Schedule Demo
                   </Button>
