@@ -783,7 +783,7 @@ const LandingPage = ({ onLogin, onAccountCreated }: LandingPageProps) => {
 
           <div className="border-t border-slate-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
             <div className="text-sm text-slate-400 mb-4 md:mb-0">
-              © 2024 VALOOV. All rights reserved.
+              © 2025 VALOOV. All rights reserved.
             </div>
           </div>
         </div>
